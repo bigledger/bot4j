@@ -8,9 +8,16 @@
 
 package ai.nitro.bot4j.integration.alexa.send;
 
+import com.amazon.speech.ui.Card;
+
 import ai.nitro.bot4j.middle.send.PlatformMessageSender;
 
 public interface AlexaMessageSender extends PlatformMessageSender {
 
+	Card getCard();
+
 	String getText();
+
+	void setCard(Card card);
+
 }

@@ -13,6 +13,8 @@ import javax.inject.Singleton;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.amazon.speech.ui.Card;
+
 import ai.nitro.bot4j.integration.alexa.domain.AlexaPlatformEnum;
 import ai.nitro.bot4j.integration.alexa.send.AlexaMessageSender;
 import ai.nitro.bot4j.middle.domain.Platform;
@@ -26,12 +28,21 @@ public class AlexaMessageSenderImpl implements AlexaMessageSender {
 
 	static Logger LOG = LogManager.getLogger(AlexaMessageSenderImpl.class);
 
+	protected Card threadLocalCard;
+
 	protected ThreadLocal<StringBuilder> threadLocalText = new ThreadLocal<>();
 
 	protected void assureThreadLocalStringBuilder() {
 		if (threadLocalText.get() == null) {
 			threadLocalText.set(new StringBuilder());
 		}
+	}
+
+	@Override
+	public Card getCard() {
+		final Card result = threadLocalCard;
+		threadLocalCard = null;
+		return result;
 	}
 
 	@Override
@@ -66,5 +77,10 @@ public class AlexaMessageSenderImpl implements AlexaMessageSender {
 		}
 
 		return result;
+	}
+
+	@Override
+	public void setCard(final Card card) {
+		threadLocalCard = card;
 	}
 }

@@ -25,6 +25,7 @@ import com.amazon.speech.speechlet.SessionStartedRequest;
 import com.amazon.speech.speechlet.SpeechletResponse;
 import com.amazon.speech.speechlet.User;
 import com.amazon.speech.ui.PlainTextOutputSpeech;
+import com.amazon.speech.ui.SsmlOutputSpeech;
 
 import ai.nitro.bot4j.integration.alexa.Bot4jSpeechlet;
 import ai.nitro.bot4j.integration.alexa.domain.AlexaPlatformEnum;
@@ -157,8 +158,8 @@ public class Bot4jSpeechletImpl implements Bot4jSpeechlet {
 		receiveMessage(request, user);
 
 		final String text = alexaMessageSender.getText();
-		final PlainTextOutputSpeech speech = new PlainTextOutputSpeech();
-		speech.setText(text);
+		final SsmlOutputSpeech speech = new SsmlOutputSpeech();
+		speech.setSsml(text);
 
 		final SpeechletResponse result = SpeechletResponse.newTellResponse(speech);
 		return result;
