@@ -22,18 +22,18 @@ To include bot4j in your Maven project edit your `pom.xml` file as follows
 
 ```
 <repositories>
-    <repository>
-        <id>jitpack.io</id>
-        <url>https://jitpack.io</url>
-    </repository>
+	<repository>
+		<id>maven.nitroventures.de</id>
+		<url>http://maven.nitroventures.de</url>
+	</repository>
 </repositories>
 ```
 
 ```
 <dependency>
-    <groupId>com.github.nitroai</groupId>
-    <artifactId>bot4j</artifactId>
-    <version>-SNAPSHOT</version>
+	<groupId>ai.nitro</groupId>
+	<artifactId>bot4j</artifactId>
+	<version>1.0.0</version>
 </dependency>
 ```
 
