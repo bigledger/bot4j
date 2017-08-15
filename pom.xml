@@ -17,6 +17,12 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
+	<distributionManagement>
+		<repository>
+			<id>maven.nitroventures.de</id>
+			<url>ftps://wp12684198.server-he.de</url>
+		</repository>
+	</distributionManagement>
 	<build>
 		<finalName>bot4j</finalName>
 		<plugins>
@@ -43,6 +49,12 @@
 				</executions>
 			</plugin>
 		</plugins>
+		<extensions>
+			<extension>
+				<groupId>org.apache.maven.wagon</groupId>
+				<artifactId>wagon-ftp</artifactId>
+			</extension>
+		</extensions>
 	</build>
 	<dependencies>
 		<dependency>
@@ -97,16 +109,16 @@
 			<groupId>com.amazon.alexa</groupId>
 			<artifactId>alexa-skills-kit</artifactId>
 			<version>1.2</version>
-			 <exclusions>
-       			<exclusion> 
-        			<groupId>org.slf4j</groupId>
-      				<artifactId>slf4j-simple</artifactId>
-       			</exclusion>
-       			<exclusion> 
-          			<groupId>org.slf4j</groupId>
-          			<artifactId>slf4j-log4j12</artifactId>
-      			</exclusion>
-    		</exclusions> 
+			<exclusions>
+				<exclusion>
+					<groupId>org.slf4j</groupId>
+					<artifactId>slf4j-simple</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.slf4j</groupId>
+					<artifactId>slf4j-log4j12</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 
 		<dependency>
