@@ -1,7 +1,7 @@
 bot4j
 =====
 
-[![Build](https://img.shields.io/travis/nitroai/bot4j.svg)](https://travis-ci.org/nitroai/bot4j)
+[![Build](https://img.shields.io/travis/nitroventures/bot4j.svg)](https://travis-ci.org/nitroventures/bot4j)
 [![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
 
 This is a bot framework for Java, which enables the development of lightweight messenger bots (a.k.a. chatbots) with Java. It provides integrations for Facebook Messenger, Slack, Telegram and Alexa and internally unifies message formats by a messaging middleware.
@@ -14,7 +14,7 @@ Getting started
 
 ### Example project
 
-Clone the [bot4j-example](https://github.com/nitroai/bot4j-example) repository and follow instructions for getting started.
+Clone the [bot4j-example](https://github.com/nitroventures/bot4j-example) repository and follow instructions for getting started.
 
 ### Existing project
 
