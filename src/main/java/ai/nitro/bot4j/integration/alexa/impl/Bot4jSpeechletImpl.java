@@ -24,6 +24,7 @@ import com.amazon.speech.speechlet.SessionEndedRequest;
 import com.amazon.speech.speechlet.SessionStartedRequest;
 import com.amazon.speech.speechlet.SpeechletResponse;
 import com.amazon.speech.speechlet.User;
+import com.amazon.speech.ui.Card;
 import com.amazon.speech.ui.PlainTextOutputSpeech;
 import com.amazon.speech.ui.SsmlOutputSpeech;
 
@@ -153,15 +154,24 @@ public class Bot4jSpeechletImpl implements Bot4jSpeechlet {
 
 	protected SpeechletResponse onIntent(final SpeechletRequestEnvelope<IntentRequest> requestEnvelope,
 			final IntentRequest request) {
+		final SpeechletResponse result;
 		final User user = requestEnvelope.getSession().getUser();
 
 		receiveMessage(request, user);
 
 		final String text = alexaMessageSender.getText();
-		final SsmlOutputSpeech speech = new SsmlOutputSpeech();
-		speech.setSsml(text);
 
-		final SpeechletResponse result = SpeechletResponse.newTellResponse(speech);
+		final SsmlOutputSpeech speech = new SsmlOutputSpeech();
+		final String wrappedSsmlText = wrapTextForSsml(text);
+		speech.setSsml(wrappedSsmlText);
+
+		final Card card = alexaMessageSender.getCard();
+
+		if (card == null) {
+			result = SpeechletResponse.newTellResponse(speech);
+		} else {
+			result = SpeechletResponse.newTellResponse(speech, card);
+		}
 		return result;
 	}
 
@@ -191,6 +201,11 @@ public class Bot4jSpeechletImpl implements Bot4jSpeechlet {
 	protected void receiveMessage(final IntentRequest intentRequest, final User user) {
 		final ReceiveMessage receiveMessage = createReceiveMessage(intentRequest, user);
 		messageReceiver.receive(receiveMessage);
+	}
+
+	protected String wrapTextForSsml(final String text) {
+		final String result = "<speak> " + text + " </speak>";
+		return result;
 	}
 
 }

@@ -28,7 +28,9 @@ public class AlexaMessageSenderImpl implements AlexaMessageSender {
 
 	static Logger LOG = LogManager.getLogger(AlexaMessageSenderImpl.class);
 
-	protected Card threadLocalCard;
+	protected ThreadLocal<Card> threadLocalAlexaCard = new ThreadLocal<>();
+
+	protected ThreadLocal<Boolean> threadLocalShouldEndSession = new ThreadLocal<>();
 
 	protected ThreadLocal<StringBuilder> threadLocalText = new ThreadLocal<>();
 
@@ -40,14 +42,21 @@ public class AlexaMessageSenderImpl implements AlexaMessageSender {
 
 	@Override
 	public Card getCard() {
-		final Card result = threadLocalCard;
-		threadLocalCard = null;
+		final Card result = threadLocalAlexaCard.get();
+		threadLocalAlexaCard.remove();
 		return result;
 	}
 
 	@Override
 	public Platform getPlatform() {
 		return AlexaPlatformEnum.ALEXA;
+	}
+
+	@Override
+	public boolean getShouldEndSession() {
+		final boolean result = threadLocalShouldEndSession.get().booleanValue();
+		threadLocalShouldEndSession.remove();
+		return result;
 	}
 
 	@Override
@@ -68,19 +77,23 @@ public class AlexaMessageSenderImpl implements AlexaMessageSender {
 			final TextSendPayload textSendPayload = (TextSendPayload) sendPayload;
 			final String text = textSendPayload.getText();
 
-			assureThreadLocalStringBuilder();
+			final Card alexaCard = textSendPayload.getAlexaCard();
+			if (alexaCard != null) {
+				final Card card = alexaCard;
+				threadLocalAlexaCard.set(card);
+			}
 
+			final boolean shouldEndSession = textSendPayload.shouldEndSession;
+			threadLocalShouldEndSession.set(shouldEndSession);
+
+			assureThreadLocalStringBuilder();
 			threadLocalText.get().append(text);
+
 			result = true;
 		} else {
 			LOG.warn("ignoring send payload with type {}", type);
 		}
 
 		return result;
-	}
-
-	@Override
-	public void setCard(final Card card) {
-		threadLocalCard = card;
 	}
 }

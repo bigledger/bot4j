@@ -16,8 +16,8 @@ public interface AlexaMessageSender extends PlatformMessageSender {
 
 	Card getCard();
 
-	String getText();
+	boolean getShouldEndSession();
 
-	void setCard(Card card);
+	String getText();
 
 }

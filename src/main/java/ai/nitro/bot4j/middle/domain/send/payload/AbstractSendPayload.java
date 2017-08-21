@@ -8,11 +8,17 @@
 
 package ai.nitro.bot4j.middle.domain.send.payload;
 
+import com.amazon.speech.ui.Card;
+
 public abstract class AbstractSendPayload {
 
 	public enum Type {
 		BUBBLE, BUTTONS, IMAGE, LIST, QUICK_REPLIES, TEXT, TYPING, VIDEO
 	}
+
+	protected Card alexaCard;
+
+	public boolean shouldEndSession = true;
 
 	protected final Type type;
 
@@ -20,8 +26,16 @@ public abstract class AbstractSendPayload {
 		this.type = type;
 	}
 
+	public Card getAlexaCard() {
+		return alexaCard;
+	}
+
 	public Type getType() {
 		return type;
+	}
+
+	public void setAlexaCard(final Card card) {
+		this.alexaCard = card;
 	}
 
 }
