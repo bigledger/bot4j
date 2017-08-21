@@ -38,5 +38,4 @@ public class QuickRepliesSendPayload extends AbstractSendPayload {
 	public void setText(final String text) {
 		this.text = text;
 	}
-
 }
