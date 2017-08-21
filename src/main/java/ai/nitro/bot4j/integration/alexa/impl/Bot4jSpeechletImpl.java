@@ -172,6 +172,9 @@ public class Bot4jSpeechletImpl implements Bot4jSpeechlet {
 		} else {
 			result = SpeechletResponse.newTellResponse(speech, card);
 		}
+
+		result.setShouldEndSession(alexaMessageSender.getShouldEndSession());
+
 		return result;
 	}
 
