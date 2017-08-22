@@ -28,6 +28,10 @@ public class Session implements HttpSession {
 		creationTime = System.currentTimeMillis();
 	}
 
+	public void clear() {
+		values.clear();
+	}
+
 	@Override
 	public Object getAttribute(final String name) {
 		return values.get(name);
@@ -100,7 +104,7 @@ public class Session implements HttpSession {
 
 	@Override
 	public void removeValue(final String name) {
-		this.removeAttribute(name);
+		removeAttribute(name);
 	}
 
 	@Override
@@ -112,5 +116,4 @@ public class Session implements HttpSession {
 	public void setMaxInactiveInterval(final int interval) {
 		throw new java.lang.UnsupportedOperationException();
 	}
-
 }

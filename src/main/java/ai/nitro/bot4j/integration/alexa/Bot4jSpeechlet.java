@@ -14,12 +14,11 @@ public interface Bot4jSpeechlet extends SpeechletV2 {
 	SpeechletResponse onIntent(SpeechletRequestEnvelope<IntentRequest> requestEnvelope);
 
 	@Override
-	SpeechletResponse onLaunch(SpeechletRequestEnvelope<LaunchRequest> arg0);
+	SpeechletResponse onLaunch(SpeechletRequestEnvelope<LaunchRequest> requestEnvelope);
 
 	@Override
-	void onSessionEnded(SpeechletRequestEnvelope<SessionEndedRequest> arg0);
+	void onSessionEnded(SpeechletRequestEnvelope<SessionEndedRequest> requestEnvelope);
 
 	@Override
-	void onSessionStarted(SpeechletRequestEnvelope<SessionStartedRequest> arg0);
-
+	void onSessionStarted(SpeechletRequestEnvelope<SessionStartedRequest> requestEnvelope);
 }

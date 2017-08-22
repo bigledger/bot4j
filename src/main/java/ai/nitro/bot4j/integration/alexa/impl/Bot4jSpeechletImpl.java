@@ -80,6 +80,7 @@ public class Bot4jSpeechletImpl implements Bot4jSpeechlet {
 
 		final TextReceivePayload textReceivePayload = createTextReceivePayload(intentRequest);
 		result.addPayload(textReceivePayload);
+
 		return result;
 	}
 
@@ -184,11 +185,11 @@ public class Bot4jSpeechletImpl implements Bot4jSpeechlet {
 	}
 
 	@Override
-	public void onSessionEnded(final SpeechletRequestEnvelope<SessionEndedRequest> arg0) {
+	public void onSessionEnded(final SpeechletRequestEnvelope<SessionEndedRequest> requestEnvelope) {
 	}
 
 	@Override
-	public void onSessionStarted(final SpeechletRequestEnvelope<SessionStartedRequest> arg0) {
+	public void onSessionStarted(final SpeechletRequestEnvelope<SessionStartedRequest> requestEnvelope) {
 	}
 
 	protected SpeechletResponse onStopIntent() {
