@@ -12,11 +12,17 @@ import java.util.Locale;
 
 public class Participant {
 
+	protected String deviceId;
+
 	protected String id;
 
 	protected Locale locale;
 
 	protected Platform platform;
+
+	public String getDeviceId() {
+		return deviceId;
+	}
 
 	public String getId() {
 		return id;
@@ -28,6 +34,10 @@ public class Participant {
 
 	public Platform getPlatform() {
 		return platform;
+	}
+
+	public void setDeviceId(final String deviceId) {
+		this.deviceId = deviceId;
 	}
 
 	public void setId(final String id) {

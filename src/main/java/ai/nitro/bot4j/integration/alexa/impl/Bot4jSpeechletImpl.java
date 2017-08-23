@@ -24,6 +24,8 @@ import com.amazon.speech.speechlet.SessionEndedRequest;
 import com.amazon.speech.speechlet.SessionStartedRequest;
 import com.amazon.speech.speechlet.SpeechletResponse;
 import com.amazon.speech.speechlet.User;
+import com.amazon.speech.speechlet.interfaces.system.SystemInterface;
+import com.amazon.speech.speechlet.interfaces.system.SystemState;
 import com.amazon.speech.ui.Card;
 import com.amazon.speech.ui.PlainTextOutputSpeech;
 import com.amazon.speech.ui.SsmlOutputSpeech;
@@ -71,8 +73,9 @@ public class Bot4jSpeechletImpl implements Bot4jSpeechlet {
 		return nlpContext;
 	}
 
-	protected ReceiveMessage createReceiveMessage(final IntentRequest intentRequest, final User user) {
-		final Participant sender = createSender(user);
+	protected ReceiveMessage createReceiveMessage(final IntentRequest intentRequest, final User user,
+			final SpeechletRequestEnvelope<IntentRequest> requestEnvelope) {
+		final Participant sender = createSender(requestEnvelope, user);
 
 		final ReceiveMessage result = new ReceiveMessage();
 		result.setMessageId(intentRequest.getRequestId());
@@ -84,10 +87,19 @@ public class Bot4jSpeechletImpl implements Bot4jSpeechlet {
 		return result;
 	}
 
-	protected Participant createSender(final User user) {
+	protected Participant createSender(final SpeechletRequestEnvelope<IntentRequest> requestEnvelope, final User user) {
 		final Participant sender = new Participant();
 		sender.setPlatform(AlexaPlatformEnum.ALEXA);
 		sender.setId(user.getUserId());
+
+		if (requestEnvelope.getContext() != null
+				&& requestEnvelope.getContext().getState(SystemInterface.class, SystemInterface.STATE_TYPE) != null) {
+			final SystemState state = requestEnvelope.getContext().getState(SystemInterface.class,
+					SystemInterface.STATE_TYPE);
+
+			final String deviceId = state.getDevice().getDeviceId();
+			sender.setDeviceId(deviceId);
+		}
 		return sender;
 	}
 
@@ -158,7 +170,7 @@ public class Bot4jSpeechletImpl implements Bot4jSpeechlet {
 		final SpeechletResponse result;
 		final User user = requestEnvelope.getSession().getUser();
 
-		receiveMessage(request, user);
+		receiveMessage(request, user, requestEnvelope);
 
 		final String text = alexaMessageSender.getText();
 
@@ -202,8 +214,9 @@ public class Bot4jSpeechletImpl implements Bot4jSpeechlet {
 		return result;
 	}
 
-	protected void receiveMessage(final IntentRequest intentRequest, final User user) {
-		final ReceiveMessage receiveMessage = createReceiveMessage(intentRequest, user);
+	protected void receiveMessage(final IntentRequest intentRequest, final User user,
+			final SpeechletRequestEnvelope<IntentRequest> requestEnvelope) {
+		final ReceiveMessage receiveMessage = createReceiveMessage(intentRequest, user, requestEnvelope);
 		messageReceiver.receive(receiveMessage);
 	}
 
@@ -211,5 +224,4 @@ public class Bot4jSpeechletImpl implements Bot4jSpeechlet {
 		final String result = "<speak> " + text + " </speak>";
 		return result;
 	}
-
 }
