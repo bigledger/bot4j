@@ -43,7 +43,6 @@ public class BubbleRuleImpl extends AbstractSlackSendRuleImpl {
 	public void apply(final SendMessage sendMessage) {
 		final BubbleSendPayload bubbleSendPayload = sendMessage.getPayloadWithType(BubbleSendPayload.class);
 
-		// FIXME
 		final Bubble bubble = bubbleSendPayload.getBubbles().get(0);
 		final List<Attachment> attachments = new ArrayList<Attachment>();
 

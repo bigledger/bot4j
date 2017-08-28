@@ -15,6 +15,8 @@ import java.util.Map;
 
 public class NlpContext {
 
+	protected String answerRecommendation;
+
 	protected Double confidence;
 
 	protected String intent;
@@ -33,6 +35,10 @@ public class NlpContext {
 		}
 	}
 
+	public String getAnswerRecommendation() {
+		return answerRecommendation;
+	}
+
 	public Double getConfidence() {
 		return confidence;
 	}
@@ -43,6 +49,10 @@ public class NlpContext {
 
 	public Map<String, List<String>> getNamedEntities() {
 		return namedEntities;
+	}
+
+	public void setAnswerRecommendation(final String answerRecommendation) {
+		this.answerRecommendation = answerRecommendation;
 	}
 
 	public void setConfidence(final Double confidence) {
