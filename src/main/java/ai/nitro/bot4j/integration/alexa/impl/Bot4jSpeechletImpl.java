@@ -97,8 +97,10 @@ public class Bot4jSpeechletImpl implements Bot4jSpeechlet {
 			final SystemState state = requestEnvelope.getContext().getState(SystemInterface.class,
 					SystemInterface.STATE_TYPE);
 
-			final String deviceId = state.getDevice().getDeviceId();
-			sender.setDeviceId(deviceId);
+			if (state.getDevice() != null) {
+				final String deviceId = state.getDevice().getDeviceId();
+				sender.setDeviceId(deviceId);
+			}
 		}
 		return sender;
 	}
