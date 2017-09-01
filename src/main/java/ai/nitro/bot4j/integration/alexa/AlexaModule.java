@@ -12,7 +12,9 @@ import com.google.inject.AbstractModule;
 
 import ai.nitro.bot4j.integration.alexa.impl.Bot4jSpeechletImpl;
 import ai.nitro.bot4j.integration.alexa.receive.AlexaReceiveHandler;
+import ai.nitro.bot4j.integration.alexa.receive.AlexaReceiveMessageFactory;
 import ai.nitro.bot4j.integration.alexa.receive.impl.AlexaReceiveHandlerImpl;
+import ai.nitro.bot4j.integration.alexa.receive.impl.AlexaReceiveMessageFactoryImpl;
 import ai.nitro.bot4j.integration.alexa.receive.webhook.AlexaWebhook;
 import ai.nitro.bot4j.integration.alexa.receive.webhook.impl.AlexaWebhookImpl;
 import ai.nitro.bot4j.integration.alexa.send.AlexaMessageSender;
@@ -22,10 +24,10 @@ public class AlexaModule extends AbstractModule {
 
 	@Override
 	protected void configure() {
-		bind(AlexaReceiveHandler.class).to(AlexaReceiveHandlerImpl.class);
-		bind(AlexaMessageSender.class).to(AlexaMessageSenderImpl.class);
 		bind(AlexaWebhook.class).to(AlexaWebhookImpl.class);
+		bind(AlexaReceiveHandler.class).to(AlexaReceiveHandlerImpl.class);
+		bind(AlexaReceiveMessageFactory.class).to(AlexaReceiveMessageFactoryImpl.class);
+		bind(AlexaMessageSender.class).to(AlexaMessageSenderImpl.class);
 		bind(Bot4jSpeechlet.class).to(Bot4jSpeechletImpl.class);
 	}
 }
-	

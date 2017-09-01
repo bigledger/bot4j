@@ -12,4 +12,9 @@ import ai.nitro.bot4j.middle.domain.Platform;
 
 public enum FacebookPlatformEnum implements Platform {
 	FACEBOOK;
+
+	@Override
+	public boolean isVoice() {
+		return false;
+	}
 }

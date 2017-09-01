@@ -8,7 +8,13 @@
 
 package ai.nitro.bot4j.middle.domain.send.payload;
 
+import com.amazon.speech.ui.Card;
+
 public class TextSendPayload extends AbstractSendPayload {
+
+	protected Card alexaCard;
+
+	public boolean shouldEndSession = true;
 
 	protected String text;
 
@@ -16,8 +22,16 @@ public class TextSendPayload extends AbstractSendPayload {
 		super(Type.TEXT);
 	}
 
+	public Card getAlexaCard() {
+		return alexaCard;
+	}
+
 	public String getText() {
 		return text;
+	}
+
+	public void setAlexaCard(final Card card) {
+		alexaCard = card;
 	}
 
 	public void setText(final String text) {

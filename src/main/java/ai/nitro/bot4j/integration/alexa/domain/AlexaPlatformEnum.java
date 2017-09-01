@@ -12,4 +12,9 @@ import ai.nitro.bot4j.middle.domain.Platform;
 
 public enum AlexaPlatformEnum implements Platform {
 	ALEXA;
+
+	@Override
+	public boolean isVoice() {
+		return true;
+	}
 }

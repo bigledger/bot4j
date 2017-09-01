@@ -5,4 +5,9 @@ import ai.nitro.bot4j.middle.domain.Platform;
 public enum ApiAiPlatformEnum implements Platform {
 	APIAI;
 
+	@Override
+	public boolean isVoice() {
+		return true;
+	}
+
 }

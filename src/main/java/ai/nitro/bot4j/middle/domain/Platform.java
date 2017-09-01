@@ -10,4 +10,6 @@ package ai.nitro.bot4j.middle.domain;
 
 public interface Platform {
 
+	boolean isVoice();
+
 }

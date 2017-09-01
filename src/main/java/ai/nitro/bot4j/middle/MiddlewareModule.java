@@ -13,6 +13,9 @@ import com.google.inject.multibindings.MapBinder;
 
 import ai.nitro.bot4j.integration.alexa.domain.AlexaPlatformEnum;
 import ai.nitro.bot4j.integration.alexa.send.impl.AlexaMessageSenderImpl;
+import ai.nitro.bot4j.integration.api.ai.domain.ApiAiPlatformEnum;
+import ai.nitro.bot4j.integration.api.ai.send.ApiAiMessageSender;
+import ai.nitro.bot4j.integration.api.ai.send.impl.ApiAiMessageSenderImpl;
 import ai.nitro.bot4j.integration.facebook.domain.FacebookPlatformEnum;
 import ai.nitro.bot4j.integration.facebook.send.impl.FacebookMessageSenderImpl;
 import ai.nitro.bot4j.integration.slack.domain.SlackPlatformEnum;
@@ -48,6 +51,7 @@ public class MiddlewareModule extends AbstractModule {
 		platformMessageSenderBinder.addBinding(SlackPlatformEnum.SLACK).to(SlackMessageSenderImpl.class);
 		platformMessageSenderBinder.addBinding(TelegramPlatformEnum.TELEGRAM).to(TelegramMessageSenderImpl.class);
 		platformMessageSenderBinder.addBinding(AlexaPlatformEnum.ALEXA).to(AlexaMessageSenderImpl.class);
+		platformMessageSenderBinder.addBinding(ApiAiPlatformEnum.APIAI).to(ApiAiMessageSenderImpl.class);
 	}
 
 }
