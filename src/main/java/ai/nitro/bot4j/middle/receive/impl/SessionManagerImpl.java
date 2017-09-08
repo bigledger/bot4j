@@ -51,6 +51,7 @@ public class SessionManagerImpl implements SessionManager {
 
 			result = session;
 		}
+
 		return result;
 	}
 
