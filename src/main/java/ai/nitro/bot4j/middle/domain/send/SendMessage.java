@@ -40,5 +40,4 @@ public class SendMessage extends AbstractMessage {
 	public String toString() {
 		return super.toString() + ", payload=[" + payload + "]";
 	}
-
 }

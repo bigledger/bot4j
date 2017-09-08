@@ -19,6 +19,7 @@ import ai.nitro.bot4j.middle.domain.Participant;
 import ai.nitro.bot4j.middle.domain.Platform;
 import ai.nitro.bot4j.middle.domain.Session;
 import ai.nitro.bot4j.middle.domain.receive.ReceiveMessage;
+import ai.nitro.bot4j.middle.domain.send.SendMessage;
 import ai.nitro.bot4j.middle.receive.SessionManager;
 import ai.nitro.bot4j.middle.receive.key.SenderKey;
 
@@ -28,6 +29,31 @@ public class SessionManagerImpl implements SessionManager {
 	protected final Cache<SenderKey, Session> sessionCache = CacheBuilder.newBuilder()
 			.expireAfterAccess(60, TimeUnit.MINUTES).build();
 
+	private Session getSession(final Participant sender) {
+		final Session result;
+
+		if (sender == null) {
+			result = null;
+		} else if (sender.getId() == null) {
+			result = null;
+		} else if (sender.getPlatform() == null) {
+			result = null;
+		} else {
+			final Platform platform = sender.getPlatform();
+			final String senderId = sender.getId();
+			final SenderKey key = new SenderKey(platform, senderId);
+			Session session = sessionCache.getIfPresent(key);
+
+			if (session == null) {
+				session = new Session();
+				sessionCache.put(key, session);
+			}
+
+			result = session;
+		}
+		return result;
+	}
+
 	@Override
 	public Session getSession(final ReceiveMessage receiveMessage) {
 		final Session result;
@@ -36,26 +62,21 @@ public class SessionManagerImpl implements SessionManager {
 			result = null;
 		} else {
 			final Participant sender = receiveMessage.getSender();
+			result = getSession(sender);
+		}
 
-			if (sender == null) {
-				result = null;
-			} else if (sender.getId() == null) {
-				result = null;
-			} else if (sender.getPlatform() == null) {
-				result = null;
-			} else {
-				final Platform platform = sender.getPlatform();
-				final String senderId = sender.getId();
-				final SenderKey key = new SenderKey(platform, senderId);
-				Session session = sessionCache.getIfPresent(key);
+		return result;
+	}
 
-				if (session == null) {
-					session = new Session();
-					sessionCache.put(key, session);
-				}
+	@Override
+	public Session getSession(final SendMessage sendMessage) {
+		final Session result;
 
-				result = session;
-			}
+		if (sendMessage == null) {
+			result = null;
+		} else {
+			final Participant sender = sendMessage.getRecipient();
+			result = getSession(sender);
 		}
 
 		return result;

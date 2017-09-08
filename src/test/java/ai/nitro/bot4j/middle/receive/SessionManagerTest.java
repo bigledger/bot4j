@@ -46,7 +46,7 @@ public class SessionManagerTest extends TestBase {
 
 	@Test
 	public void testGetSessionNull() throws Exception {
-		final Session session = sessionManager.getSession(null);
+		final Session session = sessionManager.getSession((ReceiveMessage) null);
 		assertNull(session);
 	}
 

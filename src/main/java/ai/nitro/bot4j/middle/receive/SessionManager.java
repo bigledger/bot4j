@@ -10,8 +10,11 @@ package ai.nitro.bot4j.middle.receive;
 
 import ai.nitro.bot4j.middle.domain.Session;
 import ai.nitro.bot4j.middle.domain.receive.ReceiveMessage;
+import ai.nitro.bot4j.middle.domain.send.SendMessage;
 
 public interface SessionManager {
 
 	Session getSession(ReceiveMessage receiveMessage);
+
+	Session getSession(SendMessage sendMessage);
 }
