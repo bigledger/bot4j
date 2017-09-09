@@ -31,9 +31,36 @@ public class MessageSenderImpl implements MessageSender {
 	@Inject
 	protected Map<Platform, PlatformMessageSender> platformMessageSenders;
 
+	protected boolean doSend(final SendMessage sendMessage, final Platform platform) {
+		boolean result = true;
+
+		try {
+			final PlatformMessageSender platformMessageSender = platformMessageSenders.get(platform);
+
+			if (platformMessageSender == null) {
+				LOG.error("no platform message sender configured for {} and {}", platform, sendMessage);
+				result = false;
+			} else {
+				onSend(sendMessage, platformMessageSender);
+			}
+		} catch (final FacebookOAuthException e) {
+			LOG.warn("Could not send fb message: {}", e.getMessage());
+			result = false;
+		} catch (final Exception e) {
+			LOG.error(e.getMessage(), e);
+			result = false;
+		}
+
+		return result;
+	}
+
 	protected void enrichSendMessageId(final SendMessage sendMessage) {
 		final String messageId = UUID.randomUUID().toString();
 		sendMessage.setMessageId(messageId);
+	}
+
+	protected void onSend(final SendMessage sendMessage, final PlatformMessageSender platformMessageSender) {
+		platformMessageSender.send(sendMessage);
 	}
 
 	@Override
@@ -53,31 +80,8 @@ public class MessageSenderImpl implements MessageSender {
 				LOG.error("no target platform set in {}", sendMessage);
 				result = false;
 			} else {
-				result = send(sendMessage, platform);
+				result = doSend(sendMessage, platform);
 			}
-		}
-
-		return result;
-	}
-
-	protected boolean send(final SendMessage sendMessage, final Platform platform) {
-		boolean result = true;
-
-		try {
-			final PlatformMessageSender platformMessageSender = platformMessageSenders.get(platform);
-
-			if (platformMessageSender == null) {
-				LOG.error("no platform message sender configured for {} and {}", platform, sendMessage);
-				result = false;
-			} else {
-				platformMessageSender.send(sendMessage);
-			}
-		} catch (final FacebookOAuthException e) {
-			LOG.warn("Could not send fb message: {}", e.getMessage());
-			result = false;
-		} catch (final Exception e) {
-			LOG.error(e.getMessage(), e);
-			result = false;
 		}
 
 		return result;

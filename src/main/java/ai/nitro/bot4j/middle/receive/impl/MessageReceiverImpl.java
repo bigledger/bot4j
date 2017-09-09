@@ -37,7 +37,7 @@ public class MessageReceiverImpl implements MessageReceiver {
 	@Inject
 	protected SessionManager sessionManager;
 
-	protected void handleReceiveMessage(final ReceiveMessage receiveMessage) {
+	protected void doReceive(final ReceiveMessage receiveMessage) {
 		try {
 			final Session session = sessionManager.getSession(receiveMessage);
 			receiveMessage.setSession(session);
@@ -47,11 +47,15 @@ public class MessageReceiverImpl implements MessageReceiver {
 			if (isDuplicateMessage) {
 				LOG.info("ignoring duplicate message {}", receiveMessage);
 			} else {
-				bot.onMessage(receiveMessage);
+				onBotMessage(receiveMessage);
 			}
 		} catch (final Exception e) {
 			LOG.error(e.getMessage(), e);
 		}
+	}
+
+	protected void onBotMessage(final ReceiveMessage receiveMessage) throws Exception {
+		bot.onMessage(receiveMessage);
 	}
 
 	@Override
@@ -60,9 +64,9 @@ public class MessageReceiverImpl implements MessageReceiver {
 		final Platform platform = sender.getPlatform();
 
 		if (platform.isVoice()) {
-			handleReceiveMessage(receiveMessage);
+			doReceive(receiveMessage);
 		} else {
-			CompletableFuture.runAsync(() -> handleReceiveMessage(receiveMessage));
+			CompletableFuture.runAsync(() -> doReceive(receiveMessage));
 		}
 	}
 }
