@@ -41,7 +41,7 @@ public class MessageSenderImpl implements MessageSender {
 				LOG.error("no platform message sender configured for {} and {}", platform, sendMessage);
 				result = false;
 			} else {
-				onSend(sendMessage, platformMessageSender);
+				result = onSend(sendMessage, platformMessageSender);
 			}
 		} catch (final FacebookOAuthException e) {
 			LOG.warn("Could not send fb message: {}", e.getMessage());
@@ -59,8 +59,8 @@ public class MessageSenderImpl implements MessageSender {
 		sendMessage.setMessageId(messageId);
 	}
 
-	protected void onSend(final SendMessage sendMessage, final PlatformMessageSender platformMessageSender) {
-		platformMessageSender.send(sendMessage);
+	protected boolean onSend(final SendMessage sendMessage, final PlatformMessageSender platformMessageSender) {
+		return platformMessageSender.send(sendMessage);
 	}
 
 	@Override
