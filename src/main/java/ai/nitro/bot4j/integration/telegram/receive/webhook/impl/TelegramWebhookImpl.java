@@ -8,6 +8,8 @@
 
 package ai.nitro.bot4j.integration.telegram.receive.webhook.impl;
 
+import java.util.Map;
+
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -51,9 +53,12 @@ public class TelegramWebhookImpl implements TelegramWebhook {
 	public String post(final HttpServletRequest req, final HttpServletResponse res) {
 		LOG.info("received Message");
 		final String result = "";
+
 		try {
+			final Map<String, String[]> params = req.getParameterMap();
+
 			final Update update = BotUtils.parseUpdate(req.getReader());
-			telegramReceiveHandler.handleUpdateMessage(update);
+			telegramReceiveHandler.handleUpdateMessage(update, params);
 		} catch (final Exception e) {
 			handleException(e);
 		}

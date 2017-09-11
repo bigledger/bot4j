@@ -1,5 +1,7 @@
 package ai.nitro.bot4j.integration.api.ai.receive.impl;
 
+import java.util.Map;
+
 import javax.inject.Inject;
 
 import ai.api.model.AIResponse;
@@ -22,8 +24,8 @@ public class ApiAiReceiveHandlerImpl implements ApiAiReceiveHandler {
 	protected MessageReceiver messageReceiver;
 
 	@Override
-	public Fulfillment handleAIResponse(final AIResponse aiResponse) {
-		final ReceiveMessage receiveMessage = apiAiReceiveMessageFactory.createReceiveMessage(aiResponse);
+	public Fulfillment handleAIResponse(final AIResponse aiResponse, final Map<String, String[]> params) {
+		final ReceiveMessage receiveMessage = apiAiReceiveMessageFactory.createReceiveMessage(aiResponse, params);
 
 		if (receiveMessage != null) {
 			messageReceiver.receive(receiveMessage);

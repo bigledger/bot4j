@@ -8,6 +8,8 @@
 
 package ai.nitro.bot4j.integration.telegram.receive.impl;
 
+import java.util.Map;
+
 import javax.inject.Inject;
 
 import org.apache.logging.log4j.LogManager;
@@ -42,9 +44,13 @@ public class TelegramReceiveMessageFactoryImpl implements TelegramReceiveMessage
 	protected TelegramReceivePayloadFactory telegramReceivePayloadFactory;
 
 	@Override
-	public ReceiveMessage createReceiveMessage(final Update update) {
+	public ReceiveMessage createReceiveMessage(final Update update, final Map<String, String[]> params) {
 		final ReceiveMessage result = new ReceiveMessage();
 		result.setNativePayload(TelegramPlatformEnum.TELEGRAM, update);
+
+		if (params != null) {
+			result.setParams(params);
+		}
 
 		if (update.message() != null) {
 			handleMessage(update.message(), result);

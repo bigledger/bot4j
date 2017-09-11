@@ -9,6 +9,7 @@
 package ai.nitro.bot4j.integration.alexa.receive.impl;
 
 import java.io.IOException;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -20,20 +21,34 @@ import com.amazon.speech.speechlet.SpeechletRequestHandlerException;
 import com.amazon.speech.speechlet.servlet.ServletSpeechletRequestHandler;
 
 import ai.nitro.bot4j.integration.alexa.Bot4jSpeechlet;
+import ai.nitro.bot4j.integration.alexa.impl.Bot4jSpeechletImpl;
 import ai.nitro.bot4j.integration.alexa.receive.AlexaReceiveHandler;
+import ai.nitro.bot4j.integration.alexa.receive.AlexaReceiveMessageFactory;
+import ai.nitro.bot4j.integration.alexa.send.AlexaMessageSender;
+import ai.nitro.bot4j.middle.receive.MessageReceiver;
 
 public class AlexaReceiveHandlerImpl implements AlexaReceiveHandler {
 
 	static Logger LOG = LogManager.getLogger(AlexaReceiveHandlerImpl.class);
 
 	@Inject
-	protected Bot4jSpeechlet bot4jSpeechlet;
+	protected AlexaMessageSender alexaMessageSender;
+
+	@Inject
+	protected AlexaReceiveMessageFactory alexaReceiveMessageFactory;
+
+	@Inject
+	protected MessageReceiver messageReceiver;
 
 	@Override
-	public byte[] handleSpeechletRequest(final byte[] speechletRequest) {
+	public byte[] handleSpeechletRequest(final byte[] speechletRequest, final Map<String, String[]> params) {
 		byte[] result = null;
 
 		try {
+
+			final Bot4jSpeechlet bot4jSpeechlet = new Bot4jSpeechletImpl(alexaReceiveMessageFactory, alexaMessageSender,
+					messageReceiver, params);
+
 			final ServletSpeechletRequestHandler speechletRequestHandler = new ServletSpeechletRequestHandler();
 			result = speechletRequestHandler.handleSpeechletCall(bot4jSpeechlet, speechletRequest);
 		} catch (IOException | SpeechletRequestHandlerException | SpeechletException e) {

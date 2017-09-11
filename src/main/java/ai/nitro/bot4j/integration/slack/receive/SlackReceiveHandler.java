@@ -8,11 +8,13 @@
 
 package ai.nitro.bot4j.integration.slack.receive;
 
+import java.util.Map;
+
 import com.google.gson.JsonObject;
 
 public interface SlackReceiveHandler {
 
-	void handleAction(JsonObject actionJsonObject);
+	void handleAction(JsonObject actionJsonObject, Map<String, String[]> params);
 
 	void handleEvent(JsonObject eventJsonObject);
 }

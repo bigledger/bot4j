@@ -59,7 +59,7 @@ public class FacebookMessageTest extends TestBase {
 		messagingItem.setRecipient(recipient);
 		messagingItem.setSender(sender);
 
-		final ReceiveMessage receiveMessage = facebookReceiveMessageFactory.createReceiveMessage(messagingItem);
+		final ReceiveMessage receiveMessage = facebookReceiveMessageFactory.createReceiveMessage(messagingItem, null);
 
 		for (final AbstractReceivePayload payload : receiveMessage.getPayloads()) {
 			final CoordinateReceivePayload coordinations = (CoordinateReceivePayload) payload;

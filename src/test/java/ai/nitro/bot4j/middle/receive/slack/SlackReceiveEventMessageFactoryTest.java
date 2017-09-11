@@ -33,7 +33,7 @@ public class SlackReceiveEventMessageFactoryTest extends TestBase {
 		final JsonParser jsonParser = new JsonParser();
 		final JsonObject json = jsonParser.parse(payload).getAsJsonObject();
 
-		final ReceiveMessage receiveMessage = slackReceiveActionMessageFactory.createReceiveMessage(json);
+		final ReceiveMessage receiveMessage = slackReceiveActionMessageFactory.createReceiveMessage(json, null);
 		assertEquals("1481800795.706419-test", receiveMessage.getMessageId());
 	}
 

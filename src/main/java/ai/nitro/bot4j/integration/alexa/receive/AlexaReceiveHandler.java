@@ -8,7 +8,9 @@
 
 package ai.nitro.bot4j.integration.alexa.receive;
 
+import java.util.Map;
+
 public interface AlexaReceiveHandler {
 
-	byte[] handleSpeechletRequest(byte[] speechletRequest);
+	byte[] handleSpeechletRequest(byte[] speechletRequest, Map<String, String[]> params);
 }

@@ -8,9 +8,11 @@
 
 package ai.nitro.bot4j.integration.telegram.receive;
 
+import java.util.Map;
+
 import com.pengrad.telegrambot.model.Update;
 
 public interface TelegramReceiveHandler {
 
-	void handleUpdateMessage(Update update);
+	void handleUpdateMessage(Update update, Map<String, String[]> params);
 }

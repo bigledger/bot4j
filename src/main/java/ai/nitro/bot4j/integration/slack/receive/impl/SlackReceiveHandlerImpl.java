@@ -8,6 +8,8 @@
 
 package ai.nitro.bot4j.integration.slack.receive.impl;
 
+import java.util.Map;
+
 import javax.inject.Inject;
 
 import org.apache.logging.log4j.LogManager;
@@ -35,8 +37,9 @@ public class SlackReceiveHandlerImpl implements SlackReceiveHandler {
 	protected SlackReceiveEventMessageFactory slackReceiveEventMessageFactory;
 
 	@Override
-	public void handleAction(final JsonObject actionJsonObject) {
-		final ReceiveMessage receiveMessage = slackReceiveActionMessageFactory.createReceiveMessage(actionJsonObject);
+	public void handleAction(final JsonObject actionJsonObject, final Map<String, String[]> params) {
+		final ReceiveMessage receiveMessage = slackReceiveActionMessageFactory.createReceiveMessage(actionJsonObject,
+				params);
 
 		if (receiveMessage != null) {
 			messageReceiver.receive(receiveMessage);

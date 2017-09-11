@@ -8,12 +8,14 @@
 
 package ai.nitro.bot4j.integration.facebook.receive;
 
+import java.util.Map;
+
 import com.restfb.types.webhook.messaging.MessagingItem;
 
 import ai.nitro.bot4j.middle.domain.receive.ReceiveMessage;
 
 public interface FacebookReceiveMessageFactory {
 
-	ReceiveMessage createReceiveMessage(MessagingItem messagingItem);
+	ReceiveMessage createReceiveMessage(MessagingItem messagingItem, Map<String, String[]> params);
 
 }

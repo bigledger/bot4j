@@ -8,6 +8,8 @@
 
 package ai.nitro.bot4j.integration.slack.receive.impl;
 
+import java.util.Map;
+
 import javax.inject.Inject;
 
 import com.google.gson.JsonArray;
@@ -36,7 +38,7 @@ public class SlackReceiveActionMessageFactoryImpl implements SlackReceiveActionM
 	protected SlackReceivePayloadFactory slackReceivePayloadFactory;
 
 	@Override
-	public ReceiveMessage createReceiveMessage(final JsonObject json) {
+	public ReceiveMessage createReceiveMessage(final JsonObject json, final Map<String, String[]> params) {
 		final ReceiveMessage result = new ReceiveMessage();
 		result.setNativePayload(SlackPlatformEnum.SLACK, json);
 
@@ -48,6 +50,10 @@ public class SlackReceiveActionMessageFactoryImpl implements SlackReceiveActionM
 
 		handleSender(json, result);
 		handleRecipient(json, result);
+
+		if (params != null) {
+			result.setParams(params);
+		}
 
 		if (json.has(ACTIONS)) {
 			handleActions(json.get(ACTIONS).getAsJsonArray(), result);

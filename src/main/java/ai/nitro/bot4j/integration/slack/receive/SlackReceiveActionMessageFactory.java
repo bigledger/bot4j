@@ -8,12 +8,14 @@
 
 package ai.nitro.bot4j.integration.slack.receive;
 
+import java.util.Map;
+
 import com.google.gson.JsonObject;
 
 import ai.nitro.bot4j.middle.domain.receive.ReceiveMessage;
 
 public interface SlackReceiveActionMessageFactory {
 
-	ReceiveMessage createReceiveMessage(JsonObject json);
+	ReceiveMessage createReceiveMessage(JsonObject json, Map<String, String[]> params);
 
 }

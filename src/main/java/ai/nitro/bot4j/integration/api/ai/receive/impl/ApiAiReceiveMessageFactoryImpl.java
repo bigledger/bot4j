@@ -1,5 +1,6 @@
 package ai.nitro.bot4j.integration.api.ai.receive.impl;
 
+import java.util.Map;
 import java.util.Map.Entry;
 
 import com.google.gson.JsonElement;
@@ -34,10 +35,14 @@ public class ApiAiReceiveMessageFactoryImpl implements ApiAiReceiveMessageFactor
 	}
 
 	@Override
-	public ReceiveMessage createReceiveMessage(final AIResponse aiResponse) {
+	public ReceiveMessage createReceiveMessage(final AIResponse aiResponse, final Map<String, String[]> params) {
 		final ReceiveMessage result = new ReceiveMessage();
 		result.setMessageId(aiResponse.getId());
 		result.setNativePayload(ApiAiPlatformEnum.APIAI, aiResponse);
+
+		if (params != null) {
+			result.setParams(params);
+		}
 
 		final Participant sender = createSender(aiResponse);
 		result.setSender(sender);

@@ -1,5 +1,6 @@
 package ai.nitro.bot4j.integration.alexa.receive.impl;
 
+import java.util.Map;
 import java.util.Map.Entry;
 
 import com.amazon.speech.json.SpeechletRequestEnvelope;
@@ -39,12 +40,16 @@ public class AlexaReceiveMessageFactoryImpl implements AlexaReceiveMessageFactor
 
 	@Override
 	public ReceiveMessage createReceiveMessage(final IntentRequest intentRequest, final User user,
-			final SpeechletRequestEnvelope<IntentRequest> requestEnvelope) {
+			final SpeechletRequestEnvelope<IntentRequest> requestEnvelope, final Map<String, String[]> params) {
 		final Participant sender = createSender(requestEnvelope, user);
 
 		final ReceiveMessage result = new ReceiveMessage();
 		result.setMessageId(intentRequest.getRequestId());
 		result.setSender(sender);
+
+		if (params != null) {
+			result.setParams(params);
+		}
 
 		final TextReceivePayload textReceivePayload = createTextReceivePayload(intentRequest);
 		result.addPayload(textReceivePayload);

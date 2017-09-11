@@ -8,6 +8,8 @@
 
 package ai.nitro.bot4j.integration.facebook.receive.impl;
 
+import java.util.Map;
+
 import javax.inject.Inject;
 
 import com.restfb.types.webhook.messaging.MessagingItem;
@@ -26,8 +28,8 @@ public class FacebookReceiveHandlerImpl implements FacebookReceiveHandler {
 	protected MessageReceiver messageReceiver;
 
 	@Override
-	public void handleMessagingItem(final MessagingItem messagingItem) {
-		final ReceiveMessage receiveMessage = facebookReceiveMessageFactory.createReceiveMessage(messagingItem);
+	public void handleMessagingItem(final MessagingItem messagingItem, final Map<String, String[]> params) {
+		final ReceiveMessage receiveMessage = facebookReceiveMessageFactory.createReceiveMessage(messagingItem, params);
 
 		if (receiveMessage != null) {
 			messageReceiver.receive(receiveMessage);

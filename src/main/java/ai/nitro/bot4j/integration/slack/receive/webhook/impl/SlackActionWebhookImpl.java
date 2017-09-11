@@ -8,6 +8,8 @@
 
 package ai.nitro.bot4j.integration.slack.receive.webhook.impl;
 
+import java.util.Map;
+
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -39,7 +41,9 @@ public class SlackActionWebhookImpl implements SlackActionWebhook {
 			final JsonParser jsonParser = new JsonParser();
 			final JsonObject json = jsonParser.parse(payload).getAsJsonObject();
 
-			slackReceiveHandler.handleAction(json);
+			final Map<String, String[]> params = req.getParameterMap();
+
+			slackReceiveHandler.handleAction(json, params);
 		} catch (final Exception e) {
 			handleException(e);
 		}

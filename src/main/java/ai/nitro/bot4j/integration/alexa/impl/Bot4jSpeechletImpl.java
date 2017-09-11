@@ -8,7 +8,7 @@
 
 package ai.nitro.bot4j.integration.alexa.impl;
 
-import javax.inject.Inject;
+import java.util.Map;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -40,14 +40,22 @@ public class Bot4jSpeechletImpl implements Bot4jSpeechlet {
 
 	private static final Logger LOG = LogManager.getLogger(Bot4jSpeechletImpl.class);
 
-	@Inject
 	protected AlexaMessageSender alexaMessageSender;
 
-	@Inject
 	protected AlexaReceiveMessageFactory alexaReceiveMessageFactory;
 
-	@Inject
 	protected MessageReceiver messageReceiver;
+
+	private final Map<String, String[]> params;
+
+	public Bot4jSpeechletImpl(final AlexaReceiveMessageFactory alexaReceiveMessageFactory,
+			final AlexaMessageSender alexaMessageSender, final MessageReceiver messageReceiver,
+			final Map<String, String[]> params) {
+		this.alexaReceiveMessageFactory = alexaReceiveMessageFactory;
+		this.alexaMessageSender = alexaMessageSender;
+		this.messageReceiver = messageReceiver;
+		this.params = params;
+	}
 
 	protected SpeechletResponse onCancelIntent() {
 		final PlainTextOutputSpeech speech = new PlainTextOutputSpeech();
@@ -155,8 +163,9 @@ public class Bot4jSpeechletImpl implements Bot4jSpeechlet {
 
 	protected void receiveMessage(final IntentRequest intentRequest, final User user,
 			final SpeechletRequestEnvelope<IntentRequest> requestEnvelope) {
+
 		final ReceiveMessage receiveMessage = alexaReceiveMessageFactory.createReceiveMessage(intentRequest, user,
-				requestEnvelope);
+				requestEnvelope, params);
 		messageReceiver.receive(receiveMessage);
 	}
 

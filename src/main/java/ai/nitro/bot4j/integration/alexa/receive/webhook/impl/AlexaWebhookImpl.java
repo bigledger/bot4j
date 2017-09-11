@@ -9,6 +9,7 @@
 package ai.nitro.bot4j.integration.alexa.receive.webhook.impl;
 
 import java.io.IOException;
+import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
@@ -42,7 +43,9 @@ public class AlexaWebhookImpl implements AlexaWebhook {
 					req.getHeader(Sdk.SIGNATURE_REQUEST_HEADER),
 					req.getHeader(Sdk.SIGNATURE_CERTIFICATE_CHAIN_URL_REQUEST_HEADER));
 
-			final byte[] outputBytes = alexaReceiveHandler.handleSpeechletRequest(serializedSpeechletRequest);
+			final Map<String, String[]> params = req.getParameterMap();
+
+			final byte[] outputBytes = alexaReceiveHandler.handleSpeechletRequest(serializedSpeechletRequest, params);
 			result = new String(outputBytes);
 		} catch (final IOException e) {
 			LOG.warn(e.getMessage(), e);

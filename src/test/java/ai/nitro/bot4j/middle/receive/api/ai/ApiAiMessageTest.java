@@ -38,7 +38,7 @@ public class ApiAiMessageTest extends TestBase {
 		aiResponse.setResult(result);
 		aiResponse.setSessionId(senderId);
 
-		final ReceiveMessage receiveMessage = apiAiReceiveMessageFactory.createReceiveMessage(aiResponse);
+		final ReceiveMessage receiveMessage = apiAiReceiveMessageFactory.createReceiveMessage(aiResponse, null);
 		assertEquals(receiveMessage.getSender().getId(), senderId);
 		assertEquals(receiveMessage.getMessageId(), messageId);
 

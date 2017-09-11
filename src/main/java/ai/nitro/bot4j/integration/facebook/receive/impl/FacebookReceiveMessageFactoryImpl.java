@@ -8,6 +8,8 @@
 
 package ai.nitro.bot4j.integration.facebook.receive.impl;
 
+import java.util.Map;
+
 import javax.inject.Inject;
 
 import org.apache.logging.log4j.util.Strings;
@@ -42,7 +44,7 @@ public class FacebookReceiveMessageFactoryImpl implements FacebookReceiveMessage
 	protected FacebookReceivePayloadFactory facebookReceivePayloadFactory;
 
 	@Override
-	public ReceiveMessage createReceiveMessage(final MessagingItem messagingItem) {
+	public ReceiveMessage createReceiveMessage(final MessagingItem messagingItem, final Map<String, String[]> params) {
 		final ReceiveMessage result = new ReceiveMessage();
 
 		final MessageItem messageItem = messagingItem.getMessage();
@@ -50,6 +52,10 @@ public class FacebookReceiveMessageFactoryImpl implements FacebookReceiveMessage
 
 		handleSender(messagingItem.getSender(), result);
 		handleRecipient(messagingItem.getRecipient(), result);
+
+		if (params != null) {
+			result.setParams(params);
+		}
 
 		if (messageItem != null) {
 			handleMessageItem(messageItem, result);
@@ -126,6 +132,7 @@ public class FacebookReceiveMessageFactoryImpl implements FacebookReceiveMessage
 		final Participant participant = new Participant();
 		participant.setPlatform(FacebookPlatformEnum.FACEBOOK);
 		participant.setId(recipient.getId());
+
 		result.setRecipient(participant);
 	}
 
