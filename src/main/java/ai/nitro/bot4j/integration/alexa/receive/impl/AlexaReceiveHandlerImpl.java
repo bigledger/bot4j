@@ -40,15 +40,16 @@ public class AlexaReceiveHandlerImpl implements AlexaReceiveHandler {
 	@Inject
 	protected MessageReceiver messageReceiver;
 
+	protected Bot4jSpeechletImpl createBot4jSpeechlet(final Map<String, String[]> params) {
+		return new Bot4jSpeechletImpl(alexaReceiveMessageFactory, alexaMessageSender, messageReceiver, params);
+	}
+
 	@Override
 	public byte[] handleSpeechletRequest(final byte[] speechletRequest, final Map<String, String[]> params) {
 		byte[] result = null;
 
 		try {
-
-			final Bot4jSpeechlet bot4jSpeechlet = new Bot4jSpeechletImpl(alexaReceiveMessageFactory, alexaMessageSender,
-					messageReceiver, params);
-
+			final Bot4jSpeechlet bot4jSpeechlet = createBot4jSpeechlet(params);
 			final ServletSpeechletRequestHandler speechletRequestHandler = new ServletSpeechletRequestHandler();
 			result = speechletRequestHandler.handleSpeechletCall(bot4jSpeechlet, speechletRequest);
 		} catch (IOException | SpeechletRequestHandlerException | SpeechletException e) {
@@ -57,5 +58,4 @@ public class AlexaReceiveHandlerImpl implements AlexaReceiveHandler {
 
 		return result;
 	}
-
 }
