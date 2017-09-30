@@ -11,7 +11,7 @@ package ai.nitro.bot4j.middle.domain.send.payload;
 public abstract class AbstractSendPayload {
 
 	public enum Type {
-		BUBBLE, BUTTONS, IMAGE, LIST, QUICK_REPLIES, TEXT, TYPING, VIDEO
+		BUBBLE, BUTTONS, CAMERA, IMAGE, LIST, QUICK_REPLIES, TEXT, TYPING, VIDEO
 	}
 
 	protected final Type type;
