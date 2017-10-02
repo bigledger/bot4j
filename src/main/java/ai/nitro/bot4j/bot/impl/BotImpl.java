@@ -35,10 +35,6 @@ public class BotImpl implements Bot {
 	@Inject
 	protected MessageSender messageSender;
 
-	protected void onCoordinate(final CoordinateReceivePayload payload, final Participant sender) throws Exception {
-
-	}
-
 	@Override
 	public void onMessage(final ReceiveMessage message) throws Exception {
 		final Participant sender = message.getSender();
@@ -49,6 +45,11 @@ public class BotImpl implements Bot {
 	}
 
 	protected void onReceiveAttachment(final UrlAttachmentReceivePayload payload, final Participant sender) {
+
+	}
+
+	protected void onReceiveCoordinate(final CoordinateReceivePayload payload, final Participant sender)
+			throws Exception {
 
 	}
 
@@ -66,7 +67,7 @@ public class BotImpl implements Bot {
 
 		switch (type) {
 		case COORDINATE:
-			onCoordinate((CoordinateReceivePayload) payload, sender);
+			onReceiveCoordinate((CoordinateReceivePayload) payload, sender);
 			break;
 		case DATA:
 			onReceiveData((DataReceivePayload) payload, sender);
@@ -116,7 +117,7 @@ public class BotImpl implements Bot {
 		final SendMessage sendMessage = new SendMessage();
 		sendMessage.setRecipient(recipient);
 
-		final ImageSendPayload imageSendPayload = new ImageSendPayload();
+		final ImageSendPayload imageSendPayload = new ImageSendPayload(sendMessage);
 		imageSendPayload.setTitle(title);
 		imageSendPayload.setImageUrl(imageUrl);
 		sendMessage.setPayload(imageSendPayload);
@@ -128,7 +129,7 @@ public class BotImpl implements Bot {
 		final SendMessage sendMessage = new SendMessage();
 		sendMessage.setRecipient(recipient);
 
-		final TextSendPayload textSendPayload = new TextSendPayload();
+		final TextSendPayload textSendPayload = new TextSendPayload(sendMessage);
 		textSendPayload.setText(text);
 		sendMessage.setPayload(textSendPayload);
 
@@ -139,7 +140,7 @@ public class BotImpl implements Bot {
 		final SendMessage sendMessage = new SendMessage();
 		sendMessage.setRecipient(recipient);
 
-		final TypingSendPayload typingSendPayload = new TypingSendPayload();
+		final TypingSendPayload typingSendPayload = new TypingSendPayload(sendMessage);
 		typingSendPayload.setTyping(Typing.OFF);
 		sendMessage.setPayload(typingSendPayload);
 
@@ -150,7 +151,7 @@ public class BotImpl implements Bot {
 		final SendMessage sendMessage = new SendMessage();
 		sendMessage.setRecipient(recipient);
 
-		final TypingSendPayload typingSendPayload = new TypingSendPayload();
+		final TypingSendPayload typingSendPayload = new TypingSendPayload(sendMessage);
 		typingSendPayload.setTyping(Typing.ON);
 		sendMessage.setPayload(typingSendPayload);
 

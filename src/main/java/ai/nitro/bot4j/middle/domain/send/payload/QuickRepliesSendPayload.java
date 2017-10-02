@@ -11,6 +11,7 @@ package ai.nitro.bot4j.middle.domain.send.payload;
 import java.util.ArrayList;
 import java.util.List;
 
+import ai.nitro.bot4j.middle.domain.send.SendMessage;
 import ai.nitro.bot4j.middle.domain.send.quickreply.QuickReply;
 
 public class QuickRepliesSendPayload extends AbstractSendPayload {
@@ -19,8 +20,8 @@ public class QuickRepliesSendPayload extends AbstractSendPayload {
 
 	protected String text;
 
-	public QuickRepliesSendPayload() {
-		super(Type.QUICK_REPLIES);
+	public QuickRepliesSendPayload(final SendMessage sendMessage) {
+		super(Type.QUICK_REPLIES, sendMessage);
 	}
 
 	public void addQuickReply(final QuickReply quickReply) {

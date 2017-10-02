@@ -8,14 +8,16 @@
 
 package ai.nitro.bot4j.middle.domain.send.payload;
 
+import ai.nitro.bot4j.middle.domain.send.SendMessage;
+
 public class VideoSendPayload extends AbstractSendPayload {
 
 	protected String title;
 
 	protected String videoUrl;
 
-	public VideoSendPayload() {
-		super(Type.VIDEO);
+	public VideoSendPayload(final SendMessage sendMessage) {
+		super(Type.VIDEO, sendMessage);
 	}
 
 	public String getTitle() {

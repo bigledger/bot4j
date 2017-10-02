@@ -36,6 +36,7 @@ public class FacebookReceivePayloadFactoryImpl implements FacebookReceivePayload
 	@Override
 	public CoordinateReceivePayload createCoordinationAttachment(final MessagingAttachment messagingAttachment) {
 		final CoordinateReceivePayload result = new CoordinateReceivePayload();
+
 		result.setLatVal(messagingAttachment.getPayload().getCoordinates().getLat());
 		result.setLonVal(messagingAttachment.getPayload().getCoordinates().getLongVal());
 
@@ -45,8 +46,10 @@ public class FacebookReceivePayloadFactoryImpl implements FacebookReceivePayload
 	@Override
 	public DeliveryNotificationReceivePayload createDeliveryNotification(final DeliveryItem deliveryItem) {
 		final DeliveryNotificationReceivePayload result = new DeliveryNotificationReceivePayload();
+
 		result.setWatermark(deliveryItem.getWatermark());
 		result.setMessageIds(deliveryItem.getMids());
+
 		return result;
 	}
 
@@ -58,6 +61,7 @@ public class FacebookReceivePayloadFactoryImpl implements FacebookReceivePayload
 		final PostbackPayload postbackPayload = postbackPayloadService.deserialize(serializedPayload);
 		result.setName(postbackPayload.name);
 		result.setPayload(postbackPayload.payload);
+
 		return result;
 	}
 

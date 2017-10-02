@@ -35,5 +35,4 @@ public abstract class AbstractReceivePayload {
 	public void setReceiveMessage(final ReceiveMessage receiveMessage) {
 		this.receiveMessage = receiveMessage;
 	}
-
 }

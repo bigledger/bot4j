@@ -48,6 +48,7 @@ public class ApiAiReceiveMessageFactoryImpl implements ApiAiReceiveMessageFactor
 		result.setSender(sender);
 
 		final Result aiResponseResult = aiResponse.getResult();
+
 		if (aiResponseResult != null) {
 			final TextReceivePayload payload = new TextReceivePayload();
 			payload.setText(aiResponseResult.getResolvedQuery());

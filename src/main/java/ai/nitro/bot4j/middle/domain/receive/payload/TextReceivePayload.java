@@ -35,5 +35,4 @@ public class TextReceivePayload extends AbstractReceivePayload {
 	public void setText(final String text) {
 		this.text = text;
 	}
-
 }

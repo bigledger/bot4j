@@ -11,6 +11,7 @@ package ai.nitro.bot4j.middle.domain.send.payload;
 import java.util.ArrayList;
 import java.util.List;
 
+import ai.nitro.bot4j.middle.domain.send.SendMessage;
 import ai.nitro.bot4j.middle.domain.send.button.AbstractSendButton;
 
 public class ButtonsSendPayload extends AbstractSendPayload {
@@ -19,8 +20,8 @@ public class ButtonsSendPayload extends AbstractSendPayload {
 
 	protected String title;
 
-	public ButtonsSendPayload() {
-		super(Type.BUTTONS);
+	public ButtonsSendPayload(final SendMessage sendMessage) {
+		super(Type.BUTTONS, sendMessage);
 	}
 
 	public void addButton(final AbstractSendButton button) {

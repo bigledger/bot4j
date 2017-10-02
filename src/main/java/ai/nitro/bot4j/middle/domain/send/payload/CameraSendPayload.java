@@ -8,10 +8,11 @@
 
 package ai.nitro.bot4j.middle.domain.send.payload;
 
+import ai.nitro.bot4j.middle.domain.send.SendMessage;
+
 public class CameraSendPayload extends AbstractSendPayload {
 
-	public CameraSendPayload() {
-		super(Type.CAMERA);
+	public CameraSendPayload(final SendMessage sendMessage) {
+		super(Type.CAMERA, sendMessage);
 	}
-
 }

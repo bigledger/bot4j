@@ -8,14 +8,16 @@
 
 package ai.nitro.bot4j.middle.domain.send.payload;
 
+import ai.nitro.bot4j.middle.domain.send.SendMessage;
+
 public class ImageSendPayload extends AbstractSendPayload {
 
 	protected String imageUrl;
 
 	protected String title;
 
-	public ImageSendPayload() {
-		super(Type.IMAGE);
+	public ImageSendPayload(final SendMessage sendMessage) {
+		super(Type.IMAGE, sendMessage);
 	}
 
 	public String getImageUrl() {
