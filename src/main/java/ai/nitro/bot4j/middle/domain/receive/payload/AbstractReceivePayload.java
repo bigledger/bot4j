@@ -16,7 +16,7 @@ public abstract class AbstractReceivePayload {
 		COORDINATE, DATA, DELIVERY_NOTIFICATION, POSTBACK, QUICK_REPLY, READ_NOTIFICATION, TEXT, URL_ATTACHMENT
 	}
 
-	protected ReceiveMessage receiveMessage;
+	protected transient ReceiveMessage receiveMessage;
 
 	protected final Type type;
 

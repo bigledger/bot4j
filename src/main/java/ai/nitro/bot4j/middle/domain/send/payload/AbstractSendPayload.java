@@ -16,7 +16,7 @@ public abstract class AbstractSendPayload {
 		BUBBLE, BUTTONS, CAMERA, IMAGE, LIST, QUICK_REPLIES, TEXT, TYPING, VIDEO
 	}
 
-	protected SendMessage sendMessage;
+	protected transient SendMessage sendMessage;
 
 	protected final Type type;
 
