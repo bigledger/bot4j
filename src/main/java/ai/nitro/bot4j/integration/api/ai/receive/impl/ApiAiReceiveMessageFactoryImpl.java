@@ -41,7 +41,7 @@ public class ApiAiReceiveMessageFactoryImpl implements ApiAiReceiveMessageFactor
 		result.setNativePayload(ApiAiPlatformEnum.APIAI, aiResponse);
 
 		if (params != null) {
-			result.setParams(params);
+			result.getParams().putAll(params);
 		}
 
 		final Participant sender = createSender(aiResponse);

@@ -48,7 +48,7 @@ public class AlexaReceiveMessageFactoryImpl implements AlexaReceiveMessageFactor
 		result.setSender(sender);
 
 		if (params != null) {
-			result.setParams(params);
+			result.getParams().putAll(params);
 		}
 
 		final TextReceivePayload textReceivePayload = createTextReceivePayload(intentRequest);

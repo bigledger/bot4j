@@ -49,7 +49,7 @@ public class TelegramReceiveMessageFactoryImpl implements TelegramReceiveMessage
 		result.setNativePayload(TelegramPlatformEnum.TELEGRAM, update);
 
 		if (params != null) {
-			result.setParams(params);
+			result.getParams().putAll(params);
 		}
 
 		if (update.message() != null) {

@@ -54,7 +54,7 @@ public class FacebookReceiveMessageFactoryImpl implements FacebookReceiveMessage
 		handleRecipient(messagingItem.getRecipient(), result);
 
 		if (params != null) {
-			result.setParams(params);
+			result.getParams().putAll(params);
 		}
 
 		if (messageItem != null) {

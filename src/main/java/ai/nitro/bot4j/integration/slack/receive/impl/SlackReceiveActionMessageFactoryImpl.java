@@ -52,7 +52,7 @@ public class SlackReceiveActionMessageFactoryImpl implements SlackReceiveActionM
 		handleRecipient(json, result);
 
 		if (params != null) {
-			result.setParams(params);
+			result.getParams().putAll(params);
 		}
 
 		if (json.has(ACTIONS)) {

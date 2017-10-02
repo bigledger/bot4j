@@ -9,6 +9,7 @@
 package ai.nitro.bot4j.middle.domain.receive;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -18,9 +19,9 @@ import ai.nitro.bot4j.middle.domain.receive.payload.AbstractReceivePayload;
 
 public class ReceiveMessage extends AbstractMessage {
 
-	protected Map<String, String[]> params;
+	protected final Map<String, String[]> params = new HashMap<String, String[]>();
 
-	protected List<AbstractReceivePayload> payloads = new ArrayList<AbstractReceivePayload>();
+	protected final List<AbstractReceivePayload> payloads = new ArrayList<AbstractReceivePayload>();
 
 	protected Session session;
 
@@ -58,10 +59,6 @@ public class ReceiveMessage extends AbstractMessage {
 
 	public Session getSession() {
 		return session;
-	}
-
-	public void setParams(final Map<String, String[]> params) {
-		this.params = params;
 	}
 
 	public void setSession(final Session session) {
