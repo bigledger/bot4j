@@ -35,87 +35,99 @@ public class BotImpl implements Bot {
 	@Inject
 	protected MessageSender messageSender;
 
+	/**
+	 * Determines the recipient for the answer, i. e. the original sender.
+	 */
+	protected Participant determineRecipient(final AbstractReceivePayload payload) {
+		final ReceiveMessage receiveMessage = payload.getReceiveMessage();
+		return receiveMessage.getSender();
+	}
+
+	/**
+	 * Determines the sender for the answer, i. e. the original recipient.
+	 */
+	protected Participant determineSender(final AbstractReceivePayload payload) {
+		final ReceiveMessage receiveMessage = payload.getReceiveMessage();
+		return receiveMessage.getRecipient();
+	}
+
 	@Override
 	public void onMessage(final ReceiveMessage message) throws Exception {
-		final Participant sender = message.getSender();
-
 		for (final AbstractReceivePayload payload : message.getPayloads()) {
-			onReceivePayload(payload, sender);
+			onReceivePayload(payload);
 		}
 	}
 
-	protected void onReceiveAttachment(final UrlAttachmentReceivePayload payload, final Participant sender) {
+	protected void onReceiveAttachment(final UrlAttachmentReceivePayload payload) {
 
 	}
 
-	protected void onReceiveCoordinate(final CoordinateReceivePayload payload, final Participant sender)
-			throws Exception {
+	protected void onReceiveCoordinate(final CoordinateReceivePayload payload) throws Exception {
 
 	}
 
-	protected void onReceiveData(final DataReceivePayload payload, final Participant sender) {
+	protected void onReceiveData(final DataReceivePayload payload) {
 
 	}
 
-	protected void onReceiveDeliveryNotification(final DeliveryNotificationReceivePayload payload,
-			final Participant sender) {
+	protected void onReceiveDeliveryNotification(final DeliveryNotificationReceivePayload payload) {
 
 	}
 
-	protected void onReceivePayload(final AbstractReceivePayload payload, final Participant sender) throws Exception {
+	protected void onReceivePayload(final AbstractReceivePayload payload) throws Exception {
 		final Type type = payload.getType();
 
 		switch (type) {
 		case COORDINATE:
-			onReceiveCoordinate((CoordinateReceivePayload) payload, sender);
+			onReceiveCoordinate((CoordinateReceivePayload) payload);
 			break;
 		case DATA:
-			onReceiveData((DataReceivePayload) payload, sender);
+			onReceiveData((DataReceivePayload) payload);
 			break;
 		case DELIVERY_NOTIFICATION:
-			onReceiveDeliveryNotification((DeliveryNotificationReceivePayload) payload, sender);
+			onReceiveDeliveryNotification((DeliveryNotificationReceivePayload) payload);
 			break;
 		case POSTBACK:
-			onReceivePostback((PostbackReceivePayload) payload, sender);
+			onReceivePostback((PostbackReceivePayload) payload);
 			break;
 		case QUICK_REPLY:
-			onReceiveQuickReply((QuickReplyReceivePayload) payload, sender);
+			onReceiveQuickReply((QuickReplyReceivePayload) payload);
 			break;
 		case READ_NOTIFICATION:
-			onReceiveReadNotification((ReadNotificationReceivePayload) payload, sender);
+			onReceiveReadNotification((ReadNotificationReceivePayload) payload);
 			break;
 		case TEXT:
-			onReceiveText((TextReceivePayload) payload, sender);
+			onReceiveText((TextReceivePayload) payload);
 			break;
 		case URL_ATTACHMENT:
-			onReceiveAttachment((UrlAttachmentReceivePayload) payload, sender);
+			onReceiveAttachment((UrlAttachmentReceivePayload) payload);
 			break;
 		default:
 			break;
 		}
 	}
 
-	protected void onReceivePostback(final PostbackReceivePayload payload, final Participant sender) throws Exception {
+	protected void onReceivePostback(final PostbackReceivePayload payload) throws Exception {
 
 	}
 
-	protected void onReceiveQuickReply(final QuickReplyReceivePayload payload, final Participant sender)
-			throws Exception {
+	protected void onReceiveQuickReply(final QuickReplyReceivePayload payload) throws Exception {
 
 	}
 
-	protected void onReceiveReadNotification(final ReadNotificationReceivePayload payload, final Participant sender)
-			throws Exception {
+	protected void onReceiveReadNotification(final ReadNotificationReceivePayload payload) throws Exception {
 
 	}
 
-	protected void onReceiveText(final TextReceivePayload payload, final Participant sender) throws Exception {
+	protected void onReceiveText(final TextReceivePayload payload) throws Exception {
 
 	}
 
-	protected void sendImage(final String title, final String imageUrl, final Participant recipient) {
+	protected void sendImage(final String title, final String imageUrl, final Participant recipient,
+			final Participant sender) {
 		final SendMessage sendMessage = new SendMessage();
 		sendMessage.setRecipient(recipient);
+		sendMessage.setSender(sender);
 
 		final ImageSendPayload imageSendPayload = new ImageSendPayload(sendMessage);
 		imageSendPayload.setTitle(title);
@@ -125,9 +137,10 @@ public class BotImpl implements Bot {
 		messageSender.send(sendMessage);
 	}
 
-	protected void sendText(final String text, final Participant recipient) {
+	protected void sendText(final String text, final Participant recipient, final Participant sender) {
 		final SendMessage sendMessage = new SendMessage();
 		sendMessage.setRecipient(recipient);
+		sendMessage.setSender(sender);
 
 		final TextSendPayload textSendPayload = new TextSendPayload(sendMessage);
 		textSendPayload.setText(text);
@@ -136,9 +149,10 @@ public class BotImpl implements Bot {
 		messageSender.send(sendMessage);
 	}
 
-	protected void sendTypingOff(final Participant recipient) {
+	protected void sendTypingOff(final Participant recipient, final Participant sender) {
 		final SendMessage sendMessage = new SendMessage();
 		sendMessage.setRecipient(recipient);
+		sendMessage.setSender(sender);
 
 		final TypingSendPayload typingSendPayload = new TypingSendPayload(sendMessage);
 		typingSendPayload.setTyping(Typing.OFF);
@@ -147,9 +161,10 @@ public class BotImpl implements Bot {
 		messageSender.send(sendMessage);
 	}
 
-	protected void sendTypingOn(final Participant recipient) {
+	protected void sendTypingOn(final Participant recipient, final Participant sender) {
 		final SendMessage sendMessage = new SendMessage();
 		sendMessage.setRecipient(recipient);
+		sendMessage.setSender(sender);
 
 		final TypingSendPayload typingSendPayload = new TypingSendPayload(sendMessage);
 		typingSendPayload.setTyping(Typing.ON);
