@@ -29,5 +29,4 @@ public class BubbleSendPayload extends AbstractSendPayload {
 	public List<Bubble> getBubbles() {
 		return bubbles;
 	}
-
 }
