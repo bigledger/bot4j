@@ -12,9 +12,8 @@ public class WebSendButton extends AbstractSendButton {
 
 	protected String url;
 
-	@Override
-	public Type getType() {
-		return Type.WEB_BUTTON;
+	public WebSendButton() {
+		super(Type.WEB_BUTTON);
 	}
 
 	public String getUrl() {

@@ -14,17 +14,16 @@ public class PostbackSendButton extends AbstractSendButton {
 
 	protected String[] payload;
 
+	public PostbackSendButton() {
+		super(Type.POSTBACK_BUTTON);
+	}
+
 	public String getName() {
 		return name;
 	}
 
 	public String[] getPayload() {
 		return payload;
-	}
-
-	@Override
-	public Type getType() {
-		return Type.POSTBACK_BUTTON;
 	}
 
 	public void setName(final String name) {
@@ -34,5 +33,4 @@ public class PostbackSendButton extends AbstractSendButton {
 	public void setPayload(final String... payload) {
 		this.payload = payload;
 	}
-
 }

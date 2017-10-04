@@ -16,14 +16,21 @@ public abstract class AbstractSendButton {
 
 	protected String title;
 
+	protected final Type type;
+
+	public AbstractSendButton(final Type type) {
+		this.type = type;
+	}
+
 	public String getTitle() {
 		return title;
 	}
 
-	public abstract Type getType();
+	public Type getType() {
+		return type;
+	}
 
 	public void setTitle(final String title) {
 		this.title = title;
 	}
-
 }
