@@ -31,5 +31,4 @@ public class TextRuleImpl extends AbstractFacebookSendRuleImpl {
 		final IdMessageRecipient recipient = createIdMessageRecipient(sendMessage.getRecipient());
 		publish(message, recipient);
 	}
-
 }

@@ -12,6 +12,7 @@ import javax.inject.Inject;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.util.Strings;
 
 import com.restfb.FacebookClient;
 import com.restfb.Parameter;
@@ -34,7 +35,15 @@ public abstract class AbstractFacebookSendRuleImpl implements FacebookSendRule {
 	protected FacebookClient facebookClient;
 
 	protected IdMessageRecipient createIdMessageRecipient(final Participant recipient) {
-		final IdMessageRecipient result = new IdMessageRecipient(recipient.getId());
+		final String recipientId = recipient.getId();
+		final IdMessageRecipient result;
+
+		if (Strings.isBlank(recipientId)) {
+			result = null;
+		} else {
+			result = new IdMessageRecipient(recipientId);
+		}
+
 		return result;
 	}
 
@@ -47,19 +56,27 @@ public abstract class AbstractFacebookSendRuleImpl implements FacebookSendRule {
 	protected void publish(final Message message, final IdMessageRecipient recipient) {
 		LOG.info("sending message to {}", recipient);
 
-		final Parameter recipientParam = Parameter.with("recipient", recipient);
-		final Parameter messageParam = Parameter.with("message", message);
+		if (recipient == null) {
+			LOG.warn("recipient is {}", recipient);
+		} else {
+			final Parameter recipientParam = Parameter.with("recipient", recipient);
+			final Parameter messageParam = Parameter.with("message", message);
 
-		facebookClient.publish("me/messages", SendResponse.class, recipientParam, messageParam);
+			facebookClient.publish("me/messages", SendResponse.class, recipientParam, messageParam);
+		}
 	}
 
 	protected void publish(final SenderActionEnum senderAction, final IdMessageRecipient recipient) {
 		LOG.info("sending to {} param {}", recipient, senderAction);
 
-		final Parameter recipientParam = Parameter.with("recipient", recipient);
-		final Parameter senderActionParam = Parameter.with("sender_action", senderAction);
+		if (recipient == null) {
+			LOG.warn("recipient is {}", recipient);
+		} else {
+			final Parameter recipientParam = Parameter.with("recipient", recipient);
+			final Parameter senderActionParam = Parameter.with("sender_action", senderAction);
 
-		facebookClient.publish("me/messages", SendResponse.class, recipientParam, senderActionParam);
+			facebookClient.publish("me/messages", SendResponse.class, recipientParam, senderActionParam);
+		}
 	}
 
 	@Override
