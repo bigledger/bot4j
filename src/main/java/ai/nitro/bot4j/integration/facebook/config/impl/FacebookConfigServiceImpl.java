@@ -12,12 +12,18 @@ import javax.inject.Inject;
 
 import ai.nitro.bot4j.integration.facebook.config.FacebookConfig;
 import ai.nitro.bot4j.integration.facebook.config.FacebookConfigService;
+import ai.nitro.bot4j.middle.domain.receive.ReceiveMessage;
 import ai.nitro.bot4j.middle.domain.send.SendMessage;
 
 public class FacebookConfigServiceImpl implements FacebookConfigService {
 
 	@Inject
 	protected FacebookConfig facebookConfig;
+
+	@Override
+	public String getAccessToken(final ReceiveMessage receiveMessage) {
+		return facebookConfig.getAccessToken();
+	}
 
 	@Override
 	public String getAccessToken(final SendMessage sendMessage) {

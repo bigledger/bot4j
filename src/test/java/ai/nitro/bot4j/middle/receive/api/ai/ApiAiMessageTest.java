@@ -4,7 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import com.google.inject.Inject;
+import javax.inject.Inject;
 
 import ai.api.model.AIResponse;
 import ai.api.model.Metadata;

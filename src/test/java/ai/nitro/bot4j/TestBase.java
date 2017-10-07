@@ -22,5 +22,4 @@ public abstract class TestBase {
 		final Injector injector = Guice.createInjector(new Bot4jTestModule());
 		injector.injectMembers(this);
 	}
-
 }

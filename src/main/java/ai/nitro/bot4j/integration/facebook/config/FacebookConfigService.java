@@ -8,12 +8,14 @@
 
 package ai.nitro.bot4j.integration.facebook.config;
 
+import ai.nitro.bot4j.middle.domain.receive.ReceiveMessage;
 import ai.nitro.bot4j.middle.domain.send.SendMessage;
 
 public interface FacebookConfigService {
 
+	String getAccessToken(ReceiveMessage receiveMessage);
+
 	String getAccessToken(SendMessage sendMessage);
 
 	String getPageId(SendMessage sendMessage);
-
 }

@@ -12,7 +12,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.google.gson.Gson;
-import com.google.inject.Inject;
+import javax.inject.Inject;
 
 import ai.api.GsonFactory;
 import ai.api.model.AIResponse;
