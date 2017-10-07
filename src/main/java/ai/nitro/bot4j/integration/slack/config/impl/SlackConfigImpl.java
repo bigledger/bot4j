@@ -91,5 +91,4 @@ public class SlackConfigImpl implements SlackConfig {
 			LOG.warn("Could not load {}", SLACK_PROPERTIES_FILENAME);
 		}
 	}
-
 }

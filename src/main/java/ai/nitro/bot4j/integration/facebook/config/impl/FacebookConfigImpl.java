@@ -65,5 +65,4 @@ public class FacebookConfigImpl implements FacebookConfig {
 			LOG.warn("Could not load {}", FACEBOOK_PROPERTIES_FILENAME);
 		}
 	}
-
 }

@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.util.Strings;
 
 import com.pengrad.telegrambot.BotUtils;
 import com.pengrad.telegrambot.TelegramBot;
@@ -44,10 +45,14 @@ public class TelegramWebhookImpl implements TelegramWebhook {
 
 	@Inject
 	protected void init() {
-		final SetWebhook request = new SetWebhook().url(telegramConfigService.getWebhookUrl(null));
+		final String webhookUrl = telegramConfigService.getWebhookUrl(null);
 
-		final TelegramBot bot = provideTelegramBot();
-		bot.execute(request);
+		if (Strings.isBlank(webhookUrl)) {
+		} else {
+			final SetWebhook request = new SetWebhook().url(webhookUrl);
+			final TelegramBot bot = provideTelegramBot();
+			bot.execute(request);
+		}
 	}
 
 	@Override
