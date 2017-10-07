@@ -8,6 +8,7 @@
 
 package ai.nitro.bot4j.integration.telegram.send.rules.impl;
 
+import com.pengrad.telegrambot.TelegramBot;
 import com.pengrad.telegrambot.request.BaseRequest;
 
 import ai.nitro.bot4j.integration.telegram.domain.TelegramPlatformEnum;
@@ -24,7 +25,7 @@ public class NativeRuleImpl extends AbstractTelegramSendRuleImpl {
 	@Override
 	public void apply(final SendMessage sendMessage) {
 		final BaseRequest message = (BaseRequest) sendMessage.getNativePayload(TelegramPlatformEnum.TELEGRAM);
+		final TelegramBot client = provideTelegramBot(sendMessage);
 		client.execute(message);
 	}
-
 }

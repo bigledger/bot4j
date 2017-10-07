@@ -11,6 +11,7 @@ package ai.nitro.bot4j.integration.telegram.receive.impl;
 import javax.inject.Inject;
 
 import com.pengrad.telegrambot.TelegramBot;
+import com.pengrad.telegrambot.TelegramBotAdapter;
 import com.pengrad.telegrambot.model.Audio;
 import com.pengrad.telegrambot.model.CallbackQuery;
 import com.pengrad.telegrambot.model.Document;
@@ -24,7 +25,9 @@ import com.pengrad.telegrambot.model.Voice;
 import com.pengrad.telegrambot.request.GetFile;
 import com.pengrad.telegrambot.response.GetFileResponse;
 
+import ai.nitro.bot4j.integration.telegram.config.TelegramConfigService;
 import ai.nitro.bot4j.integration.telegram.receive.TelegramReceivePayloadFactory;
+import ai.nitro.bot4j.middle.domain.receive.ReceiveMessage;
 import ai.nitro.bot4j.middle.domain.receive.payload.CoordinateReceivePayload;
 import ai.nitro.bot4j.middle.domain.receive.payload.PostbackReceivePayload;
 import ai.nitro.bot4j.middle.domain.receive.payload.TextReceivePayload;
@@ -35,15 +38,15 @@ import ai.nitro.bot4j.middle.payload.PostbackPayloadService;
 public class TelegramReceivePayloadFactoryImpl implements TelegramReceivePayloadFactory {
 
 	@Inject
-	protected TelegramBot bot;
-
-	@Inject
 	protected PostbackPayloadService postbackPayloadService;
 
+	@Inject
+	protected TelegramConfigService telegramConfigService;
+
 	@Override
-	public UrlAttachmentReceivePayload createAudio(final Audio audio) {
+	public UrlAttachmentReceivePayload createAudio(final ReceiveMessage receiveMessage, final Audio audio) {
 		final String fileId = audio.fileId();
-		final String url = getFileUrl(fileId);
+		final String url = getFileUrl(receiveMessage, fileId);
 
 		final UrlAttachmentReceivePayload urlAttachmentReceivePayload = new UrlAttachmentReceivePayload();
 		urlAttachmentReceivePayload.setTitle(fileId);
@@ -53,10 +56,10 @@ public class TelegramReceivePayloadFactoryImpl implements TelegramReceivePayload
 	}
 
 	@Override
-	public UrlAttachmentReceivePayload createDocument(final Message message) {
+	public UrlAttachmentReceivePayload createDocument(final ReceiveMessage receiveMessage, final Message message) {
 		final Document document = message.document();
 		final String fileId = document.fileId();
-		final String url = getFileUrl(fileId);
+		final String url = getFileUrl(receiveMessage, fileId);
 
 		final UrlAttachmentReceivePayload urlAttachmentReceivePayload = new UrlAttachmentReceivePayload();
 		createTitle(message, fileId, urlAttachmentReceivePayload);
@@ -66,10 +69,10 @@ public class TelegramReceivePayloadFactoryImpl implements TelegramReceivePayload
 	}
 
 	@Override
-	public UrlAttachmentReceivePayload createPhoto(final Message message) {
+	public UrlAttachmentReceivePayload createPhoto(final ReceiveMessage receiveMessage, final Message message) {
 		final PhotoSize[] photo = message.photo();
 		final String fileId = photo[0].fileId();
-		final String url = getFileUrl(fileId);
+		final String url = getFileUrl(receiveMessage, fileId);
 
 		final UrlAttachmentReceivePayload urlAttachmentReceivePayload = new UrlAttachmentReceivePayload();
 		createTitle(message, fileId, urlAttachmentReceivePayload);
@@ -91,9 +94,9 @@ public class TelegramReceivePayloadFactoryImpl implements TelegramReceivePayload
 	}
 
 	@Override
-	public UrlAttachmentReceivePayload createSticker(final Sticker sticker) {
+	public UrlAttachmentReceivePayload createSticker(final ReceiveMessage receiveMessage, final Sticker sticker) {
 		final String fileId = sticker.fileId();
-		final String url = getFileUrl(fileId);
+		final String url = getFileUrl(receiveMessage, fileId);
 
 		final UrlAttachmentReceivePayload urlAttachmentReceivePayload = new UrlAttachmentReceivePayload();
 		urlAttachmentReceivePayload.setTitle(fileId);
@@ -119,10 +122,10 @@ public class TelegramReceivePayloadFactoryImpl implements TelegramReceivePayload
 	}
 
 	@Override
-	public UrlAttachmentReceivePayload createVideo(final Message message) {
+	public UrlAttachmentReceivePayload createVideo(final ReceiveMessage receiveMessage, final Message message) {
 		final Video video = message.video();
 		final String fileId = video.fileId();
-		final String url = getFileUrl(fileId);
+		final String url = getFileUrl(receiveMessage, fileId);
 
 		final UrlAttachmentReceivePayload urlAttachmentReceivePayload = new UrlAttachmentReceivePayload();
 		createTitle(message, fileId, urlAttachmentReceivePayload);
@@ -132,9 +135,9 @@ public class TelegramReceivePayloadFactoryImpl implements TelegramReceivePayload
 	}
 
 	@Override
-	public UrlAttachmentReceivePayload createVoice(final Voice voice) {
+	public UrlAttachmentReceivePayload createVoice(final ReceiveMessage receiveMessage, final Voice voice) {
 		final String fileId = voice.fileId();
-		final String url = getFileUrl(fileId);
+		final String url = getFileUrl(receiveMessage, fileId);
 
 		final UrlAttachmentReceivePayload urlAttachmentReceivePayload = new UrlAttachmentReceivePayload();
 		urlAttachmentReceivePayload.setTitle(fileId);
@@ -155,7 +158,9 @@ public class TelegramReceivePayloadFactoryImpl implements TelegramReceivePayload
 		return result;
 	}
 
-	protected String getFileUrl(final String fileId) {
+	protected String getFileUrl(final ReceiveMessage receiveMessage, final String fileId) {
+		final TelegramBot bot = provideTelegramBot(receiveMessage);
+
 		final GetFile getFile = new GetFile(fileId);
 		final GetFileResponse response = bot.execute(getFile);
 		final File file = response.file();
@@ -164,4 +169,9 @@ public class TelegramReceivePayloadFactoryImpl implements TelegramReceivePayload
 		return url;
 	}
 
+	protected TelegramBot provideTelegramBot(final ReceiveMessage receiveMessage) {
+		final String telegramAccessToken = telegramConfigService.getAccessToken(receiveMessage);
+		final TelegramBot result = TelegramBotAdapter.build(telegramAccessToken);
+		return result;
+	}
 }

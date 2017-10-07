@@ -78,7 +78,6 @@ public class ListRuleImpl extends AbstractSlackSendRuleImpl {
 		final String channel = sendMessage.getRecipient().getId();
 		final String text = listSendPayload.getTitle();
 		final Payload payload = Payload.builder().channel(channel).text(text).attachments(attachments).build();
-		chatPostMessage(payload);
+		chatPostMessage(sendMessage, payload);
 	}
-
 }

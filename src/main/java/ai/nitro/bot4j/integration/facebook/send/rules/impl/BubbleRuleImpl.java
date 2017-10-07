@@ -46,7 +46,7 @@ public class BubbleRuleImpl extends AbstractFacebookSendRuleImpl {
 		final Message message = new Message(templateAttachment);
 
 		final IdMessageRecipient recipient = createIdMessageRecipient(sendMessage.getRecipient());
-		publish(message, recipient);
+		publish(sendMessage, message, recipient);
 	}
 
 	protected com.restfb.types.send.Bubble createBubble(final Bubble bubbleSendPayload) {
@@ -62,5 +62,4 @@ public class BubbleRuleImpl extends AbstractFacebookSendRuleImpl {
 
 		return result;
 	}
-
 }

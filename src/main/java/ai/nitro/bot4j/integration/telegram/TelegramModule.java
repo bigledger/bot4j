@@ -9,13 +9,12 @@
 package ai.nitro.bot4j.integration.telegram;
 
 import com.google.inject.AbstractModule;
-import com.google.inject.Provides;
 import com.google.inject.multibindings.Multibinder;
-import com.pengrad.telegrambot.TelegramBot;
-import com.pengrad.telegrambot.TelegramBotAdapter;
 
 import ai.nitro.bot4j.integration.telegram.config.TelegramConfig;
+import ai.nitro.bot4j.integration.telegram.config.TelegramConfigService;
 import ai.nitro.bot4j.integration.telegram.config.impl.TelegramConfigImpl;
+import ai.nitro.bot4j.integration.telegram.config.impl.TelegramConfigServiceImpl;
 import ai.nitro.bot4j.integration.telegram.receive.TelegramReceiveHandler;
 import ai.nitro.bot4j.integration.telegram.receive.TelegramReceiveMessageFactory;
 import ai.nitro.bot4j.integration.telegram.receive.TelegramReceivePayloadFactory;
@@ -43,6 +42,7 @@ public class TelegramModule extends AbstractModule {
 	protected void configure() {
 		bind(TelegramWebhook.class).to(TelegramWebhookImpl.class);
 		bind(TelegramConfig.class).to(TelegramConfigImpl.class);
+		bind(TelegramConfigService.class).to(TelegramConfigServiceImpl.class);
 		bind(TelegramMessageSender.class).to(TelegramMessageSenderImpl.class);
 		bind(TelegramSendInlineKeyboardFactory.class).to(TelegramSendInlineKeyboardFactoryImpl.class);
 		bind(TelegramReceiveHandler.class).to(TelegramReceiveHandlerImpl.class);
@@ -61,12 +61,4 @@ public class TelegramModule extends AbstractModule {
 		telegramSendRuleBinder.addBinding().to(TextRuleImpl.class);
 		telegramSendRuleBinder.addBinding().to(VideoRuleImpl.class);
 	}
-
-	@Provides
-	protected TelegramBot provideTelegramClient(final TelegramConfig config) {
-		final String telegramAccessToken = config.getAccessToken();
-		final TelegramBot client = TelegramBotAdapter.build(telegramAccessToken);
-		return client;
-	}
-
 }

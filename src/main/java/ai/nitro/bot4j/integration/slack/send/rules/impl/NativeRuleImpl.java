@@ -24,7 +24,6 @@ public class NativeRuleImpl extends AbstractSlackSendRuleImpl {
 	@Override
 	public void apply(final SendMessage sendMessage) {
 		final Payload payload = (Payload) sendMessage.getNativePayload(SlackPlatformEnum.SLACK);
-		chatPostMessage(payload);
+		chatPostMessage(sendMessage, payload);
 	}
-
 }

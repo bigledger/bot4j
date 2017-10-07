@@ -37,7 +37,6 @@ public class VideoRuleImpl extends AbstractSlackSendRuleImpl {
 		final String channel = sendMessage.getRecipient().getId();
 
 		final Payload payload = Payload.builder().channel(channel).attachments(attachments).build();
-		chatPostMessage(payload);
+		chatPostMessage(sendMessage, payload);
 	}
-
 }

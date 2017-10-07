@@ -10,6 +10,7 @@ package ai.nitro.bot4j.integration.telegram.send.rules.impl;
 
 import org.apache.logging.log4j.util.Strings;
 
+import com.pengrad.telegrambot.TelegramBot;
 import com.pengrad.telegrambot.request.SendPhoto;
 
 import ai.nitro.bot4j.middle.domain.send.SendMessage;
@@ -38,7 +39,7 @@ public class ImageRuleImpl extends AbstractTelegramSendRuleImpl {
 		}
 
 		LOG.info("sending image {} to recipient {}", sendPhotoTelegram, recipient);
+		final TelegramBot client = provideTelegramBot(sendMessage);
 		client.execute(sendPhotoTelegram);
 	}
-
 }

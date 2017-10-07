@@ -59,7 +59,6 @@ public class ButtonsRuleImpl extends AbstractTelegramSendRuleImpl {
 
 		final com.pengrad.telegrambot.request.SendMessage sendMessageTelegram = new com.pengrad.telegrambot.request.SendMessage(
 				recipient, boldTitle).replyMarkup(inlineKeyboardMarkup).parseMode(ParseMode.Markdown);
-		super.execute(sendMessageTelegram, recipient);
+		super.execute(sendMessage, sendMessageTelegram, recipient);
 	}
-
 }

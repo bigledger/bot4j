@@ -1,0 +1,41 @@
+/*
+ * Copyright (C) 2017, nitro.ai
+ * All rights reserved.
+ *
+ * This software may be modified and distributed under the terms
+ * of the BSD 3-clause license. See the LICENSE file for details.
+ */
+
+package ai.nitro.bot4j.integration.slack.config.impl;
+
+import javax.inject.Inject;
+
+import ai.nitro.bot4j.integration.slack.config.SlackConfig;
+import ai.nitro.bot4j.integration.slack.config.SlackConfigService;
+import ai.nitro.bot4j.middle.domain.send.SendMessage;
+
+public class SlackConfigServiceImpl implements SlackConfigService {
+
+	@Inject
+	protected SlackConfig slackConfig;
+
+	@Override
+	public String getAccessToken(final SendMessage sendMessage) {
+		return slackConfig.getAccessToken();
+	}
+
+	@Override
+	public String getClientId(final SendMessage sendMessage) {
+		return slackConfig.getClientId();
+	}
+
+	@Override
+	public String getClientSecret(final SendMessage sendMessage) {
+		return slackConfig.getClientSecret();
+	}
+
+	@Override
+	public String getUsername(final SendMessage sendMessage) {
+		return slackConfig.getUsername();
+	}
+}

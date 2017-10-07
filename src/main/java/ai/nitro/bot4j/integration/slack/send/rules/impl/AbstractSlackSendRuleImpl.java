@@ -22,7 +22,7 @@ import com.github.seratch.jslack.api.methods.request.chat.ChatPostMessageRequest
 import com.github.seratch.jslack.api.model.Attachment;
 import com.github.seratch.jslack.api.webhook.Payload;
 
-import ai.nitro.bot4j.integration.slack.config.SlackConfig;
+import ai.nitro.bot4j.integration.slack.config.SlackConfigService;
 import ai.nitro.bot4j.integration.slack.send.rules.SlackSendRule;
 import ai.nitro.bot4j.middle.domain.send.SendMessage;
 import ai.nitro.bot4j.middle.domain.send.payload.AbstractSendPayload;
@@ -33,9 +33,9 @@ public abstract class AbstractSlackSendRuleImpl implements SlackSendRule {
 	final static Logger LOG = LogManager.getLogger(AbstractSlackSendRuleImpl.class);
 
 	@Inject
-	protected SlackConfig slackConfig;
+	protected SlackConfigService slackConfigService;
 
-	protected void chatPostMessage(final Payload payload) {
+	protected void chatPostMessage(final SendMessage sendMessage, final Payload payload) {
 		final String channel = payload.getChannel();
 		final String username = payload.getUsername();
 		final String text = payload.getText();
@@ -43,13 +43,13 @@ public abstract class AbstractSlackSendRuleImpl implements SlackSendRule {
 
 		LOG.info("sending with username {} to channel {} payload {}", username, channel, payload);
 
-		chatPostMessage(channel, username, text, attachments);
+		chatPostMessage(sendMessage, channel, username, text, attachments);
 	}
 
-	protected void chatPostMessage(final String channel, final String username, final String text,
-			final List<Attachment> attachments) {
+	protected void chatPostMessage(final SendMessage sendMessage, final String channel, final String username,
+			final String text, final List<Attachment> attachments) {
 		final Slack slack = Slack.getInstance();
-		final String token = slackConfig.getAccessToken();
+		final String token = slackConfigService.getAccessToken(sendMessage);
 
 		final ChatPostMessageRequest chatPostMessageRequest = ChatPostMessageRequest.builder().username(username)
 				.token(token).channel(channel).text(text).attachments(attachments).build();

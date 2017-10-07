@@ -41,7 +41,7 @@ public class QuickRepliesRuleImpl extends AbstractFacebookSendRuleImpl {
 		}
 
 		final IdMessageRecipient recipient = createIdMessageRecipient(sendMessage.getRecipient());
-		publish(message, recipient);
+		publish(sendMessage, message, recipient);
 	}
 
 	protected com.restfb.types.send.QuickReply createQuickReply(final QuickReply quickReply) {

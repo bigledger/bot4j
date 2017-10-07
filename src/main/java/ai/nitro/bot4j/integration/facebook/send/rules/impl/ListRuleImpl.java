@@ -90,7 +90,7 @@ public class ListRuleImpl extends AbstractFacebookSendRuleImpl {
 		final Message message = new Message(templateAttachment);
 
 		final IdMessageRecipient recipient = createIdMessageRecipient(sendMessage.getRecipient());
-		publish(message, recipient);
+		publish(sendMessage, message, recipient);
 	}
 
 	protected void setStyle(final ListSendPayload listSendPayload, final ListTemplatePayload payload) {

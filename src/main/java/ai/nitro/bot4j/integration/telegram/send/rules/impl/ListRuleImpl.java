@@ -17,6 +17,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.util.Strings;
 
+import com.pengrad.telegrambot.TelegramBot;
 import com.pengrad.telegrambot.model.request.InlineKeyboardButton;
 import com.pengrad.telegrambot.model.request.InlineKeyboardMarkup;
 import com.pengrad.telegrambot.model.request.ParseMode;
@@ -48,14 +49,14 @@ public class ListRuleImpl extends AbstractTelegramSendRuleImpl {
 		final String recipient = sendMessage.getRecipient().getId();
 
 		for (final ListSendElement listSendElement : listSendPayload.getListElements()) {
-			sendListElement(recipient, listSendElement);
+			sendListElement(sendMessage, recipient, listSendElement);
 
 		}
 	}
 
-	protected void sendButtonElement(final String recipient, final ListSendElement listSendElement) {
+	protected void sendButtonElement(final SendMessage sendMessage, final String recipient,
+			final ListSendElement listSendElement) {
 		final AbstractSendButton abstractButton = listSendElement.getButton();
-
 		final List<InlineKeyboardButton> buttonList = new ArrayList<InlineKeyboardButton>();
 
 		buttonList.add(telegramSendInlineKeyboardFactory.createInlineKeyboard(abstractButton));
@@ -72,24 +73,25 @@ public class ListRuleImpl extends AbstractTelegramSendRuleImpl {
 		final String boldTitle = "*" + title + "*";
 		final com.pengrad.telegrambot.request.SendMessage sendMessageTelegram = new com.pengrad.telegrambot.request.SendMessage(
 				recipient, boldTitle).replyMarkup(inlineKeyboardMarkup).parseMode(ParseMode.Markdown);
-		super.execute(sendMessageTelegram, recipient);
+		super.execute(sendMessage, sendMessageTelegram, recipient);
 	}
 
-	protected void sendListElement(final String recipient, final ListSendElement listSendElement) {
+	protected void sendListElement(final SendMessage sendMessage, final String recipient,
+			final ListSendElement listSendElement) {
 		if (!Strings.isBlank(listSendElement.getTitle()) && listSendElement.getButton() == null) {
 			final String title = "*" + listSendElement.getTitle() + "*";
 			final com.pengrad.telegrambot.request.SendMessage sendMessageTelegram = new com.pengrad.telegrambot.request.SendMessage(
 					recipient, title).parseMode(ParseMode.Markdown);
 
-			super.execute(sendMessageTelegram, recipient);
+			super.execute(sendMessage, sendMessageTelegram, recipient);
 		}
 
 		if (!Strings.isBlank(listSendElement.getImageUrl())) {
-			sendPhotoElement(recipient, listSendElement);
+			sendPhotoElement(sendMessage, recipient, listSendElement);
 		}
 
 		if (listSendElement.getButton() != null) {
-			sendButtonElement(recipient, listSendElement);
+			sendButtonElement(sendMessage, recipient, listSendElement);
 		}
 
 		if (!Strings.isBlank(listSendElement.getSubTitle())) {
@@ -97,11 +99,12 @@ public class ListRuleImpl extends AbstractTelegramSendRuleImpl {
 			final com.pengrad.telegrambot.request.SendMessage sendMessageTelegram = new com.pengrad.telegrambot.request.SendMessage(
 					recipient, subTitle);
 
-			super.execute(sendMessageTelegram, recipient);
+			super.execute(sendMessage, sendMessageTelegram, recipient);
 		}
 	}
 
-	protected void sendPhotoElement(final String recipient, final ListSendElement listSendElement) {
+	protected void sendPhotoElement(final SendMessage sendMessage, final String recipient,
+			final ListSendElement listSendElement) {
 		final SendPhoto sendPhotoTelegram = new SendPhoto(recipient, listSendElement.getImageUrl());
 		final String title = listSendElement.getTitle();
 
@@ -110,6 +113,7 @@ public class ListRuleImpl extends AbstractTelegramSendRuleImpl {
 		}
 
 		LOG.info("sending image {} to recipient {}", sendPhotoTelegram, recipient);
+		final TelegramBot client = provideTelegramBot(sendMessage);
 		client.execute(sendPhotoTelegram);
 	}
 }

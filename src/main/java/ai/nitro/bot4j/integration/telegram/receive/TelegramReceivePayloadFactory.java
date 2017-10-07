@@ -15,6 +15,7 @@ import com.pengrad.telegrambot.model.Message;
 import com.pengrad.telegrambot.model.Sticker;
 import com.pengrad.telegrambot.model.Voice;
 
+import ai.nitro.bot4j.middle.domain.receive.ReceiveMessage;
 import ai.nitro.bot4j.middle.domain.receive.payload.CoordinateReceivePayload;
 import ai.nitro.bot4j.middle.domain.receive.payload.PostbackReceivePayload;
 import ai.nitro.bot4j.middle.domain.receive.payload.TextReceivePayload;
@@ -22,22 +23,21 @@ import ai.nitro.bot4j.middle.domain.receive.payload.UrlAttachmentReceivePayload;
 
 public interface TelegramReceivePayloadFactory {
 
-	UrlAttachmentReceivePayload createAudio(Audio audio);
+	UrlAttachmentReceivePayload createAudio(ReceiveMessage receiveMessage, Audio audio);
 
-	UrlAttachmentReceivePayload createDocument(Message message);
+	UrlAttachmentReceivePayload createDocument(ReceiveMessage receiveMessage, Message message);
 
-	UrlAttachmentReceivePayload createPhoto(Message message);
+	UrlAttachmentReceivePayload createPhoto(ReceiveMessage receiveMessage, Message message);
 
 	PostbackReceivePayload createPostback(CallbackQuery callbackQuery);
 
-	UrlAttachmentReceivePayload createSticker(Sticker sticker);
+	UrlAttachmentReceivePayload createSticker(ReceiveMessage receiveMessage, Sticker sticker);
 
 	TextReceivePayload createTextPayload(String text);
 
-	UrlAttachmentReceivePayload createVideo(Message message);
+	UrlAttachmentReceivePayload createVideo(ReceiveMessage receiveMessage, Message message);
 
-	UrlAttachmentReceivePayload createVoice(Voice voice);
+	UrlAttachmentReceivePayload createVoice(ReceiveMessage receiveMessage, Voice voice);
 
 	CoordinateReceivePayload getCoordinationPayload(Location location);
-
 }

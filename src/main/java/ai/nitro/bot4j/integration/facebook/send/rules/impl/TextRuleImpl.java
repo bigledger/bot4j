@@ -29,6 +29,6 @@ public class TextRuleImpl extends AbstractFacebookSendRuleImpl {
 		final Message message = new Message(text);
 
 		final IdMessageRecipient recipient = createIdMessageRecipient(sendMessage.getRecipient());
-		publish(message, recipient);
+		publish(sendMessage, message, recipient);
 	}
 }

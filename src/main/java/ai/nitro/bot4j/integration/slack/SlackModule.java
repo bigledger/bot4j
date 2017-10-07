@@ -12,7 +12,9 @@ import com.google.inject.AbstractModule;
 import com.google.inject.multibindings.Multibinder;
 
 import ai.nitro.bot4j.integration.slack.config.SlackConfig;
+import ai.nitro.bot4j.integration.slack.config.SlackConfigService;
 import ai.nitro.bot4j.integration.slack.config.impl.SlackConfigImpl;
+import ai.nitro.bot4j.integration.slack.config.impl.SlackConfigServiceImpl;
 import ai.nitro.bot4j.integration.slack.oauth.SlackOAuthClient;
 import ai.nitro.bot4j.integration.slack.oauth.impl.SlackOAuthClientImpl;
 import ai.nitro.bot4j.integration.slack.receive.SlackReceiveActionMessageFactory;
@@ -50,6 +52,7 @@ public class SlackModule extends AbstractModule {
 	protected void configure() {
 		bind(SlackActionWebhook.class).to(SlackActionWebhookImpl.class);
 		bind(SlackConfig.class).to(SlackConfigImpl.class);
+		bind(SlackConfigService.class).to(SlackConfigServiceImpl.class);
 		bind(SlackEventWebhook.class).to(SlackEventWebhookImpl.class);
 		bind(SlackMessageSender.class).to(SlackMessageSenderImpl.class);
 		bind(SlackOAuthClient.class).to(SlackOAuthClientImpl.class);

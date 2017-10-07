@@ -9,14 +9,12 @@
 package ai.nitro.bot4j.integration.facebook;
 
 import com.google.inject.AbstractModule;
-import com.google.inject.Provides;
 import com.google.inject.multibindings.Multibinder;
-import com.restfb.DefaultFacebookClient;
-import com.restfb.FacebookClient;
-import com.restfb.Version;
 
 import ai.nitro.bot4j.integration.facebook.config.FacebookConfig;
+import ai.nitro.bot4j.integration.facebook.config.FacebookConfigService;
 import ai.nitro.bot4j.integration.facebook.config.impl.FacebookConfigImpl;
+import ai.nitro.bot4j.integration.facebook.config.impl.FacebookConfigServiceImpl;
 import ai.nitro.bot4j.integration.facebook.receive.FacebookReceiveHandler;
 import ai.nitro.bot4j.integration.facebook.receive.FacebookReceiveMessageFactory;
 import ai.nitro.bot4j.integration.facebook.receive.FacebookReceivePayloadFactory;
@@ -45,6 +43,7 @@ public class FacebookModule extends AbstractModule {
 	@Override
 	protected void configure() {
 		bind(FacebookConfig.class).to(FacebookConfigImpl.class);
+		bind(FacebookConfigService.class).to(FacebookConfigServiceImpl.class);
 		bind(FacebookMessageSender.class).to(FacebookMessageSenderImpl.class);
 		bind(FacebookReceiveHandler.class).to(FacebookReceiveHandlerImpl.class);
 		bind(FacebookReceiveMessageFactory.class).to(FacebookReceiveMessageFactoryImpl.class);
@@ -64,11 +63,4 @@ public class FacebookModule extends AbstractModule {
 		facebookSendRuleBinder.addBinding().to(BubbleRuleImpl.class);
 		facebookSendRuleBinder.addBinding().to(ListRuleImpl.class);
 	}
-
-	@Provides
-	protected FacebookClient provideFacebookClient(final FacebookConfig config) {
-		final String facebookAccessToken = config.getAccessToken();
-		return new DefaultFacebookClient(facebookAccessToken, Version.VERSION_2_8);
-	}
-
 }

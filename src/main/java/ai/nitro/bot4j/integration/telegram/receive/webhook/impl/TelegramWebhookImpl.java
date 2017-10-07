@@ -19,22 +19,21 @@ import org.apache.logging.log4j.Logger;
 
 import com.pengrad.telegrambot.BotUtils;
 import com.pengrad.telegrambot.TelegramBot;
+import com.pengrad.telegrambot.TelegramBotAdapter;
 import com.pengrad.telegrambot.model.Update;
 import com.pengrad.telegrambot.request.SetWebhook;
 
-import ai.nitro.bot4j.integration.telegram.config.TelegramConfig;
+import ai.nitro.bot4j.integration.telegram.config.TelegramConfigService;
 import ai.nitro.bot4j.integration.telegram.receive.TelegramReceiveHandler;
 import ai.nitro.bot4j.integration.telegram.receive.webhook.TelegramWebhook;
+import ai.nitro.bot4j.middle.domain.send.SendMessage;
 
 public class TelegramWebhookImpl implements TelegramWebhook {
 
 	private final static Logger LOG = LogManager.getLogger(TelegramWebhookImpl.class);
 
 	@Inject
-	protected TelegramBot bot;
-
-	@Inject
-	protected TelegramConfig telegramConfig;
+	protected TelegramConfigService telegramConfigService;
 
 	@Inject
 	protected TelegramReceiveHandler telegramReceiveHandler;
@@ -45,7 +44,9 @@ public class TelegramWebhookImpl implements TelegramWebhook {
 
 	@Inject
 	protected void init() {
-		final SetWebhook request = new SetWebhook().url(telegramConfig.getWebhookUrl());
+		final SetWebhook request = new SetWebhook().url(telegramConfigService.getWebhookUrl(null));
+
+		final TelegramBot bot = provideTelegramBot();
 		bot.execute(request);
 	}
 
@@ -62,6 +63,13 @@ public class TelegramWebhookImpl implements TelegramWebhook {
 		} catch (final Exception e) {
 			handleException(e);
 		}
+
+		return result;
+	}
+
+	protected TelegramBot provideTelegramBot() {
+		final String telegramAccessToken = telegramConfigService.getAccessToken((SendMessage) null);
+		final TelegramBot result = TelegramBotAdapter.build(telegramAccessToken);
 		return result;
 	}
 }

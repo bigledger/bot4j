@@ -41,7 +41,6 @@ public class TypingRuleImpl extends AbstractFacebookSendRuleImpl {
 		}
 
 		final IdMessageRecipient recipient = createIdMessageRecipient(sendMessage.getRecipient());
-		publish(senderActionEnum, recipient);
+		publish(sendMessage, senderActionEnum, recipient);
 	}
-
 }

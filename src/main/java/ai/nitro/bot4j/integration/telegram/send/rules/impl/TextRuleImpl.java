@@ -28,6 +28,6 @@ public class TextRuleImpl extends AbstractTelegramSendRuleImpl {
 
 		final com.pengrad.telegrambot.request.SendMessage sendMessageTelegram = new com.pengrad.telegrambot.request.SendMessage(
 				recipient, text);
-		super.execute(sendMessageTelegram, recipient);
+		super.execute(sendMessage, sendMessageTelegram, recipient);
 	}
 }

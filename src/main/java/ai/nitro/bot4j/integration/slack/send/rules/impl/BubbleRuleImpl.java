@@ -55,7 +55,6 @@ public class BubbleRuleImpl extends AbstractSlackSendRuleImpl {
 		final String channel = sendMessage.getRecipient().getId();
 		final String text = bubble.getTitle();
 		final Payload payload = Payload.builder().channel(channel).text(text).attachments(attachments).build();
-		chatPostMessage(payload);
+		chatPostMessage(sendMessage, payload);
 	}
-
 }

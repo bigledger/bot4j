@@ -14,7 +14,9 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.pengrad.telegrambot.TelegramBot;
+import com.pengrad.telegrambot.TelegramBotAdapter;
 
+import ai.nitro.bot4j.integration.telegram.config.TelegramConfigService;
 import ai.nitro.bot4j.integration.telegram.send.rules.TelegramSendRule;
 import ai.nitro.bot4j.middle.domain.send.SendMessage;
 import ai.nitro.bot4j.middle.domain.send.payload.AbstractSendPayload;
@@ -25,16 +27,24 @@ public abstract class AbstractTelegramSendRuleImpl implements TelegramSendRule {
 	final static Logger LOG = LogManager.getLogger(AbstractTelegramSendRuleImpl.class);
 
 	@Inject
-	protected TelegramBot client;
+	protected TelegramConfigService telegramConfigService;
 
-	protected void execute(final com.pengrad.telegrambot.request.SendMessage message, final String recipient) {
+	protected void execute(final SendMessage sendMessage, final com.pengrad.telegrambot.request.SendMessage message,
+			final String recipient) {
 		LOG.info("sending to {} message {}", recipient, message);
+		final TelegramBot client = provideTelegramBot(sendMessage);
 		client.execute(message);
 	}
 
 	protected boolean hasPayloadType(final Type type, final SendMessage sendMessage) {
 		final AbstractSendPayload payload = sendMessage.getPayload();
 		final boolean result = payload != null && type.equals(payload.getType());
+		return result;
+	}
+
+	protected TelegramBot provideTelegramBot(final SendMessage sendMessage) {
+		final String telegramAccessToken = telegramConfigService.getAccessToken(sendMessage);
+		final TelegramBot result = TelegramBotAdapter.build(telegramAccessToken);
 		return result;
 	}
 }

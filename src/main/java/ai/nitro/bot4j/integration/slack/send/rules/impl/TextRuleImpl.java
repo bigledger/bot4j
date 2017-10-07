@@ -29,7 +29,6 @@ public class TextRuleImpl extends AbstractSlackSendRuleImpl {
 		final String channel = sendMessage.getRecipient().getId();
 
 		final Payload payload = Payload.builder().text(text).channel(channel).build();
-		chatPostMessage(payload);
+		chatPostMessage(sendMessage, payload);
 	}
-
 }

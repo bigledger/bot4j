@@ -34,7 +34,6 @@ public class VideoRuleImpl extends AbstractFacebookSendRuleImpl {
 		final Message message = new Message(mediaAttachment);
 
 		final IdMessageRecipient recipient = createIdMessageRecipient(sendMessage.getRecipient());
-		publish(message, recipient);
+		publish(sendMessage, message, recipient);
 	}
-
 }

@@ -48,6 +48,7 @@ public class TelegramReceiveMessageFactoryImpl implements TelegramReceiveMessage
 		final ReceiveMessage result = new ReceiveMessage();
 		result.setNativePayload(TelegramPlatformEnum.TELEGRAM, update);
 
+		// has to be here, as the params are required in the following method calls
 		if (params != null) {
 			result.getParams().putAll(params);
 		}
@@ -67,13 +68,13 @@ public class TelegramReceiveMessageFactoryImpl implements TelegramReceiveMessage
 
 	protected void handleAudio(final Audio audio, final ReceiveMessage result) {
 		final UrlAttachmentReceivePayload urlAttachmentReceivePayload = telegramReceivePayloadFactory
-				.createAudio(audio);
+				.createAudio(result, audio);
 		result.addPayload(urlAttachmentReceivePayload);
 	}
 
 	protected void handleDocument(final Message message, final ReceiveMessage result) {
 		final UrlAttachmentReceivePayload urlAttachmentReceivePayload = telegramReceivePayloadFactory
-				.createDocument(message);
+				.createDocument(result, message);
 		result.addPayload(urlAttachmentReceivePayload);
 	}
 
@@ -126,7 +127,7 @@ public class TelegramReceiveMessageFactoryImpl implements TelegramReceiveMessage
 
 	protected void handlePhoto(final Message message, final ReceiveMessage result) {
 		final UrlAttachmentReceivePayload urlAttachmentReceivePayload = telegramReceivePayloadFactory
-				.createPhoto(message);
+				.createPhoto(result, message);
 		result.addPayload(urlAttachmentReceivePayload);
 	}
 
@@ -151,7 +152,7 @@ public class TelegramReceiveMessageFactoryImpl implements TelegramReceiveMessage
 
 	protected void handleSticker(final Sticker sticker, final ReceiveMessage result) {
 		final UrlAttachmentReceivePayload urlAttachmentReceivePayload = telegramReceivePayloadFactory
-				.createSticker(sticker);
+				.createSticker(result, sticker);
 		result.addPayload(urlAttachmentReceivePayload);
 	}
 
@@ -162,13 +163,13 @@ public class TelegramReceiveMessageFactoryImpl implements TelegramReceiveMessage
 
 	protected void handleVideo(final Message message, final ReceiveMessage result) {
 		final UrlAttachmentReceivePayload urlAttachmentReceivePayload = telegramReceivePayloadFactory
-				.createVideo(message);
+				.createVideo(result, message);
 		result.addPayload(urlAttachmentReceivePayload);
 	}
 
 	protected void handleVoice(final Voice voice, final ReceiveMessage result) {
 		final UrlAttachmentReceivePayload urlAttachmentReceivePayload = telegramReceivePayloadFactory
-				.createVoice(voice);
+				.createVoice(result, voice);
 		result.addPayload(urlAttachmentReceivePayload);
 	}
 }

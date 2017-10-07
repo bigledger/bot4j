@@ -54,7 +54,7 @@ public class BubbleRuleImpl extends AbstractTelegramSendRuleImpl {
 		final com.pengrad.telegrambot.request.SendMessage sendMessageTelegram = new com.pengrad.telegrambot.request.SendMessage(
 				recipient, displayText).replyMarkup(inlineKeyboardMarkup).parseMode(ParseMode.Markdown);
 
-		super.execute(sendMessageTelegram, recipient);
+		super.execute(sendMessage, sendMessageTelegram, recipient);
 	}
 
 	protected List<InlineKeyboardButton> createButtonList(final Bubble bubble) {
