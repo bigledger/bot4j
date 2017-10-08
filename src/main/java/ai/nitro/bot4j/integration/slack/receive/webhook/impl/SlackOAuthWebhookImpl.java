@@ -19,6 +19,7 @@ import org.apache.logging.log4j.util.Strings;
 import ai.nitro.bot4j.integration.slack.config.SlackConfigService;
 import ai.nitro.bot4j.integration.slack.oauth.SlackOAuthClient;
 import ai.nitro.bot4j.integration.slack.receive.webhook.SlackOAuthWebhook;
+import ai.nitro.bot4j.middle.domain.receive.ReceiveMessage;
 
 public class SlackOAuthWebhookImpl implements SlackOAuthWebhook {
 
@@ -35,8 +36,8 @@ public class SlackOAuthWebhookImpl implements SlackOAuthWebhook {
 		String result = "";
 
 		try {
-			final String clientId = slackConfigService.getClientId(null);
-			final String clientSecret = slackConfigService.getClientSecret(null);
+			final String clientId = slackConfigService.getClientId((ReceiveMessage) null);
+			final String clientSecret = slackConfigService.getClientSecret((ReceiveMessage) null);
 			final String code = req.getParameter("code");
 
 			if (Strings.isBlank(clientId)) {

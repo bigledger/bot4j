@@ -31,6 +31,11 @@ public class TelegramConfigServiceImpl implements TelegramConfigService {
 	}
 
 	@Override
+	public String getWebhookUrl(final ReceiveMessage receiveMessage) {
+		return telegramConfig.getWebhookUrl();
+	}
+
+	@Override
 	public String getWebhookUrl(final SendMessage sendMessage) {
 		return telegramConfig.getWebhookUrl();
 	}

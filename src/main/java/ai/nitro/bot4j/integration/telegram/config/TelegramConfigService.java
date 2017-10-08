@@ -17,5 +17,7 @@ public interface TelegramConfigService {
 
 	String getAccessToken(SendMessage sendMessage);
 
+	String getWebhookUrl(ReceiveMessage receiveMessage);
+
 	String getWebhookUrl(SendMessage sendMessage);
 }

@@ -13,5 +13,4 @@ public interface TelegramConfig {
 	String getAccessToken();
 
 	String getWebhookUrl();
-
 }

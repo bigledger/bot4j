@@ -27,6 +27,7 @@ import com.pengrad.telegrambot.request.SetWebhook;
 import ai.nitro.bot4j.integration.telegram.config.TelegramConfigService;
 import ai.nitro.bot4j.integration.telegram.receive.TelegramReceiveHandler;
 import ai.nitro.bot4j.integration.telegram.receive.webhook.TelegramWebhook;
+import ai.nitro.bot4j.middle.domain.receive.ReceiveMessage;
 import ai.nitro.bot4j.middle.domain.send.SendMessage;
 
 public class TelegramWebhookImpl implements TelegramWebhook {
@@ -45,7 +46,7 @@ public class TelegramWebhookImpl implements TelegramWebhook {
 
 	@Inject
 	protected void init() {
-		final String webhookUrl = telegramConfigService.getWebhookUrl(null);
+		final String webhookUrl = telegramConfigService.getWebhookUrl((ReceiveMessage) null);
 
 		if (Strings.isBlank(webhookUrl)) {
 		} else {

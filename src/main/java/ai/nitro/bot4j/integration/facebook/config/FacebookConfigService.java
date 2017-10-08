@@ -17,5 +17,7 @@ public interface FacebookConfigService {
 
 	String getAccessToken(SendMessage sendMessage);
 
+	String getPageId(ReceiveMessage receiveMessage);
+
 	String getPageId(SendMessage sendMessage);
 }

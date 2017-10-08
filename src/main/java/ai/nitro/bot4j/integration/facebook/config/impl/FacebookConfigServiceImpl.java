@@ -31,6 +31,11 @@ public class FacebookConfigServiceImpl implements FacebookConfigService {
 	}
 
 	@Override
+	public String getPageId(final ReceiveMessage receiveMessage) {
+		return facebookConfig.getPageId();
+	}
+
+	@Override
 	public String getPageId(final SendMessage sendMessage) {
 		return facebookConfig.getPageId();
 	}

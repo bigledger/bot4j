@@ -12,6 +12,7 @@ import javax.inject.Inject;
 
 import ai.nitro.bot4j.integration.slack.config.SlackConfig;
 import ai.nitro.bot4j.integration.slack.config.SlackConfigService;
+import ai.nitro.bot4j.middle.domain.receive.ReceiveMessage;
 import ai.nitro.bot4j.middle.domain.send.SendMessage;
 
 public class SlackConfigServiceImpl implements SlackConfigService {
@@ -20,8 +21,18 @@ public class SlackConfigServiceImpl implements SlackConfigService {
 	protected SlackConfig slackConfig;
 
 	@Override
+	public String getAccessToken(final ReceiveMessage receiveMessage) {
+		return slackConfig.getAccessToken();
+	}
+
+	@Override
 	public String getAccessToken(final SendMessage sendMessage) {
 		return slackConfig.getAccessToken();
+	}
+
+	@Override
+	public String getClientId(final ReceiveMessage receiveMessage) {
+		return slackConfig.getClientId();
 	}
 
 	@Override
@@ -30,8 +41,18 @@ public class SlackConfigServiceImpl implements SlackConfigService {
 	}
 
 	@Override
+	public String getClientSecret(final ReceiveMessage receiveMessage) {
+		return slackConfig.getClientSecret();
+	}
+
+	@Override
 	public String getClientSecret(final SendMessage sendMessage) {
 		return slackConfig.getClientSecret();
+	}
+
+	@Override
+	public String getUsername(final ReceiveMessage receiveMessage) {
+		return slackConfig.getUsername();
 	}
 
 	@Override
