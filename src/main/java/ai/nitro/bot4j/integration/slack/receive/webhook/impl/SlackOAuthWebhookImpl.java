@@ -16,7 +16,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.util.Strings;
 
-import ai.nitro.bot4j.integration.slack.config.SlackConfig;
+import ai.nitro.bot4j.integration.slack.config.SlackConfigService;
 import ai.nitro.bot4j.integration.slack.oauth.SlackOAuthClient;
 import ai.nitro.bot4j.integration.slack.receive.webhook.SlackOAuthWebhook;
 
@@ -25,7 +25,7 @@ public class SlackOAuthWebhookImpl implements SlackOAuthWebhook {
 	private final static Logger LOG = LogManager.getLogger(SlackOAuthWebhookImpl.class);
 
 	@Inject
-	protected SlackConfig slackConfig;
+	protected SlackConfigService slackConfigService;
 
 	@Inject
 	protected SlackOAuthClient slackOAuthClient;
@@ -35,8 +35,8 @@ public class SlackOAuthWebhookImpl implements SlackOAuthWebhook {
 		String result = "";
 
 		try {
-			final String clientId = slackConfig.getClientId();
-			final String clientSecret = slackConfig.getClientSecret();
+			final String clientId = slackConfigService.getClientId(null);
+			final String clientSecret = slackConfigService.getClientSecret(null);
 			final String code = req.getParameter("code");
 
 			if (Strings.isBlank(clientId)) {
