@@ -57,5 +57,4 @@ public class DuplicateMessageFilterImpl implements DuplicateMessageFilter {
 
 		return result;
 	}
-
 }

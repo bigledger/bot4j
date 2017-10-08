@@ -11,6 +11,7 @@ package ai.nitro.bot4j.integration.facebook.receive.impl;
 import java.util.Map;
 
 import javax.inject.Inject;
+import javax.inject.Singleton;
 
 import com.restfb.types.webhook.messaging.MessagingItem;
 
@@ -19,6 +20,7 @@ import ai.nitro.bot4j.integration.facebook.receive.FacebookReceiveMessageFactory
 import ai.nitro.bot4j.middle.domain.receive.ReceiveMessage;
 import ai.nitro.bot4j.middle.receive.MessageReceiver;
 
+@Singleton
 public class FacebookReceiveHandlerImpl implements FacebookReceiveHandler {
 
 	@Inject

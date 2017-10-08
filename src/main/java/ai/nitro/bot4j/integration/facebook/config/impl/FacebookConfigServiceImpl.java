@@ -9,12 +9,14 @@
 package ai.nitro.bot4j.integration.facebook.config.impl;
 
 import javax.inject.Inject;
+import javax.inject.Singleton;
 
 import ai.nitro.bot4j.integration.facebook.config.FacebookConfig;
 import ai.nitro.bot4j.integration.facebook.config.FacebookConfigService;
 import ai.nitro.bot4j.middle.domain.receive.ReceiveMessage;
 import ai.nitro.bot4j.middle.domain.send.SendMessage;
 
+@Singleton
 public class FacebookConfigServiceImpl implements FacebookConfigService {
 
 	@Inject

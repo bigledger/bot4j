@@ -9,6 +9,7 @@
 package ai.nitro.bot4j.integration.facebook.receive.impl;
 
 import javax.inject.Inject;
+import javax.inject.Singleton;
 
 import com.restfb.types.webhook.messaging.DeliveryItem;
 import com.restfb.types.webhook.messaging.MessagingAttachment;
@@ -28,6 +29,7 @@ import ai.nitro.bot4j.middle.domain.receive.payload.UrlAttachmentReceivePayload;
 import ai.nitro.bot4j.middle.payload.PostbackPayload;
 import ai.nitro.bot4j.middle.payload.PostbackPayloadService;
 
+@Singleton
 public class FacebookReceivePayloadFactoryImpl implements FacebookReceivePayloadFactory {
 
 	@Inject

@@ -12,6 +12,7 @@ import java.util.Map;
 import java.util.UUID;
 
 import javax.inject.Inject;
+import javax.inject.Singleton;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -24,6 +25,7 @@ import ai.nitro.bot4j.middle.domain.send.SendMessage;
 import ai.nitro.bot4j.middle.send.MessageSender;
 import ai.nitro.bot4j.middle.send.PlatformMessageSender;
 
+@Singleton
 public class MessageSenderImpl implements MessageSender {
 
 	protected final static Logger LOG = LogManager.getLogger(MessageSenderImpl.class);

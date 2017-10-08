@@ -9,6 +9,7 @@
 package ai.nitro.bot4j.integration.slack.send.impl;
 
 import javax.inject.Inject;
+import javax.inject.Singleton;
 
 import com.github.seratch.jslack.api.model.Action;
 import com.github.seratch.jslack.api.model.ActionAttachment;
@@ -21,6 +22,7 @@ import ai.nitro.bot4j.middle.domain.send.button.AbstractSendButton;
 import ai.nitro.bot4j.middle.domain.send.button.PostbackSendButton;
 import ai.nitro.bot4j.middle.domain.send.button.WebSendButton;
 
+@Singleton
 public class SlackSendAttachmentFactoryImpl implements SlackSendAttachmentFactory {
 
 	@Inject

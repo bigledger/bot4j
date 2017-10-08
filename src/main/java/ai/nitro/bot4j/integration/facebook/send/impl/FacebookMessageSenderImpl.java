@@ -11,6 +11,7 @@ package ai.nitro.bot4j.integration.facebook.send.impl;
 import java.util.Set;
 
 import javax.inject.Inject;
+import javax.inject.Singleton;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -21,6 +22,7 @@ import ai.nitro.bot4j.integration.facebook.send.rules.FacebookSendRule;
 import ai.nitro.bot4j.middle.domain.Platform;
 import ai.nitro.bot4j.middle.domain.send.SendMessage;
 
+@Singleton
 public class FacebookMessageSenderImpl implements FacebookMessageSender {
 
 	final static Logger LOG = LogManager.getLogger(FacebookMessageSenderImpl.class);

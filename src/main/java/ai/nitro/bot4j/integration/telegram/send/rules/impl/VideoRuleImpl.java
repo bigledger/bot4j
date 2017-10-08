@@ -8,6 +8,8 @@
 
 package ai.nitro.bot4j.integration.telegram.send.rules.impl;
 
+import javax.inject.Singleton;
+
 import org.apache.logging.log4j.util.Strings;
 
 import com.pengrad.telegrambot.TelegramBot;
@@ -17,6 +19,7 @@ import ai.nitro.bot4j.middle.domain.send.SendMessage;
 import ai.nitro.bot4j.middle.domain.send.payload.AbstractSendPayload.Type;
 import ai.nitro.bot4j.middle.domain.send.payload.VideoSendPayload;
 
+@Singleton
 public class VideoRuleImpl extends AbstractTelegramSendRuleImpl {
 
 	@Override

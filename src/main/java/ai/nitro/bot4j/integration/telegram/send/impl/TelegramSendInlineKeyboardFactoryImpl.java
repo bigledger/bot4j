@@ -9,6 +9,7 @@
 package ai.nitro.bot4j.integration.telegram.send.impl;
 
 import javax.inject.Inject;
+import javax.inject.Singleton;
 
 import com.pengrad.telegrambot.model.request.InlineKeyboardButton;
 
@@ -20,6 +21,7 @@ import ai.nitro.bot4j.middle.domain.send.button.WebSendButton;
 import ai.nitro.bot4j.middle.payload.PostbackPayload;
 import ai.nitro.bot4j.middle.payload.PostbackPayloadService;
 
+@Singleton
 public class TelegramSendInlineKeyboardFactoryImpl implements TelegramSendInlineKeyboardFactory {
 
 	@Inject

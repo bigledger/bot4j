@@ -18,5 +18,4 @@ public class BotModule extends AbstractModule {
 	protected void configure() {
 		bind(Bot.class).to(BotImpl.class);
 	}
-
 }

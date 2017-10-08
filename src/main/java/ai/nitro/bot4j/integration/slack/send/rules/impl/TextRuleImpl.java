@@ -8,12 +8,15 @@
 
 package ai.nitro.bot4j.integration.slack.send.rules.impl;
 
+import javax.inject.Singleton;
+
 import com.github.seratch.jslack.api.webhook.Payload;
 
 import ai.nitro.bot4j.middle.domain.send.SendMessage;
 import ai.nitro.bot4j.middle.domain.send.payload.AbstractSendPayload.Type;
 import ai.nitro.bot4j.middle.domain.send.payload.TextSendPayload;
 
+@Singleton
 public class TextRuleImpl extends AbstractSlackSendRuleImpl {
 
 	@Override

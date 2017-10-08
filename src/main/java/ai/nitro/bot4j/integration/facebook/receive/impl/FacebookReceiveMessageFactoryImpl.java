@@ -11,6 +11,7 @@ package ai.nitro.bot4j.integration.facebook.receive.impl;
 import java.util.Map;
 
 import javax.inject.Inject;
+import javax.inject.Singleton;
 
 import org.apache.logging.log4j.util.Strings;
 
@@ -36,6 +37,7 @@ import ai.nitro.bot4j.middle.domain.receive.payload.ReadNotificationReceivePaylo
 import ai.nitro.bot4j.middle.domain.receive.payload.TextReceivePayload;
 import ai.nitro.bot4j.middle.domain.receive.payload.UrlAttachmentReceivePayload;
 
+@Singleton
 public class FacebookReceiveMessageFactoryImpl implements FacebookReceiveMessageFactory {
 
 	private static final String LOCATION = "location";

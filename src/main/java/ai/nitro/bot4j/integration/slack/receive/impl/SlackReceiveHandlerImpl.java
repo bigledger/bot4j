@@ -11,6 +11,7 @@ package ai.nitro.bot4j.integration.slack.receive.impl;
 import java.util.Map;
 
 import javax.inject.Inject;
+import javax.inject.Singleton;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -23,6 +24,7 @@ import ai.nitro.bot4j.integration.slack.receive.SlackReceiveHandler;
 import ai.nitro.bot4j.middle.domain.receive.ReceiveMessage;
 import ai.nitro.bot4j.middle.receive.MessageReceiver;
 
+@Singleton
 public class SlackReceiveHandlerImpl implements SlackReceiveHandler {
 
 	final static Logger LOG = LogManager.getLogger(SlackReceiveHandlerImpl.class);

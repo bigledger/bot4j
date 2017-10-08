@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.util.Map;
 
 import javax.inject.Inject;
+import javax.inject.Singleton;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -29,6 +30,7 @@ import com.restfb.types.webhook.messaging.MessagingParticipant;
 import ai.nitro.bot4j.integration.facebook.receive.FacebookReceiveHandler;
 import ai.nitro.bot4j.integration.facebook.receive.webhook.FacebookWebhook;
 
+@Singleton
 public class FacebookWebhookImpl implements FacebookWebhook {
 
 	private final static Logger LOG = LogManager.getLogger(FacebookWebhookImpl.class);

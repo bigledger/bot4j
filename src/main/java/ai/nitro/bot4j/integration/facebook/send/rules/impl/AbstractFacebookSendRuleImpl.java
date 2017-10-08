@@ -9,6 +9,7 @@
 package ai.nitro.bot4j.integration.facebook.send.rules.impl;
 
 import javax.inject.Inject;
+import javax.inject.Singleton;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -30,6 +31,7 @@ import ai.nitro.bot4j.middle.domain.send.SendMessage;
 import ai.nitro.bot4j.middle.domain.send.payload.AbstractSendPayload;
 import ai.nitro.bot4j.middle.domain.send.payload.AbstractSendPayload.Type;
 
+@Singleton
 public abstract class AbstractFacebookSendRuleImpl implements FacebookSendRule {
 
 	final static Logger LOG = LogManager.getLogger(AbstractFacebookSendRuleImpl.class);

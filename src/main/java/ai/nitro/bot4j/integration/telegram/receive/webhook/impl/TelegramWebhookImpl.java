@@ -11,6 +11,7 @@ package ai.nitro.bot4j.integration.telegram.receive.webhook.impl;
 import java.util.Map;
 
 import javax.inject.Inject;
+import javax.inject.Singleton;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -30,6 +31,7 @@ import ai.nitro.bot4j.integration.telegram.receive.webhook.TelegramWebhook;
 import ai.nitro.bot4j.middle.domain.receive.ReceiveMessage;
 import ai.nitro.bot4j.middle.domain.send.SendMessage;
 
+@Singleton
 public class TelegramWebhookImpl implements TelegramWebhook {
 
 	private final static Logger LOG = LogManager.getLogger(TelegramWebhookImpl.class);

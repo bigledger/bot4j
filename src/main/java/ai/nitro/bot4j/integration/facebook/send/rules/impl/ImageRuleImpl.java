@@ -8,6 +8,8 @@
 
 package ai.nitro.bot4j.integration.facebook.send.rules.impl;
 
+import javax.inject.Singleton;
+
 import com.restfb.types.send.IdMessageRecipient;
 import com.restfb.types.send.MediaAttachment;
 import com.restfb.types.send.Message;
@@ -16,6 +18,7 @@ import ai.nitro.bot4j.middle.domain.send.SendMessage;
 import ai.nitro.bot4j.middle.domain.send.payload.AbstractSendPayload.Type;
 import ai.nitro.bot4j.middle.domain.send.payload.ImageSendPayload;
 
+@Singleton
 public class ImageRuleImpl extends AbstractFacebookSendRuleImpl {
 
 	@Override

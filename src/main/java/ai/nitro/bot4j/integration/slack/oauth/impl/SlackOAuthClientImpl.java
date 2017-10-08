@@ -10,6 +10,8 @@ package ai.nitro.bot4j.integration.slack.oauth.impl;
 
 import java.io.IOException;
 
+import javax.inject.Singleton;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -25,6 +27,7 @@ import okhttp3.FormBody;
 import okhttp3.MultipartBody;
 import okhttp3.Response;
 
+@Singleton
 public class SlackOAuthClientImpl implements SlackOAuthClient {
 
 	private final static Logger LOG = LogManager.getLogger(SlackOAuthClientImpl.class);

@@ -11,6 +11,7 @@ package ai.nitro.bot4j.middle.receive.impl;
 import java.util.concurrent.CompletableFuture;
 
 import javax.inject.Inject;
+import javax.inject.Singleton;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -24,6 +25,7 @@ import ai.nitro.bot4j.middle.receive.DuplicateMessageFilter;
 import ai.nitro.bot4j.middle.receive.MessageReceiver;
 import ai.nitro.bot4j.middle.receive.SessionManager;
 
+@Singleton
 public class MessageReceiverImpl implements MessageReceiver {
 
 	final static Logger LOG = LogManager.getLogger(MessageReceiverImpl.class);

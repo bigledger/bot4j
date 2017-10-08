@@ -11,6 +11,7 @@ package ai.nitro.bot4j.integration.slack.receive.impl;
 import java.util.Map;
 
 import javax.inject.Inject;
+import javax.inject.Singleton;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
@@ -22,6 +23,7 @@ import ai.nitro.bot4j.middle.domain.Participant;
 import ai.nitro.bot4j.middle.domain.receive.ReceiveMessage;
 import ai.nitro.bot4j.middle.domain.receive.payload.PostbackReceivePayload;
 
+@Singleton
 public class SlackReceiveActionMessageFactoryImpl implements SlackReceiveActionMessageFactory {
 
 	private static final String ACTION_TS = "action_ts";

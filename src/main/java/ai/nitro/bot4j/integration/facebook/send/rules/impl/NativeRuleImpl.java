@@ -8,12 +8,15 @@
 
 package ai.nitro.bot4j.integration.facebook.send.rules.impl;
 
+import javax.inject.Singleton;
+
 import com.restfb.types.send.IdMessageRecipient;
 import com.restfb.types.send.Message;
 
 import ai.nitro.bot4j.integration.facebook.domain.FacebookPlatformEnum;
 import ai.nitro.bot4j.middle.domain.send.SendMessage;
 
+@Singleton
 public class NativeRuleImpl extends AbstractFacebookSendRuleImpl {
 
 	@Override

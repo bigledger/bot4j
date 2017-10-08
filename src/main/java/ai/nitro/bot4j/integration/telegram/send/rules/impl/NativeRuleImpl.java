@@ -8,12 +8,15 @@
 
 package ai.nitro.bot4j.integration.telegram.send.rules.impl;
 
+import javax.inject.Singleton;
+
 import com.pengrad.telegrambot.TelegramBot;
 import com.pengrad.telegrambot.request.BaseRequest;
 
 import ai.nitro.bot4j.integration.telegram.domain.TelegramPlatformEnum;
 import ai.nitro.bot4j.middle.domain.send.SendMessage;
 
+@Singleton
 public class NativeRuleImpl extends AbstractTelegramSendRuleImpl {
 
 	@Override

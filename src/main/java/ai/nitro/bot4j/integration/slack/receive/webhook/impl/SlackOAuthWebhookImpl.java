@@ -9,6 +9,7 @@
 package ai.nitro.bot4j.integration.slack.receive.webhook.impl;
 
 import javax.inject.Inject;
+import javax.inject.Singleton;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -21,6 +22,7 @@ import ai.nitro.bot4j.integration.slack.oauth.SlackOAuthClient;
 import ai.nitro.bot4j.integration.slack.receive.webhook.SlackOAuthWebhook;
 import ai.nitro.bot4j.middle.domain.receive.ReceiveMessage;
 
+@Singleton
 public class SlackOAuthWebhookImpl implements SlackOAuthWebhook {
 
 	private final static Logger LOG = LogManager.getLogger(SlackOAuthWebhookImpl.class);

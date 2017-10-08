@@ -3,6 +3,8 @@ package ai.nitro.bot4j.integration.alexa.receive.impl;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import javax.inject.Singleton;
+
 import com.amazon.speech.json.SpeechletRequestEnvelope;
 import com.amazon.speech.slu.Intent;
 import com.amazon.speech.slu.Slot;
@@ -18,6 +20,7 @@ import ai.nitro.bot4j.middle.domain.receive.ReceiveMessage;
 import ai.nitro.bot4j.middle.domain.receive.nlp.NlpContext;
 import ai.nitro.bot4j.middle.domain.receive.payload.TextReceivePayload;
 
+@Singleton
 public class AlexaReceiveMessageFactoryImpl implements AlexaReceiveMessageFactory {
 
 	protected NlpContext createNlpContext(final Intent intent) {
@@ -83,5 +86,4 @@ public class AlexaReceiveMessageFactoryImpl implements AlexaReceiveMessageFactor
 
 		return result;
 	}
-
 }

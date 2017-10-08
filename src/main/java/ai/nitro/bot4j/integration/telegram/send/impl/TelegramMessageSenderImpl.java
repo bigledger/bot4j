@@ -11,6 +11,7 @@ package ai.nitro.bot4j.integration.telegram.send.impl;
 import java.util.Set;
 
 import javax.inject.Inject;
+import javax.inject.Singleton;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -21,9 +22,10 @@ import ai.nitro.bot4j.integration.telegram.send.rules.TelegramSendRule;
 import ai.nitro.bot4j.middle.domain.Platform;
 import ai.nitro.bot4j.middle.domain.send.SendMessage;
 
+@Singleton
 public class TelegramMessageSenderImpl implements TelegramMessageSender {
 
-	final static Logger log = LogManager.getLogger(TelegramMessageSenderImpl.class);
+	public final static Logger LOG = LogManager.getLogger(TelegramMessageSenderImpl.class);
 
 	@Inject
 	protected Set<TelegramSendRule> rules;
@@ -42,7 +44,7 @@ public class TelegramMessageSenderImpl implements TelegramMessageSender {
 				final boolean applies = rule.applies(sendMessage);
 
 				if (applies) {
-					log.info("applying send rule {}", rule);
+					LOG.info("applying send rule {}", rule);
 
 					rule.apply(sendMessage);
 					result = true;
@@ -53,5 +55,4 @@ public class TelegramMessageSenderImpl implements TelegramMessageSender {
 
 		return result;
 	}
-
 }

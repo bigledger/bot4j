@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.util.Map;
 
 import javax.inject.Inject;
+import javax.inject.Singleton;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -27,6 +28,7 @@ import ai.nitro.bot4j.integration.alexa.receive.AlexaReceiveMessageFactory;
 import ai.nitro.bot4j.integration.alexa.send.AlexaMessageSender;
 import ai.nitro.bot4j.middle.receive.MessageReceiver;
 
+@Singleton
 public class AlexaReceiveHandlerImpl implements AlexaReceiveHandler {
 
 	static Logger LOG = LogManager.getLogger(AlexaReceiveHandlerImpl.class);

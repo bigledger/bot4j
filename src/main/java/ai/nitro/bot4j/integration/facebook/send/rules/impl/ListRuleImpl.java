@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.inject.Singleton;
 
 import org.apache.logging.log4j.util.Strings;
 
@@ -31,6 +32,7 @@ import ai.nitro.bot4j.middle.domain.send.payload.AbstractSendPayload.Type;
 import ai.nitro.bot4j.middle.domain.send.payload.ListSendPayload;
 import ai.nitro.bot4j.middle.domain.send.payload.ListSendPayload.Style;
 
+@Singleton
 public class ListRuleImpl extends AbstractFacebookSendRuleImpl {
 
 	@Inject

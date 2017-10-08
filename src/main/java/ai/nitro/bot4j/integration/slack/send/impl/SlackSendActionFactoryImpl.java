@@ -9,6 +9,7 @@
 package ai.nitro.bot4j.integration.slack.send.impl;
 
 import javax.inject.Inject;
+import javax.inject.Singleton;
 
 import com.github.seratch.jslack.api.model.Action;
 
@@ -17,6 +18,7 @@ import ai.nitro.bot4j.middle.domain.send.button.PostbackSendButton;
 import ai.nitro.bot4j.middle.payload.PostbackPayload;
 import ai.nitro.bot4j.middle.payload.PostbackPayloadService;
 
+@Singleton
 public class SlackSendActionFactoryImpl implements SlackSendActionFactory {
 
 	@Inject

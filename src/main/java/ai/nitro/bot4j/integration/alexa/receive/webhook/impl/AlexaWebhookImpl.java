@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.util.Map;
 
 import javax.inject.Inject;
+import javax.inject.Singleton;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -25,6 +26,7 @@ import com.amazon.speech.speechlet.authentication.SpeechletRequestSignatureVerif
 import ai.nitro.bot4j.integration.alexa.receive.AlexaReceiveHandler;
 import ai.nitro.bot4j.integration.alexa.receive.webhook.AlexaWebhook;
 
+@Singleton
 public class AlexaWebhookImpl implements AlexaWebhook {
 
 	static Logger LOG = LogManager.getLogger(AlexaWebhookImpl.class);

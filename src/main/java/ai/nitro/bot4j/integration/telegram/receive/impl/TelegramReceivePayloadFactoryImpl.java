@@ -9,6 +9,7 @@
 package ai.nitro.bot4j.integration.telegram.receive.impl;
 
 import javax.inject.Inject;
+import javax.inject.Singleton;
 
 import com.pengrad.telegrambot.TelegramBot;
 import com.pengrad.telegrambot.TelegramBotAdapter;
@@ -35,6 +36,7 @@ import ai.nitro.bot4j.middle.domain.receive.payload.UrlAttachmentReceivePayload;
 import ai.nitro.bot4j.middle.payload.PostbackPayload;
 import ai.nitro.bot4j.middle.payload.PostbackPayloadService;
 
+@Singleton
 public class TelegramReceivePayloadFactoryImpl implements TelegramReceivePayloadFactory {
 
 	@Inject

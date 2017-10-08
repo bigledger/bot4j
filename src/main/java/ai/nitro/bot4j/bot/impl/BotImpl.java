@@ -9,6 +9,7 @@
 package ai.nitro.bot4j.bot.impl;
 
 import javax.inject.Inject;
+import javax.inject.Singleton;
 
 import ai.nitro.bot4j.bot.Bot;
 import ai.nitro.bot4j.middle.domain.Participant;
@@ -30,6 +31,7 @@ import ai.nitro.bot4j.middle.domain.send.payload.TypingSendPayload;
 import ai.nitro.bot4j.middle.domain.send.payload.TypingSendPayload.Typing;
 import ai.nitro.bot4j.middle.send.MessageSender;
 
+@Singleton
 public class BotImpl implements Bot {
 
 	@Inject

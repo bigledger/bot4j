@@ -9,6 +9,7 @@
 package ai.nitro.bot4j.integration.slack.receive.impl;
 
 import javax.inject.Inject;
+import javax.inject.Singleton;
 
 import com.google.gson.JsonObject;
 
@@ -18,6 +19,7 @@ import ai.nitro.bot4j.middle.domain.receive.payload.TextReceivePayload;
 import ai.nitro.bot4j.middle.payload.PostbackPayload;
 import ai.nitro.bot4j.middle.payload.PostbackPayloadService;
 
+@Singleton
 public class SlackReceivePayloadFactoryImpl implements SlackReceivePayloadFactory {
 
 	private static final String NAME = "name";

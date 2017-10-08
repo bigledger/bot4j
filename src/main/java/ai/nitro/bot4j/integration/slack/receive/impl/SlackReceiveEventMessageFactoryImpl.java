@@ -9,6 +9,7 @@
 package ai.nitro.bot4j.integration.slack.receive.impl;
 
 import javax.inject.Inject;
+import javax.inject.Singleton;
 
 import com.google.gson.JsonObject;
 
@@ -19,6 +20,7 @@ import ai.nitro.bot4j.middle.domain.Participant;
 import ai.nitro.bot4j.middle.domain.receive.ReceiveMessage;
 import ai.nitro.bot4j.middle.domain.receive.payload.TextReceivePayload;
 
+@Singleton
 public class SlackReceiveEventMessageFactoryImpl implements SlackReceiveEventMessageFactory {
 
 	private static final String CHANNEL = "channel";

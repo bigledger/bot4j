@@ -11,6 +11,7 @@ package ai.nitro.bot4j.integration.slack.receive.webhook.impl;
 import java.util.Map;
 
 import javax.inject.Inject;
+import javax.inject.Singleton;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -23,6 +24,7 @@ import com.google.gson.JsonParser;
 import ai.nitro.bot4j.integration.slack.receive.SlackReceiveHandler;
 import ai.nitro.bot4j.integration.slack.receive.webhook.SlackActionWebhook;
 
+@Singleton
 public class SlackActionWebhookImpl implements SlackActionWebhook {
 
 	private final static Logger LOG = LogManager.getLogger(SlackActionWebhookImpl.class);

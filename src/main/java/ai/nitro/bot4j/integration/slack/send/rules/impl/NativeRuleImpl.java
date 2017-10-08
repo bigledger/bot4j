@@ -8,11 +8,14 @@
 
 package ai.nitro.bot4j.integration.slack.send.rules.impl;
 
+import javax.inject.Singleton;
+
 import com.github.seratch.jslack.api.webhook.Payload;
 
 import ai.nitro.bot4j.integration.slack.domain.SlackPlatformEnum;
 import ai.nitro.bot4j.middle.domain.send.SendMessage;
 
+@Singleton
 public class NativeRuleImpl extends AbstractSlackSendRuleImpl {
 
 	@Override

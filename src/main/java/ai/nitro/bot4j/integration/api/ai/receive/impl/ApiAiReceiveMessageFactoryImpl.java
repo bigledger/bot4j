@@ -3,6 +3,8 @@ package ai.nitro.bot4j.integration.api.ai.receive.impl;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import javax.inject.Singleton;
+
 import com.google.gson.JsonElement;
 
 import ai.api.model.AIResponse;
@@ -14,6 +16,7 @@ import ai.nitro.bot4j.middle.domain.receive.ReceiveMessage;
 import ai.nitro.bot4j.middle.domain.receive.nlp.NlpContext;
 import ai.nitro.bot4j.middle.domain.receive.payload.TextReceivePayload;
 
+@Singleton
 public class ApiAiReceiveMessageFactoryImpl implements ApiAiReceiveMessageFactory {
 
 	protected NlpContext createNlpContext(final Result aiResponseResult) {

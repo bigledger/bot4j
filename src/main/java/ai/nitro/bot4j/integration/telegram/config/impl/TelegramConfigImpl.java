@@ -11,11 +11,14 @@ package ai.nitro.bot4j.integration.telegram.config.impl;
 import java.io.InputStream;
 import java.util.Properties;
 
+import javax.inject.Singleton;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import ai.nitro.bot4j.integration.telegram.config.TelegramConfig;
 
+@Singleton
 public class TelegramConfigImpl implements TelegramConfig {
 
 	protected static final String ACCESS_TOKEN_KEY = "access_token";

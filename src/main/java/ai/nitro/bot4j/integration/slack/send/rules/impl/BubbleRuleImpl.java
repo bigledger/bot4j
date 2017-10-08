@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.inject.Singleton;
 
 import com.github.seratch.jslack.api.model.Attachment;
 import com.github.seratch.jslack.api.webhook.Payload;
@@ -23,6 +24,7 @@ import ai.nitro.bot4j.middle.domain.send.button.AbstractSendButton;
 import ai.nitro.bot4j.middle.domain.send.payload.AbstractSendPayload.Type;
 import ai.nitro.bot4j.middle.domain.send.payload.BubbleSendPayload;
 
+@Singleton
 public class BubbleRuleImpl extends AbstractSlackSendRuleImpl {
 
 	@Inject

@@ -11,6 +11,7 @@ package ai.nitro.bot4j.integration.telegram.receive.impl;
 import java.util.Map;
 
 import javax.inject.Inject;
+import javax.inject.Singleton;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -34,6 +35,7 @@ import ai.nitro.bot4j.middle.domain.receive.payload.PostbackReceivePayload;
 import ai.nitro.bot4j.middle.domain.receive.payload.TextReceivePayload;
 import ai.nitro.bot4j.middle.domain.receive.payload.UrlAttachmentReceivePayload;
 
+@Singleton
 public class TelegramReceiveMessageFactoryImpl implements TelegramReceiveMessageFactory {
 
 	private static final String GET_STARTED = "GET_STARTED";

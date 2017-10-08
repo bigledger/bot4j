@@ -10,6 +10,8 @@ package ai.nitro.bot4j.integration.slack.send.rules.impl;
 
 import java.util.List;
 
+import javax.inject.Singleton;
+
 import com.github.seratch.jslack.api.model.Attachment;
 import com.github.seratch.jslack.api.webhook.Payload;
 import com.google.common.collect.Lists;
@@ -18,6 +20,7 @@ import ai.nitro.bot4j.middle.domain.send.SendMessage;
 import ai.nitro.bot4j.middle.domain.send.payload.AbstractSendPayload.Type;
 import ai.nitro.bot4j.middle.domain.send.payload.VideoSendPayload;
 
+@Singleton
 public class VideoRuleImpl extends AbstractSlackSendRuleImpl {
 
 	@Override

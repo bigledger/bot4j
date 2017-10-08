@@ -3,6 +3,7 @@ package ai.nitro.bot4j.integration.api.ai.receive.impl;
 import java.util.Map;
 
 import javax.inject.Inject;
+import javax.inject.Singleton;
 
 import ai.api.model.AIResponse;
 import ai.api.model.Fulfillment;
@@ -12,6 +13,7 @@ import ai.nitro.bot4j.integration.api.ai.send.ApiAiMessageSender;
 import ai.nitro.bot4j.middle.domain.receive.ReceiveMessage;
 import ai.nitro.bot4j.middle.receive.MessageReceiver;
 
+@Singleton
 public class ApiAiReceiveHandlerImpl implements ApiAiReceiveHandler {
 
 	@Inject

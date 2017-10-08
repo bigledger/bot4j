@@ -9,12 +9,14 @@
 package ai.nitro.bot4j.integration.slack.config.impl;
 
 import javax.inject.Inject;
+import javax.inject.Singleton;
 
 import ai.nitro.bot4j.integration.slack.config.SlackConfig;
 import ai.nitro.bot4j.integration.slack.config.SlackConfigService;
 import ai.nitro.bot4j.middle.domain.receive.ReceiveMessage;
 import ai.nitro.bot4j.middle.domain.send.SendMessage;
 
+@Singleton
 public class SlackConfigServiceImpl implements SlackConfigService {
 
 	@Inject

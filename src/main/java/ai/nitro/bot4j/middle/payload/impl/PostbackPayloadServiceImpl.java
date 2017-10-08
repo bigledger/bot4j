@@ -8,11 +8,14 @@
 
 package ai.nitro.bot4j.middle.payload.impl;
 
+import javax.inject.Singleton;
+
 import com.google.gson.Gson;
 
 import ai.nitro.bot4j.middle.payload.PostbackPayload;
 import ai.nitro.bot4j.middle.payload.PostbackPayloadService;
 
+@Singleton
 public class PostbackPayloadServiceImpl implements PostbackPayloadService {
 
 	@Override
@@ -28,5 +31,4 @@ public class PostbackPayloadServiceImpl implements PostbackPayloadService {
 		final String result = gson.toJson(postbackPayload);
 		return result;
 	}
-
 }

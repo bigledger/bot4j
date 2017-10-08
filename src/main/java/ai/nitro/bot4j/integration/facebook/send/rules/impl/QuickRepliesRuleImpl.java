@@ -8,6 +8,8 @@
 
 package ai.nitro.bot4j.integration.facebook.send.rules.impl;
 
+import javax.inject.Singleton;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -20,6 +22,7 @@ import ai.nitro.bot4j.middle.domain.send.payload.QuickRepliesSendPayload;
 import ai.nitro.bot4j.middle.domain.send.quickreply.QuickReply;
 import ai.nitro.bot4j.middle.domain.send.quickreply.QuickReply.ContentType;
 
+@Singleton
 public class QuickRepliesRuleImpl extends AbstractFacebookSendRuleImpl {
 
 	final static Logger LOG = LogManager.getLogger(QuickRepliesRuleImpl.class);

@@ -11,6 +11,7 @@ package ai.nitro.bot4j.integration.slack.receive.webhook.impl;
 import java.io.IOException;
 
 import javax.inject.Inject;
+import javax.inject.Singleton;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -25,6 +26,7 @@ import com.google.gson.JsonParser;
 import ai.nitro.bot4j.integration.slack.receive.SlackReceiveHandler;
 import ai.nitro.bot4j.integration.slack.receive.webhook.SlackEventWebhook;
 
+@Singleton
 public class SlackEventWebhookImpl implements SlackEventWebhook {
 
 	private static final String BOT_ID = "bot_id";

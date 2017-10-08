@@ -20,5 +20,4 @@ public class ApiAiModule extends AbstractModule {
 		bind(ApiAiMessageSender.class).to(ApiAiMessageSenderImpl.class);
 		bind(ApiAiReceiveMessageFactory.class).to(ApiAiReceiveMessageFactoryImpl.class);
 	}
-
 }

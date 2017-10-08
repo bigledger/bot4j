@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.inject.Singleton;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -30,6 +31,7 @@ import ai.nitro.bot4j.middle.domain.send.list.ListSendElement;
 import ai.nitro.bot4j.middle.domain.send.payload.AbstractSendPayload.Type;
 import ai.nitro.bot4j.middle.domain.send.payload.ListSendPayload;
 
+@Singleton
 public class ListRuleImpl extends AbstractTelegramSendRuleImpl {
 
 	private final static Logger LOG = LogManager.getLogger(ListRuleImpl.class);
