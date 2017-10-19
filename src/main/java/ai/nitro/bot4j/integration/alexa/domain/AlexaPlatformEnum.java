@@ -14,6 +14,11 @@ public enum AlexaPlatformEnum implements Platform {
 	ALEXA;
 
 	@Override
+	public boolean isAsync() {
+		return false;
+	}
+
+	@Override
 	public boolean isVoice() {
 		return true;
 	}

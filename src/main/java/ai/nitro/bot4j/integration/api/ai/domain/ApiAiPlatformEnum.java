@@ -6,8 +6,12 @@ public enum ApiAiPlatformEnum implements Platform {
 	APIAI;
 
 	@Override
+	public boolean isAsync() {
+		return false;
+	}
+
+	@Override
 	public boolean isVoice() {
 		return true;
 	}
-
 }

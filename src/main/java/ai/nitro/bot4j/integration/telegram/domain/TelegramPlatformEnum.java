@@ -14,6 +14,11 @@ public enum TelegramPlatformEnum implements Platform {
 	TELEGRAM;
 
 	@Override
+	public boolean isAsync() {
+		return true;
+	}
+
+	@Override
 	public boolean isVoice() {
 		return false;
 	}

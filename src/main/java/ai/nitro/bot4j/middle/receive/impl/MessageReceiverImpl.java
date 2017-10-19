@@ -65,10 +65,10 @@ public class MessageReceiverImpl implements MessageReceiver {
 		final Participant sender = receiveMessage.getSender();
 		final Platform platform = sender.getPlatform();
 
-		if (platform.isVoice()) {
-			doReceive(receiveMessage);
-		} else {
+		if (platform.isAsync()) {
 			CompletableFuture.runAsync(() -> doReceive(receiveMessage));
+		} else {
+			doReceive(receiveMessage);
 		}
 	}
 }

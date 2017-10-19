@@ -14,6 +14,11 @@ public enum FacebookPlatformEnum implements Platform {
 	FACEBOOK;
 
 	@Override
+	public boolean isAsync() {
+		return true;
+	}
+
+	@Override
 	public boolean isVoice() {
 		return false;
 	}

@@ -14,6 +14,11 @@ public enum SlackPlatformEnum implements Platform {
 	SLACK;
 
 	@Override
+	public boolean isAsync() {
+		return true;
+	}
+
+	@Override
 	public boolean isVoice() {
 		return false;
 	}
