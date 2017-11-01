@@ -18,27 +18,37 @@ import ai.nitro.bot4j.integration.alexa.receive.AlexaReceiveMessageFactory;
 import ai.nitro.bot4j.middle.domain.Participant;
 import ai.nitro.bot4j.middle.domain.receive.ReceiveMessage;
 import ai.nitro.bot4j.middle.domain.receive.nlp.NlpContext;
+import ai.nitro.bot4j.middle.domain.receive.nlp.NlpIntent;
+import ai.nitro.bot4j.middle.domain.receive.nlp.NlpNamedEntity;
+import ai.nitro.bot4j.middle.domain.receive.nlp.impl.NlpContextImpl;
+import ai.nitro.bot4j.middle.domain.receive.nlp.impl.NlpIntentImpl;
+import ai.nitro.bot4j.middle.domain.receive.nlp.impl.NlpNamedEntityImpl;
 import ai.nitro.bot4j.middle.domain.receive.payload.TextReceivePayload;
 
 @Singleton
 public class AlexaReceiveMessageFactoryImpl implements AlexaReceiveMessageFactory {
 
 	protected NlpContext createNlpContext(final Intent intent) {
-		final NlpContext nlpContext = new NlpContext();
-		nlpContext.setConfidence(1.0);
+		final NlpContext result = new NlpContextImpl();
 
-		final String intentName = intent.getName();
-		nlpContext.setIntent(intentName);
+		final NlpIntent nlpIntent = new NlpIntentImpl();
+		nlpIntent.setConfidence(1.0);
+		nlpIntent.setName(intent.getName());
+
+		result.setMaxIntent(nlpIntent);
 
 		for (final Entry<String, Slot> entry : intent.getSlots().entrySet()) {
-			final String key = entry.getKey();
 			final Slot value = entry.getValue();
 
-			final String slotValue = value.getValue();
-			nlpContext.addNamedEntity(key, slotValue);
+			final NlpNamedEntity nlpNamedEntity = new NlpNamedEntityImpl();
+			nlpNamedEntity.setType(entry.getKey());
+			nlpNamedEntity.setConfidence(1.0);
+			nlpNamedEntity.setEntity(value.getValue());
+
+			result.addNamedEntity(nlpNamedEntity);
 		}
 
-		return nlpContext;
+		return result;
 	}
 
 	@Override

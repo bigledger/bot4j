@@ -1,0 +1,70 @@
+/*
+ * Copyright (C) 2017, nitro.ai
+ * All rights reserved.
+ *
+ * This software may be modified and distributed under the terms
+ * of the BSD 3-clause license. See the LICENSE file for details.
+ */
+
+package ai.nitro.bot4j.middle.domain.receive.nlp.impl;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import ai.nitro.bot4j.middle.domain.receive.nlp.NlpContext;
+import ai.nitro.bot4j.middle.domain.receive.nlp.NlpIntent;
+import ai.nitro.bot4j.middle.domain.receive.nlp.NlpNamedEntity;
+
+public class NlpContextImpl implements NlpContext {
+
+	protected final List<NlpIntent> intents = new ArrayList<NlpIntent>();
+
+	protected NlpIntent maxIntent;
+
+	protected final Map<String, List<NlpNamedEntity>> namedEntities = new HashMap<String, List<NlpNamedEntity>>();
+
+	@Override
+	public void addIntent(final NlpIntent intent) {
+		intents.add(intent);
+	}
+
+	@Override
+	public void addNamedEntity(final NlpNamedEntity namedEntity) {
+		assureNamedEntityList(namedEntity.getType());
+
+		namedEntities.get(namedEntity.getType()).add(namedEntity);
+	}
+
+	protected void assureNamedEntityList(final String name) {
+		if (namedEntities.get(name) == null) {
+			namedEntities.put(name, new ArrayList<NlpNamedEntity>());
+		}
+	}
+
+	@Override
+	public List<NlpIntent> getIntents() {
+		return intents;
+	}
+
+	@Override
+	public NlpIntent getMaxIntent() {
+		return maxIntent;
+	}
+
+	@Override
+	public Map<String, List<NlpNamedEntity>> getNamedEntities() {
+		return namedEntities;
+	}
+
+	@Override
+	public void setMaxIntent(final NlpIntent maxIntent) {
+		this.maxIntent = maxIntent;
+	}
+
+	@Override
+	public String toString() {
+		return "maxIntent=[" + maxIntent + "]";
+	}
+}

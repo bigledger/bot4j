@@ -2,9 +2,9 @@ package ai.nitro.bot4j.middle.receive.api.ai;
 
 import static org.junit.Assert.assertEquals;
 
-import org.junit.Test;
-
 import javax.inject.Inject;
+
+import org.junit.Test;
 
 import ai.api.model.AIResponse;
 import ai.api.model.Metadata;
@@ -44,7 +44,6 @@ public class ApiAiMessageTest extends TestBase {
 
 		assertEquals(receiveMessage.getPayloads().get(0).getClass(), TextReceivePayload.class);
 		final TextReceivePayload textReceivePayload = (TextReceivePayload) receiveMessage.getPayloads().get(0);
-		assertEquals(textReceivePayload.getNlpContext().getIntent(), intentName);
+		assertEquals(intentName, textReceivePayload.getNlpContext().getMaxIntent().getName());
 	}
-
 }

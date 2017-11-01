@@ -14,23 +14,35 @@ import ai.nitro.bot4j.integration.api.ai.receive.ApiAiReceiveMessageFactory;
 import ai.nitro.bot4j.middle.domain.Participant;
 import ai.nitro.bot4j.middle.domain.receive.ReceiveMessage;
 import ai.nitro.bot4j.middle.domain.receive.nlp.NlpContext;
+import ai.nitro.bot4j.middle.domain.receive.nlp.NlpIntent;
+import ai.nitro.bot4j.middle.domain.receive.nlp.NlpNamedEntity;
+import ai.nitro.bot4j.middle.domain.receive.nlp.impl.NlpContextImpl;
+import ai.nitro.bot4j.middle.domain.receive.nlp.impl.NlpIntentImpl;
+import ai.nitro.bot4j.middle.domain.receive.nlp.impl.NlpNamedEntityImpl;
 import ai.nitro.bot4j.middle.domain.receive.payload.TextReceivePayload;
 
 @Singleton
 public class ApiAiReceiveMessageFactoryImpl implements ApiAiReceiveMessageFactory {
 
 	protected NlpContext createNlpContext(final Result aiResponseResult) {
-		final NlpContext result = new NlpContext();
+		final NlpContext result = new NlpContextImpl();
 
 		if (aiResponseResult.getMetadata() != null) {
-			result.setIntent(aiResponseResult.getMetadata().getIntentName());
+			final NlpIntent nlpIntent = new NlpIntentImpl();
+			nlpIntent.setConfidence(1.0);
+			nlpIntent.setName(aiResponseResult.getMetadata().getIntentName());
+
+			result.setMaxIntent(nlpIntent);
 		}
+
 		if (aiResponseResult.getParameters() != null) {
 			for (final Entry<String, JsonElement> entry : aiResponseResult.getParameters().entrySet()) {
-				final String key = entry.getKey();
-				final String value = entry.getValue().toString();
+				final NlpNamedEntity nlpNamedEntity = new NlpNamedEntityImpl();
+				nlpNamedEntity.setType(entry.getKey());
+				nlpNamedEntity.setConfidence(1.0);
+				nlpNamedEntity.setEntity(entry.getValue().toString());
 
-				result.addNamedEntity(key, value);
+				result.addNamedEntity(nlpNamedEntity);
 			}
 		}
 

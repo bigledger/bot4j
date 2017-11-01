@@ -8,67 +8,20 @@
 
 package ai.nitro.bot4j.middle.domain.receive.nlp;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class NlpContext {
+public interface NlpContext {
 
-	protected String answerRecommendation;
+	void addIntent(NlpIntent intent);
 
-	protected Double confidence;
+	void addNamedEntity(NlpNamedEntity namedEntity);
 
-	protected String intent;
+	List<NlpIntent> getIntents();
 
-	protected Map<String, List<String>> namedEntities = new HashMap<String, List<String>>();
+	NlpIntent getMaxIntent();
 
-	public void addNamedEntity(final String name, final String value) {
-		assureNamedEntityList(name);
+	Map<String, List<NlpNamedEntity>> getNamedEntities();
 
-		namedEntities.get(name).add(value);
-	}
-
-	protected void assureNamedEntityList(final String name) {
-		if (namedEntities.get(name) == null) {
-			namedEntities.put(name, new ArrayList<String>());
-		}
-	}
-
-	public String getAnswerRecommendation() {
-		return answerRecommendation;
-	}
-
-	public Double getConfidence() {
-		return confidence;
-	}
-
-	public String getIntent() {
-		return intent;
-	}
-
-	public Map<String, List<String>> getNamedEntities() {
-		return namedEntities;
-	}
-
-	public void setAnswerRecommendation(final String answerRecommendation) {
-		this.answerRecommendation = answerRecommendation;
-	}
-
-	public void setConfidence(final Double confidence) {
-		this.confidence = confidence;
-	}
-
-	public void setIntent(final String intent) {
-		this.intent = intent;
-	}
-
-	public void setNamedEntities(final Map<String, List<String>> namedEntities) {
-		this.namedEntities = namedEntities;
-	}
-
-	@Override
-	public String toString() {
-		return "intent=[" + intent + "], confidence=[" + confidence + "]";
-	}
+	void setMaxIntent(NlpIntent maxIntent);
 }
