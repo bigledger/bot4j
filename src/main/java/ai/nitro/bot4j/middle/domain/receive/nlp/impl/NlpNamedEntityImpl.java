@@ -77,4 +77,9 @@ public class NlpNamedEntityImpl implements NlpNamedEntity {
 	public void setType(final String type) {
 		this.type = type;
 	}
+
+	@Override
+	public String toString() {
+		return entity;
+	}
 }
