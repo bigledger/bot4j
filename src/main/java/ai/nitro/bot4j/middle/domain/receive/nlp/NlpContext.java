@@ -23,6 +23,4 @@ public interface NlpContext {
 	NlpIntent getMaxIntent();
 
 	Map<String, List<NlpNamedEntity>> getNamedEntities();
-
-	void setMaxIntent(NlpIntent maxIntent);
 }

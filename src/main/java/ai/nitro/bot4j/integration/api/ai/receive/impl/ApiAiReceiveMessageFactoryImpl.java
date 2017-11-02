@@ -31,8 +31,6 @@ public class ApiAiReceiveMessageFactoryImpl implements ApiAiReceiveMessageFactor
 			final NlpIntent nlpIntent = new NlpIntentImpl();
 			nlpIntent.setConfidence(1.0);
 			nlpIntent.setName(aiResponseResult.getMetadata().getIntentName());
-
-			result.setMaxIntent(nlpIntent);
 			result.addIntent(nlpIntent);
 		}
 

@@ -23,8 +23,6 @@ public class NlpContextImpl implements NlpContext {
 
 	protected final SortedSet<NlpIntent> intents = new TreeSet<NlpIntent>();
 
-	protected NlpIntent maxIntent;
-
 	protected final Map<String, List<NlpNamedEntity>> namedEntities = new HashMap<String, List<NlpNamedEntity>>();
 
 	@Override
@@ -52,7 +50,7 @@ public class NlpContextImpl implements NlpContext {
 
 	@Override
 	public NlpIntent getMaxIntent() {
-		return maxIntent;
+		return intents.isEmpty() ? null : intents.first();
 	}
 
 	@Override
@@ -61,12 +59,7 @@ public class NlpContextImpl implements NlpContext {
 	}
 
 	@Override
-	public void setMaxIntent(final NlpIntent maxIntent) {
-		this.maxIntent = maxIntent;
-	}
-
-	@Override
 	public String toString() {
-		return "maxIntent=[" + maxIntent + "]";
+		return "intents=[" + intents + "]";
 	}
 }
