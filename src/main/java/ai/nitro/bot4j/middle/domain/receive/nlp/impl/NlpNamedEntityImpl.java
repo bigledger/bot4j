@@ -19,6 +19,31 @@ public class NlpNamedEntityImpl implements NlpNamedEntity {
 	protected String type;
 
 	@Override
+	public boolean equals(final Object o) {
+		final boolean result;
+
+		if (o == this) {
+			result = true;
+		} else if (!(o instanceof NlpNamedEntity)) {
+			result = false;
+		} else {
+			final NlpNamedEntity otherNlpNamedEntity = (NlpNamedEntity) o;
+
+			if (!otherNlpNamedEntity.getType().equals(type)) {
+				result = false;
+			} else if (!otherNlpNamedEntity.getEntity().equals(entity)) {
+				result = false;
+			} else if (!otherNlpNamedEntity.getConfidence().equals(confidence)) {
+				result = false;
+			} else {
+				result = true;
+			}
+		}
+
+		return result;
+	}
+
+	@Override
 	public Double getConfidence() {
 		return confidence;
 	}
@@ -31,6 +56,11 @@ public class NlpNamedEntityImpl implements NlpNamedEntity {
 	@Override
 	public String getType() {
 		return type;
+	}
+
+	@Override
+	public int hashCode() {
+		return 31 * 17 + type.hashCode();
 	}
 
 	@Override

@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 import ai.nitro.bot4j.middle.domain.receive.nlp.NlpContext;
 import ai.nitro.bot4j.middle.domain.receive.nlp.NlpIntent;
@@ -19,7 +21,7 @@ import ai.nitro.bot4j.middle.domain.receive.nlp.NlpNamedEntity;
 
 public class NlpContextImpl implements NlpContext {
 
-	protected final List<NlpIntent> intents = new ArrayList<NlpIntent>();
+	protected final SortedSet<NlpIntent> intents = new TreeSet<NlpIntent>();
 
 	protected NlpIntent maxIntent;
 
@@ -44,7 +46,7 @@ public class NlpContextImpl implements NlpContext {
 	}
 
 	@Override
-	public List<NlpIntent> getIntents() {
+	public SortedSet<NlpIntent> getIntents() {
 		return intents;
 	}
 

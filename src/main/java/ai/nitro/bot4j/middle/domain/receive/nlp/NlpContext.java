@@ -10,6 +10,7 @@ package ai.nitro.bot4j.middle.domain.receive.nlp;
 
 import java.util.List;
 import java.util.Map;
+import java.util.SortedSet;
 
 public interface NlpContext {
 
@@ -17,7 +18,7 @@ public interface NlpContext {
 
 	void addNamedEntity(NlpNamedEntity namedEntity);
 
-	List<NlpIntent> getIntents();
+	SortedSet<NlpIntent> getIntents();
 
 	NlpIntent getMaxIntent();
 

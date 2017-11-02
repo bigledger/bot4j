@@ -10,11 +10,39 @@ package ai.nitro.bot4j.middle.domain.receive.nlp.impl;
 
 import ai.nitro.bot4j.middle.domain.receive.nlp.NlpIntent;
 
-public class NlpIntentImpl implements NlpIntent {
+public class NlpIntentImpl implements NlpIntent, Comparable<NlpIntent> {
 
 	protected Double confidence;
 
 	protected String name;
+
+	@Override
+	public int compareTo(final NlpIntent otherNlpIntent) {
+		return otherNlpIntent.getConfidence().compareTo(confidence);
+	}
+
+	@Override
+	public boolean equals(final Object o) {
+		final boolean result;
+
+		if (o == this) {
+			result = true;
+		} else if (!(o instanceof NlpIntent)) {
+			result = false;
+		} else {
+			final NlpIntent otherNlpIntent = (NlpIntent) o;
+
+			if (!otherNlpIntent.getName().equals(name)) {
+				result = false;
+			} else if (!otherNlpIntent.getConfidence().equals(confidence)) {
+				result = false;
+			} else {
+				result = true;
+			}
+		}
+
+		return result;
+	}
 
 	@Override
 	public Double getConfidence() {
@@ -24,6 +52,11 @@ public class NlpIntentImpl implements NlpIntent {
 	@Override
 	public String getName() {
 		return name;
+	}
+
+	@Override
+	public int hashCode() {
+		return 31 * 17 + name.hashCode();
 	}
 
 	@Override
