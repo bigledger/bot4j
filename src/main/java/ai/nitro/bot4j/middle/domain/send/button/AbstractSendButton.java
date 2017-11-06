@@ -11,7 +11,7 @@ package ai.nitro.bot4j.middle.domain.send.button;
 public abstract class AbstractSendButton {
 
 	public enum Type {
-		POSTBACK_BUTTON, WEB_BUTTON
+		IFRAME_BUTTON, POSTBACK_BUTTON, WEB_BUTTON
 	}
 
 	protected String title;
