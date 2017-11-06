@@ -33,14 +33,14 @@ public class AlexaReceiveMessageFactoryImpl implements AlexaReceiveMessageFactor
 
 		final NlpIntent nlpIntent = new NlpIntentImpl();
 		nlpIntent.setConfidence(1.0);
-		nlpIntent.setName(intent.getName());
+		nlpIntent.setName(intent.getName().toLowerCase());
 		result.addIntent(nlpIntent);
 
 		for (final Entry<String, Slot> entry : intent.getSlots().entrySet()) {
 			final Slot value = entry.getValue();
 
 			final NlpNamedEntity nlpNamedEntity = new NlpNamedEntityImpl();
-			nlpNamedEntity.setType(entry.getKey());
+			nlpNamedEntity.setType(entry.getKey().toLowerCase());
 			nlpNamedEntity.setConfidence(1.0);
 			nlpNamedEntity.setEntity(value.getValue());
 
