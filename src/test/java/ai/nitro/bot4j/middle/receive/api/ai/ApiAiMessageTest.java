@@ -16,7 +16,7 @@ import ai.nitro.bot4j.middle.domain.receive.payload.TextReceivePayload;
 
 public class ApiAiMessageTest extends TestBase {
 
-	private static final String intentName = "intentName";
+	private static final String intentName = "intentname";
 
 	private static final String messageId = "123";
 

@@ -30,14 +30,14 @@ public class ApiAiReceiveMessageFactoryImpl implements ApiAiReceiveMessageFactor
 		if (aiResponseResult.getMetadata() != null) {
 			final NlpIntent nlpIntent = new NlpIntentImpl();
 			nlpIntent.setConfidence(1.0);
-			nlpIntent.setName(aiResponseResult.getMetadata().getIntentName());
+			nlpIntent.setName(aiResponseResult.getMetadata().getIntentName().toLowerCase());
 			result.addIntent(nlpIntent);
 		}
 
 		if (aiResponseResult.getParameters() != null) {
 			for (final Entry<String, JsonElement> entry : aiResponseResult.getParameters().entrySet()) {
 				final NlpNamedEntity nlpNamedEntity = new NlpNamedEntityImpl();
-				nlpNamedEntity.setType(entry.getKey());
+				nlpNamedEntity.setType(entry.getKey().toLowerCase());
 				nlpNamedEntity.setConfidence(1.0);
 				nlpNamedEntity.setEntity(entry.getValue().toString());
 
