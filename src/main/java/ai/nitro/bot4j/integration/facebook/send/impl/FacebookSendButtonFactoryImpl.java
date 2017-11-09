@@ -19,7 +19,7 @@ import com.restfb.types.send.WebviewHeightEnum;
 import ai.nitro.bot4j.integration.facebook.send.FacebookSendButtonFactory;
 import ai.nitro.bot4j.middle.domain.send.button.AbstractSendButton;
 import ai.nitro.bot4j.middle.domain.send.button.AbstractSendButton.Type;
-import ai.nitro.bot4j.middle.domain.send.button.IFrameSendButton;
+import ai.nitro.bot4j.middle.domain.send.button.FormSendButton;
 import ai.nitro.bot4j.middle.domain.send.button.PostbackSendButton;
 import ai.nitro.bot4j.middle.domain.send.button.WebSendButton;
 import ai.nitro.bot4j.middle.payload.PostbackPayload;
@@ -43,8 +43,8 @@ public class FacebookSendButtonFactoryImpl implements FacebookSendButtonFactory 
 		case POSTBACK_BUTTON:
 			result = createPostbackButton((PostbackSendButton) abstractSendButton);
 			break;
-		case IFRAME_BUTTON:
-			result = createIFrameButton((IFrameSendButton) abstractSendButton);
+		case FORM_BUTTON:
+			result = createIFrameButton((FormSendButton) abstractSendButton);
 			break;
 		default:
 			result = null;
@@ -53,7 +53,7 @@ public class FacebookSendButtonFactoryImpl implements FacebookSendButtonFactory 
 		return result;
 	}
 
-	protected AbstractButton createIFrameButton(final IFrameSendButton iFrameSendButton) {
+	protected AbstractButton createIFrameButton(final FormSendButton iFrameSendButton) {
 		final String title = iFrameSendButton.getTitle();
 		final String webUrl = iFrameSendButton.getUrl();
 		final WebButton result = new WebButton(title, webUrl);

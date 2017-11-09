@@ -8,12 +8,12 @@
 
 package ai.nitro.bot4j.middle.domain.send.button;
 
-public class IFrameSendButton extends AbstractSendButton {
+public class FormSendButton extends AbstractSendButton {
 
 	protected String url;
 
-	public IFrameSendButton() {
-		super(Type.IFRAME_BUTTON);
+	public FormSendButton() {
+		super(Type.FORM_BUTTON);
 	}
 
 	public String getUrl() {
