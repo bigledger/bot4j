@@ -13,7 +13,7 @@ import ai.nitro.bot4j.middle.domain.receive.ReceiveMessage;
 public abstract class AbstractReceivePayload {
 
 	public enum Type {
-		COORDINATE, DATA, DELIVERY_NOTIFICATION, POSTBACK, QUICK_REPLY, READ_NOTIFICATION, TEXT, URL_ATTACHMENT
+		COORDINATE, DATA, DELIVERY_NOTIFICATION, FORM, POSTBACK, QUICK_REPLY, READ_NOTIFICATION, TEXT, URL_ATTACHMENT
 	}
 
 	protected transient ReceiveMessage receiveMessage;

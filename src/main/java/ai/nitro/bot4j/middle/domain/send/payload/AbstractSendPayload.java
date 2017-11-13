@@ -13,7 +13,7 @@ import ai.nitro.bot4j.middle.domain.send.SendMessage;
 public abstract class AbstractSendPayload {
 
 	public enum Type {
-		BUBBLE, BUTTONS, CAMERA, IMAGE, LIST, QUICK_REPLIES, TEXT, TYPING, VIDEO
+		BUBBLE, BUTTONS, CAMERA, FORM, IMAGE, LIST, QUICK_REPLIES, TEXT, TYPING, VIDEO
 	}
 
 	protected transient SendMessage sendMessage;
