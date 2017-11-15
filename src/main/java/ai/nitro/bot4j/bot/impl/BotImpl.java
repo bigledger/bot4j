@@ -19,6 +19,7 @@ import ai.nitro.bot4j.middle.domain.receive.payload.AbstractReceivePayload.Type;
 import ai.nitro.bot4j.middle.domain.receive.payload.CoordinateReceivePayload;
 import ai.nitro.bot4j.middle.domain.receive.payload.DataReceivePayload;
 import ai.nitro.bot4j.middle.domain.receive.payload.DeliveryNotificationReceivePayload;
+import ai.nitro.bot4j.middle.domain.receive.payload.FormReceivePayload;
 import ai.nitro.bot4j.middle.domain.receive.payload.PostbackReceivePayload;
 import ai.nitro.bot4j.middle.domain.receive.payload.QuickReplyReceivePayload;
 import ai.nitro.bot4j.middle.domain.receive.payload.ReadNotificationReceivePayload;
@@ -76,6 +77,10 @@ public class BotImpl implements Bot {
 
 	}
 
+	protected void onReceiveForm(final FormReceivePayload payload) {
+
+	}
+
 	protected void onReceivePayload(final AbstractReceivePayload payload) throws Exception {
 		final Type type = payload.getType();
 
@@ -88,6 +93,9 @@ public class BotImpl implements Bot {
 			break;
 		case DELIVERY_NOTIFICATION:
 			onReceiveDeliveryNotification((DeliveryNotificationReceivePayload) payload);
+			break;
+		case FORM:
+			onReceiveForm((FormReceivePayload) payload);
 			break;
 		case POSTBACK:
 			onReceivePostback((PostbackReceivePayload) payload);

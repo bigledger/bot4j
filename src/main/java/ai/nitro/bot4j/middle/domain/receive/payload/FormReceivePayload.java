@@ -25,6 +25,19 @@ public class FormReceivePayload extends AbstractReceivePayload {
 		return form;
 	}
 
+	public String getFormParam(final String key) {
+		String result = null;
+
+		for (final FormParam formParam : form) {
+			if (key.equals(formParam.getKey())) {
+				result = formParam.getValue();
+				break;
+			}
+		}
+
+		return result;
+	}
+
 	public void setForm(final List<FormParam> form) {
 		this.form = form;
 	}
