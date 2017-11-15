@@ -116,4 +116,9 @@ public class Session implements HttpSession {
 	public void setMaxInactiveInterval(final int interval) {
 		throw new java.lang.UnsupportedOperationException();
 	}
+
+	@Override
+	public String toString() {
+		return values.toString();
+	}
 }
