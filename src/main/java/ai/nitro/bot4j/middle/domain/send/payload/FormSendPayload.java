@@ -10,7 +10,7 @@ public class FormSendPayload extends AbstractSendPayload {
 
 	protected final List<FormElement> formElements = new ArrayList<FormElement>();
 
-	protected String text;
+	protected String title;
 
 	protected String url;
 
@@ -30,16 +30,16 @@ public class FormSendPayload extends AbstractSendPayload {
 		return formElements;
 	}
 
-	public String getText() {
-		return text;
+	public String getTitle() {
+		return title;
 	}
 
 	public String getUrl() {
 		return url;
 	}
 
-	public void setText(final String text) {
-		this.text = text;
+	public void setTitle(final String text) {
+		this.title = text;
 	}
 
 	public void setUrl(final String url) {
