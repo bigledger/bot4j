@@ -62,7 +62,7 @@ public class Bot4jSpeechletImpl implements Bot4jSpeechlet {
 		speech.setText("Bye");
 
 		final SpeechletResponse result = SpeechletResponse.newTellResponse(speech);
-		result.setShouldEndSession(true);
+		result.setNullableShouldEndSession(true);
 
 		return result;
 	}
@@ -72,7 +72,7 @@ public class Bot4jSpeechletImpl implements Bot4jSpeechlet {
 		speech.setText("Ok");
 
 		final SpeechletResponse result = SpeechletResponse.newTellResponse(speech);
-		result.setShouldEndSession(false);
+		result.setNullableShouldEndSession(false);
 
 		return result;
 	}
@@ -133,7 +133,7 @@ public class Bot4jSpeechletImpl implements Bot4jSpeechlet {
 			result = SpeechletResponse.newTellResponse(speech, card);
 		}
 
-		result.setShouldEndSession(alexaMessageSender.getShouldEndSession());
+		result.setNullableShouldEndSession(alexaMessageSender.getShouldEndSession());
 
 		return result;
 	}
@@ -156,7 +156,7 @@ public class Bot4jSpeechletImpl implements Bot4jSpeechlet {
 		speech.setText("Bye");
 
 		final SpeechletResponse result = SpeechletResponse.newTellResponse(speech);
-		result.setShouldEndSession(true);
+		result.setNullableShouldEndSession(true);
 
 		return result;
 	}
