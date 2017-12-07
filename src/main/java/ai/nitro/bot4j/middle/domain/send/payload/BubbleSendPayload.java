@@ -13,13 +13,14 @@ import java.util.List;
 
 import ai.nitro.bot4j.middle.domain.send.SendMessage;
 import ai.nitro.bot4j.middle.domain.send.bubble.Bubble;
+import ai.nitro.bot4j.middle.domain.send.payload.type.SendPayloadTypeEnum;
 
 public class BubbleSendPayload extends AbstractSendPayload {
 
 	protected List<Bubble> bubbles = new ArrayList<Bubble>();
 
 	public BubbleSendPayload(final SendMessage sendMessage) {
-		super(Type.BUBBLE, sendMessage);
+		super(SendPayloadTypeEnum.BUBBLE, sendMessage);
 	}
 
 	public void addBubble(final Bubble bubble) {

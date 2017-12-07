@@ -21,8 +21,8 @@ import ai.nitro.bot4j.integration.slack.send.SlackSendAttachmentFactory;
 import ai.nitro.bot4j.middle.domain.send.SendMessage;
 import ai.nitro.bot4j.middle.domain.send.bubble.Bubble;
 import ai.nitro.bot4j.middle.domain.send.button.AbstractSendButton;
-import ai.nitro.bot4j.middle.domain.send.payload.AbstractSendPayload.Type;
 import ai.nitro.bot4j.middle.domain.send.payload.BubbleSendPayload;
+import ai.nitro.bot4j.middle.domain.send.payload.type.SendPayloadTypeEnum;
 
 @Singleton
 public class BubbleRuleImpl extends AbstractSlackSendRuleImpl {
@@ -38,7 +38,7 @@ public class BubbleRuleImpl extends AbstractSlackSendRuleImpl {
 
 	@Override
 	public boolean applies(final SendMessage sendMessage) {
-		return hasPayloadType(Type.BUBBLE, sendMessage);
+		return hasPayloadType(SendPayloadTypeEnum.BUBBLE, sendMessage);
 	}
 
 	@Override

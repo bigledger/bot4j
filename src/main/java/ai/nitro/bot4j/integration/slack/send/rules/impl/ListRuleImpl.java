@@ -21,8 +21,8 @@ import ai.nitro.bot4j.integration.slack.send.SlackSendAttachmentFactory;
 import ai.nitro.bot4j.middle.domain.send.SendMessage;
 import ai.nitro.bot4j.middle.domain.send.button.AbstractSendButton;
 import ai.nitro.bot4j.middle.domain.send.list.ListSendElement;
-import ai.nitro.bot4j.middle.domain.send.payload.AbstractSendPayload.Type;
 import ai.nitro.bot4j.middle.domain.send.payload.ListSendPayload;
+import ai.nitro.bot4j.middle.domain.send.payload.type.SendPayloadTypeEnum;
 
 @Singleton
 public class ListRuleImpl extends AbstractSlackSendRuleImpl {
@@ -63,7 +63,7 @@ public class ListRuleImpl extends AbstractSlackSendRuleImpl {
 
 	@Override
 	public boolean applies(final SendMessage sendMessage) {
-		return hasPayloadType(Type.LIST, sendMessage);
+		return hasPayloadType(SendPayloadTypeEnum.LIST, sendMessage);
 	}
 
 	@Override

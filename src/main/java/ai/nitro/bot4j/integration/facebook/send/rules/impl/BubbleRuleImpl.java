@@ -20,8 +20,8 @@ import ai.nitro.bot4j.integration.facebook.send.FacebookSendButtonFactory;
 import ai.nitro.bot4j.middle.domain.send.SendMessage;
 import ai.nitro.bot4j.middle.domain.send.bubble.Bubble;
 import ai.nitro.bot4j.middle.domain.send.button.AbstractSendButton;
-import ai.nitro.bot4j.middle.domain.send.payload.AbstractSendPayload.Type;
 import ai.nitro.bot4j.middle.domain.send.payload.BubbleSendPayload;
+import ai.nitro.bot4j.middle.domain.send.payload.type.SendPayloadTypeEnum;
 
 @Singleton
 public class BubbleRuleImpl extends AbstractFacebookSendRuleImpl {
@@ -31,7 +31,7 @@ public class BubbleRuleImpl extends AbstractFacebookSendRuleImpl {
 
 	@Override
 	public boolean applies(final SendMessage sendMessage) {
-		return hasPayloadType(Type.BUBBLE, sendMessage);
+		return hasPayloadType(SendPayloadTypeEnum.BUBBLE, sendMessage);
 	}
 
 	@Override

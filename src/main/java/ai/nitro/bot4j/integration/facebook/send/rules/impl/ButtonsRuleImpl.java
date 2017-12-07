@@ -19,8 +19,8 @@ import com.restfb.types.send.TemplateAttachment;
 import ai.nitro.bot4j.integration.facebook.send.FacebookSendButtonFactory;
 import ai.nitro.bot4j.middle.domain.send.SendMessage;
 import ai.nitro.bot4j.middle.domain.send.button.AbstractSendButton;
-import ai.nitro.bot4j.middle.domain.send.payload.AbstractSendPayload.Type;
 import ai.nitro.bot4j.middle.domain.send.payload.ButtonsSendPayload;
+import ai.nitro.bot4j.middle.domain.send.payload.type.SendPayloadTypeEnum;
 
 @Singleton
 public class ButtonsRuleImpl extends AbstractFacebookSendRuleImpl {
@@ -30,7 +30,7 @@ public class ButtonsRuleImpl extends AbstractFacebookSendRuleImpl {
 
 	@Override
 	public boolean applies(final SendMessage sendMessage) {
-		return hasPayloadType(Type.BUTTONS, sendMessage);
+		return hasPayloadType(SendPayloadTypeEnum.BUTTONS, sendMessage);
 	}
 
 	@Override

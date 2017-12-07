@@ -19,6 +19,8 @@ import ai.nitro.bot4j.middle.domain.receive.payload.AbstractReceivePayload;
 
 public class ReceiveMessage extends AbstractMessage {
 
+	protected final Map<String, String> cookies = new HashMap<String, String>();
+
 	protected final Map<String, String[]> params = new HashMap<String, String[]>();
 
 	protected final List<AbstractReceivePayload> payloads = new ArrayList<AbstractReceivePayload>();
@@ -34,6 +36,10 @@ public class ReceiveMessage extends AbstractMessage {
 		for (final AbstractReceivePayload payload : payloads) {
 			addPayload(payload);
 		}
+	}
+
+	public Map<String, String> getCookies() {
+		return cookies;
 	}
 
 	public Map<String, String[]> getParams() {

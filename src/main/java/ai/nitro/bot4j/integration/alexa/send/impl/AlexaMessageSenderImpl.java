@@ -20,8 +20,9 @@ import ai.nitro.bot4j.integration.alexa.send.AlexaMessageSender;
 import ai.nitro.bot4j.middle.domain.Platform;
 import ai.nitro.bot4j.middle.domain.send.SendMessage;
 import ai.nitro.bot4j.middle.domain.send.payload.AbstractSendPayload;
-import ai.nitro.bot4j.middle.domain.send.payload.AbstractSendPayload.Type;
 import ai.nitro.bot4j.middle.domain.send.payload.TextSendPayload;
+import ai.nitro.bot4j.middle.domain.send.payload.type.SendPayloadType;
+import ai.nitro.bot4j.middle.domain.send.payload.type.SendPayloadTypeEnum;
 
 @Singleton
 public class AlexaMessageSenderImpl implements AlexaMessageSender {
@@ -78,9 +79,9 @@ public class AlexaMessageSenderImpl implements AlexaMessageSender {
 		boolean result = false;
 
 		final AbstractSendPayload sendPayload = sendMessage.getPayload();
-		final Type type = sendPayload.getType();
+		final SendPayloadType sendPayloadType = sendPayload.getSendPayloadType();
 
-		if (Type.TEXT.equals(type)) {
+		if (SendPayloadTypeEnum.TEXT.equals(sendPayloadType)) {
 			final TextSendPayload textSendPayload = (TextSendPayload) sendPayload;
 			final String text = textSendPayload.getText();
 
@@ -98,7 +99,7 @@ public class AlexaMessageSenderImpl implements AlexaMessageSender {
 
 			result = true;
 		} else {
-			LOG.warn("ignoring send payload with type {}", type);
+			LOG.warn("ignoring send payload with type {}", sendPayloadType);
 		}
 
 		return result;

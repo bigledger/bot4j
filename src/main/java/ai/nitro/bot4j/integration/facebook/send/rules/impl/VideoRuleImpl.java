@@ -15,15 +15,15 @@ import com.restfb.types.send.MediaAttachment;
 import com.restfb.types.send.Message;
 
 import ai.nitro.bot4j.middle.domain.send.SendMessage;
-import ai.nitro.bot4j.middle.domain.send.payload.AbstractSendPayload.Type;
 import ai.nitro.bot4j.middle.domain.send.payload.VideoSendPayload;
+import ai.nitro.bot4j.middle.domain.send.payload.type.SendPayloadTypeEnum;
 
 @Singleton
 public class VideoRuleImpl extends AbstractFacebookSendRuleImpl {
 
 	@Override
 	public boolean applies(final SendMessage sendMessage) {
-		return hasPayloadType(Type.VIDEO, sendMessage);
+		return hasPayloadType(SendPayloadTypeEnum.VIDEO, sendMessage);
 	}
 
 	@Override

@@ -53,5 +53,4 @@ public class MiddlewareModule extends AbstractModule {
 		platformMessageSenderBinder.addBinding(AlexaPlatformEnum.ALEXA).to(AlexaMessageSenderImpl.class);
 		platformMessageSenderBinder.addBinding(ApiAiPlatformEnum.APIAI).to(ApiAiMessageSenderImpl.class);
 	}
-
 }

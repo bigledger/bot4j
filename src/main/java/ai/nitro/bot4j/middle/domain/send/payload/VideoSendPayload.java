@@ -9,6 +9,7 @@
 package ai.nitro.bot4j.middle.domain.send.payload;
 
 import ai.nitro.bot4j.middle.domain.send.SendMessage;
+import ai.nitro.bot4j.middle.domain.send.payload.type.SendPayloadTypeEnum;
 
 public class VideoSendPayload extends AbstractSendPayload {
 
@@ -17,7 +18,7 @@ public class VideoSendPayload extends AbstractSendPayload {
 	protected String videoUrl;
 
 	public VideoSendPayload(final SendMessage sendMessage) {
-		super(Type.VIDEO, sendMessage);
+		super(SendPayloadTypeEnum.VIDEO, sendMessage);
 	}
 
 	public String getTitle() {

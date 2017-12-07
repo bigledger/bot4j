@@ -14,6 +14,7 @@ import java.util.List;
 import ai.nitro.bot4j.middle.domain.send.SendMessage;
 import ai.nitro.bot4j.middle.domain.send.button.AbstractSendButton;
 import ai.nitro.bot4j.middle.domain.send.list.ListSendElement;
+import ai.nitro.bot4j.middle.domain.send.payload.type.SendPayloadTypeEnum;
 
 public class ListSendPayload extends AbstractSendPayload {
 
@@ -30,7 +31,7 @@ public class ListSendPayload extends AbstractSendPayload {
 	protected String title;
 
 	public ListSendPayload(final SendMessage sendMessage) {
-		super(Type.LIST, sendMessage);
+		super(SendPayloadTypeEnum.LIST, sendMessage);
 	}
 
 	public void addListElement(final ListSendElement listElement) {

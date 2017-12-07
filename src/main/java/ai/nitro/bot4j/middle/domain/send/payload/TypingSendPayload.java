@@ -9,6 +9,7 @@
 package ai.nitro.bot4j.middle.domain.send.payload;
 
 import ai.nitro.bot4j.middle.domain.send.SendMessage;
+import ai.nitro.bot4j.middle.domain.send.payload.type.SendPayloadTypeEnum;
 
 public class TypingSendPayload extends AbstractSendPayload {
 
@@ -19,7 +20,7 @@ public class TypingSendPayload extends AbstractSendPayload {
 	protected Typing typing;
 
 	public TypingSendPayload(final SendMessage sendMessage) {
-		super(Type.TYPING, sendMessage);
+		super(SendPayloadTypeEnum.TYPING, sendMessage);
 	}
 
 	public Typing getTyping() {

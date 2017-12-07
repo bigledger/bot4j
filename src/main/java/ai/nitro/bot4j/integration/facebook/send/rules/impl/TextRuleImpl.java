@@ -14,15 +14,15 @@ import com.restfb.types.send.IdMessageRecipient;
 import com.restfb.types.send.Message;
 
 import ai.nitro.bot4j.middle.domain.send.SendMessage;
-import ai.nitro.bot4j.middle.domain.send.payload.AbstractSendPayload.Type;
 import ai.nitro.bot4j.middle.domain.send.payload.TextSendPayload;
+import ai.nitro.bot4j.middle.domain.send.payload.type.SendPayloadTypeEnum;
 
 @Singleton
 public class TextRuleImpl extends AbstractFacebookSendRuleImpl {
 
 	@Override
 	public boolean applies(final SendMessage sendMessage) {
-		return hasPayloadType(Type.TEXT, sendMessage);
+		return hasPayloadType(SendPayloadTypeEnum.TEXT, sendMessage);
 	}
 
 	@Override

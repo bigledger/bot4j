@@ -20,8 +20,8 @@ import com.github.seratch.jslack.api.webhook.Payload;
 import ai.nitro.bot4j.integration.slack.send.SlackSendAttachmentFactory;
 import ai.nitro.bot4j.middle.domain.send.SendMessage;
 import ai.nitro.bot4j.middle.domain.send.button.AbstractSendButton;
-import ai.nitro.bot4j.middle.domain.send.payload.AbstractSendPayload.Type;
 import ai.nitro.bot4j.middle.domain.send.payload.ButtonsSendPayload;
+import ai.nitro.bot4j.middle.domain.send.payload.type.SendPayloadTypeEnum;
 
 @Singleton
 public class ButtonsRuleImpl extends AbstractSlackSendRuleImpl {
@@ -31,7 +31,7 @@ public class ButtonsRuleImpl extends AbstractSlackSendRuleImpl {
 
 	@Override
 	public boolean applies(final SendMessage sendMessage) {
-		return hasPayloadType(Type.BUTTONS, sendMessage);
+		return hasPayloadType(SendPayloadTypeEnum.BUTTONS, sendMessage);
 	}
 
 	@Override

@@ -17,15 +17,15 @@ import com.github.seratch.jslack.api.webhook.Payload;
 import com.google.common.collect.Lists;
 
 import ai.nitro.bot4j.middle.domain.send.SendMessage;
-import ai.nitro.bot4j.middle.domain.send.payload.AbstractSendPayload.Type;
 import ai.nitro.bot4j.middle.domain.send.payload.ImageSendPayload;
+import ai.nitro.bot4j.middle.domain.send.payload.type.SendPayloadTypeEnum;
 
 @Singleton
 public class ImageRuleImpl extends AbstractSlackSendRuleImpl {
 
 	@Override
 	public boolean applies(final SendMessage sendMessage) {
-		return hasPayloadType(Type.IMAGE, sendMessage);
+		return hasPayloadType(SendPayloadTypeEnum.IMAGE, sendMessage);
 	}
 
 	@Override

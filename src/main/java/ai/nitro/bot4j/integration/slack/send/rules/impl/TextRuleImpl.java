@@ -13,15 +13,15 @@ import javax.inject.Singleton;
 import com.github.seratch.jslack.api.webhook.Payload;
 
 import ai.nitro.bot4j.middle.domain.send.SendMessage;
-import ai.nitro.bot4j.middle.domain.send.payload.AbstractSendPayload.Type;
 import ai.nitro.bot4j.middle.domain.send.payload.TextSendPayload;
+import ai.nitro.bot4j.middle.domain.send.payload.type.SendPayloadTypeEnum;
 
 @Singleton
 public class TextRuleImpl extends AbstractSlackSendRuleImpl {
 
 	@Override
 	public boolean applies(final SendMessage sendMessage) {
-		return hasPayloadType(Type.TEXT, sendMessage);
+		return hasPayloadType(SendPayloadTypeEnum.TEXT, sendMessage);
 	}
 
 	@Override

@@ -9,22 +9,19 @@
 package ai.nitro.bot4j.middle.domain.send.payload;
 
 import ai.nitro.bot4j.middle.domain.send.SendMessage;
+import ai.nitro.bot4j.middle.domain.send.payload.type.SendPayloadType;
 
 public abstract class AbstractSendPayload {
 
-	public enum Type {
-		BUBBLE, BUTTONS, CAMERA, FORM, IMAGE, LIST, QUICK_REPLIES, TEXT, TYPING, VIDEO
-	}
-
 	protected transient SendMessage sendMessage;
 
-	protected final Type type;
+	protected final SendPayloadType sendPayloadType;
 
-	public AbstractSendPayload(final Type type, final SendMessage sendMessage) {
-		assert type != null;
+	public AbstractSendPayload(final SendPayloadType sendPayloadType, final SendMessage sendMessage) {
+		assert sendPayloadType != null;
 		assert sendMessage != null;
 
-		this.type = type;
+		this.sendPayloadType = sendPayloadType;
 		this.sendMessage = sendMessage;
 	}
 
@@ -32,8 +29,8 @@ public abstract class AbstractSendPayload {
 		return sendMessage;
 	}
 
-	public Type getType() {
-		return type;
+	public SendPayloadType getSendPayloadType() {
+		return sendPayloadType;
 	}
 
 	public void setSendMessage(final SendMessage sendMessage) {
