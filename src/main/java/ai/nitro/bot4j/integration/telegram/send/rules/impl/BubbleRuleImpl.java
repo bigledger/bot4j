@@ -25,8 +25,8 @@ import ai.nitro.bot4j.integration.telegram.send.TelegramSendInlineKeyboardFactor
 import ai.nitro.bot4j.middle.domain.send.SendMessage;
 import ai.nitro.bot4j.middle.domain.send.bubble.Bubble;
 import ai.nitro.bot4j.middle.domain.send.button.AbstractSendButton;
-import ai.nitro.bot4j.middle.domain.send.payload.AbstractSendPayload.Type;
 import ai.nitro.bot4j.middle.domain.send.payload.BubbleSendPayload;
+import ai.nitro.bot4j.middle.domain.send.payload.type.SendPayloadTypeEnum;
 
 @Singleton
 public class BubbleRuleImpl extends AbstractTelegramSendRuleImpl {
@@ -36,7 +36,7 @@ public class BubbleRuleImpl extends AbstractTelegramSendRuleImpl {
 
 	@Override
 	public boolean applies(final SendMessage sendMessage) {
-		return hasPayloadType(Type.BUBBLE, sendMessage);
+		return hasPayloadType(SendPayloadTypeEnum.BUBBLE, sendMessage);
 	}
 
 	@Override

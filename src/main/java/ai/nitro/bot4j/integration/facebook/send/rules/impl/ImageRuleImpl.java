@@ -15,15 +15,15 @@ import com.restfb.types.send.MediaAttachment;
 import com.restfb.types.send.Message;
 
 import ai.nitro.bot4j.middle.domain.send.SendMessage;
-import ai.nitro.bot4j.middle.domain.send.payload.AbstractSendPayload.Type;
 import ai.nitro.bot4j.middle.domain.send.payload.ImageSendPayload;
+import ai.nitro.bot4j.middle.domain.send.payload.type.SendPayloadTypeEnum;
 
 @Singleton
 public class ImageRuleImpl extends AbstractFacebookSendRuleImpl {
 
 	@Override
 	public boolean applies(final SendMessage sendMessage) {
-		return hasPayloadType(Type.IMAGE, sendMessage);
+		return hasPayloadType(SendPayloadTypeEnum.IMAGE, sendMessage);
 	}
 
 	@Override

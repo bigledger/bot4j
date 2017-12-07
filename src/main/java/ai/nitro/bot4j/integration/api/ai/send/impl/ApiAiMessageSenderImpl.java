@@ -11,8 +11,9 @@ import ai.nitro.bot4j.integration.api.ai.send.ApiAiMessageSender;
 import ai.nitro.bot4j.middle.domain.Platform;
 import ai.nitro.bot4j.middle.domain.send.SendMessage;
 import ai.nitro.bot4j.middle.domain.send.payload.AbstractSendPayload;
-import ai.nitro.bot4j.middle.domain.send.payload.AbstractSendPayload.Type;
 import ai.nitro.bot4j.middle.domain.send.payload.TextSendPayload;
+import ai.nitro.bot4j.middle.domain.send.payload.type.SendPayloadType;
+import ai.nitro.bot4j.middle.domain.send.payload.type.SendPayloadTypeEnum;
 
 @Singleton
 public class ApiAiMessageSenderImpl implements ApiAiMessageSender {
@@ -38,9 +39,9 @@ public class ApiAiMessageSenderImpl implements ApiAiMessageSender {
 		boolean result = false;
 
 		final AbstractSendPayload sendPayload = sendMessage.getPayload();
-		final Type type = sendPayload.getType();
+		final SendPayloadType sendPayloadType = sendPayload.getSendPayloadType();
 
-		if (Type.TEXT.equals(type)) {
+		if (SendPayloadTypeEnum.TEXT.equals(sendPayloadType)) {
 			final TextSendPayload textSendPayload = (TextSendPayload) sendPayload;
 			final String text = textSendPayload.getText();
 
@@ -51,7 +52,7 @@ public class ApiAiMessageSenderImpl implements ApiAiMessageSender {
 
 			result = true;
 		} else {
-			LOG.warn("ignoring send payload with type {}", type);
+			LOG.warn("ignoring send payload with type {}", sendPayloadType);
 		}
 
 		return result;

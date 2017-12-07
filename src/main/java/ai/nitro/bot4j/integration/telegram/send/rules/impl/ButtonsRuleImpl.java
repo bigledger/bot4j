@@ -23,8 +23,8 @@ import com.pengrad.telegrambot.model.request.ParseMode;
 import ai.nitro.bot4j.integration.telegram.send.TelegramSendInlineKeyboardFactory;
 import ai.nitro.bot4j.middle.domain.send.SendMessage;
 import ai.nitro.bot4j.middle.domain.send.button.AbstractSendButton;
-import ai.nitro.bot4j.middle.domain.send.payload.AbstractSendPayload.Type;
 import ai.nitro.bot4j.middle.domain.send.payload.ButtonsSendPayload;
+import ai.nitro.bot4j.middle.domain.send.payload.type.SendPayloadTypeEnum;
 
 @Singleton
 public class ButtonsRuleImpl extends AbstractTelegramSendRuleImpl {
@@ -34,7 +34,7 @@ public class ButtonsRuleImpl extends AbstractTelegramSendRuleImpl {
 
 	@Override
 	public boolean applies(final SendMessage sendMessage) {
-		return hasPayloadType(Type.BUTTONS, sendMessage);
+		return hasPayloadType(SendPayloadTypeEnum.BUTTONS, sendMessage);
 	}
 
 	@Override

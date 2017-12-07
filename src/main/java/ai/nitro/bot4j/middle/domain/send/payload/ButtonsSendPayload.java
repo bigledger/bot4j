@@ -13,6 +13,7 @@ import java.util.List;
 
 import ai.nitro.bot4j.middle.domain.send.SendMessage;
 import ai.nitro.bot4j.middle.domain.send.button.AbstractSendButton;
+import ai.nitro.bot4j.middle.domain.send.payload.type.SendPayloadTypeEnum;
 
 public class ButtonsSendPayload extends AbstractSendPayload {
 
@@ -21,7 +22,7 @@ public class ButtonsSendPayload extends AbstractSendPayload {
 	protected String title;
 
 	public ButtonsSendPayload(final SendMessage sendMessage) {
-		super(Type.BUTTONS, sendMessage);
+		super(SendPayloadTypeEnum.BUTTONS, sendMessage);
 	}
 
 	public void addButton(final AbstractSendButton button) {

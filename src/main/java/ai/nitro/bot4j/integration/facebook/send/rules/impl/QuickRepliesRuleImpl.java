@@ -17,8 +17,8 @@ import com.restfb.types.send.IdMessageRecipient;
 import com.restfb.types.send.Message;
 
 import ai.nitro.bot4j.middle.domain.send.SendMessage;
-import ai.nitro.bot4j.middle.domain.send.payload.AbstractSendPayload.Type;
 import ai.nitro.bot4j.middle.domain.send.payload.QuickRepliesSendPayload;
+import ai.nitro.bot4j.middle.domain.send.payload.type.SendPayloadTypeEnum;
 import ai.nitro.bot4j.middle.domain.send.quickreply.QuickReply;
 import ai.nitro.bot4j.middle.domain.send.quickreply.QuickReply.ContentType;
 
@@ -29,7 +29,7 @@ public class QuickRepliesRuleImpl extends AbstractFacebookSendRuleImpl {
 
 	@Override
 	public boolean applies(final SendMessage sendMessage) {
-		return hasPayloadType(Type.QUICK_REPLIES, sendMessage);
+		return hasPayloadType(SendPayloadTypeEnum.QUICK_REPLIES, sendMessage);
 	}
 
 	@Override

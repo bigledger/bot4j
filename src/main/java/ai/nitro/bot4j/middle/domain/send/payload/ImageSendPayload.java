@@ -9,6 +9,7 @@
 package ai.nitro.bot4j.middle.domain.send.payload;
 
 import ai.nitro.bot4j.middle.domain.send.SendMessage;
+import ai.nitro.bot4j.middle.domain.send.payload.type.SendPayloadTypeEnum;
 
 public class ImageSendPayload extends AbstractSendPayload {
 
@@ -17,7 +18,7 @@ public class ImageSendPayload extends AbstractSendPayload {
 	protected String title;
 
 	public ImageSendPayload(final SendMessage sendMessage) {
-		super(Type.IMAGE, sendMessage);
+		super(SendPayloadTypeEnum.IMAGE, sendMessage);
 	}
 
 	public String getImageUrl() {

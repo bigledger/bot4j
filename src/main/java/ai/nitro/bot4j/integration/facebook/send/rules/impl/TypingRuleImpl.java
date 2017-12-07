@@ -14,16 +14,16 @@ import com.restfb.types.send.IdMessageRecipient;
 import com.restfb.types.send.SenderActionEnum;
 
 import ai.nitro.bot4j.middle.domain.send.SendMessage;
-import ai.nitro.bot4j.middle.domain.send.payload.AbstractSendPayload.Type;
 import ai.nitro.bot4j.middle.domain.send.payload.TypingSendPayload;
 import ai.nitro.bot4j.middle.domain.send.payload.TypingSendPayload.Typing;
+import ai.nitro.bot4j.middle.domain.send.payload.type.SendPayloadTypeEnum;
 
 @Singleton
 public class TypingRuleImpl extends AbstractFacebookSendRuleImpl {
 
 	@Override
 	public boolean applies(final SendMessage sendMessage) {
-		return hasPayloadType(Type.TYPING, sendMessage);
+		return hasPayloadType(SendPayloadTypeEnum.TYPING, sendMessage);
 	}
 
 	@Override

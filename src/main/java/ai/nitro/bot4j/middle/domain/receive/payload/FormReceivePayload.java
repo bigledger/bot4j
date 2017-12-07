@@ -17,6 +17,8 @@ public class FormReceivePayload extends AbstractReceivePayload {
 
 	protected List<FormParam> form = new ArrayList<FormParam>();
 
+	protected String name;
+
 	public FormReceivePayload() {
 		super(Type.FORM);
 	}
@@ -38,7 +40,15 @@ public class FormReceivePayload extends AbstractReceivePayload {
 		return result;
 	}
 
+	public String getName() {
+		return name;
+	}
+
 	public void setForm(final List<FormParam> form) {
 		this.form = form;
+	}
+
+	public void setName(final String name) {
+		this.name = name;
 	}
 }

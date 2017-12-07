@@ -27,7 +27,7 @@ import ai.nitro.bot4j.integration.slack.config.SlackConfigService;
 import ai.nitro.bot4j.integration.slack.send.rules.SlackSendRule;
 import ai.nitro.bot4j.middle.domain.send.SendMessage;
 import ai.nitro.bot4j.middle.domain.send.payload.AbstractSendPayload;
-import ai.nitro.bot4j.middle.domain.send.payload.AbstractSendPayload.Type;
+import ai.nitro.bot4j.middle.domain.send.payload.type.SendPayloadType;
 
 @Singleton
 public abstract class AbstractSlackSendRuleImpl implements SlackSendRule {
@@ -65,9 +65,9 @@ public abstract class AbstractSlackSendRuleImpl implements SlackSendRule {
 		}
 	}
 
-	protected boolean hasPayloadType(final Type type, final SendMessage sendMessage) {
+	protected boolean hasPayloadType(final SendPayloadType sendPayloadType, final SendMessage sendMessage) {
 		final AbstractSendPayload payload = sendMessage.getPayload();
-		final boolean result = payload != null && type.equals(payload.getType());
+		final boolean result = payload != null && sendPayloadType.equals(payload.getSendPayloadType());
 		return result;
 	}
 

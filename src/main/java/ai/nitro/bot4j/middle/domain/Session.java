@@ -8,6 +8,8 @@
 
 package ai.nitro.bot4j.middle.domain;
 
+import java.util.ArrayDeque;
+import java.util.Deque;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
@@ -19,6 +21,8 @@ import javax.servlet.http.HttpSessionContext;
 import com.google.common.collect.Iterators;
 
 public class Session implements HttpSession {
+
+	private Deque<Runnable> concernStack = new ArrayDeque<Runnable>();
 
 	protected final long creationTime;
 
@@ -40,6 +44,10 @@ public class Session implements HttpSession {
 	@Override
 	public Enumeration<String> getAttributeNames() {
 		return Iterators.asEnumeration(values.keySet().iterator());
+	}
+
+	public Deque<Runnable> getConcernStack() {
+		return concernStack;
 	}
 
 	@Override
@@ -115,6 +123,10 @@ public class Session implements HttpSession {
 	@Override
 	public void setMaxInactiveInterval(final int interval) {
 		throw new java.lang.UnsupportedOperationException();
+	}
+
+	public void setMethodStack(final Deque<Runnable> concernStack) {
+		this.concernStack = concernStack;
 	}
 
 	@Override

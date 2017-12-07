@@ -21,7 +21,7 @@ import ai.nitro.bot4j.integration.telegram.config.TelegramConfigService;
 import ai.nitro.bot4j.integration.telegram.send.rules.TelegramSendRule;
 import ai.nitro.bot4j.middle.domain.send.SendMessage;
 import ai.nitro.bot4j.middle.domain.send.payload.AbstractSendPayload;
-import ai.nitro.bot4j.middle.domain.send.payload.AbstractSendPayload.Type;
+import ai.nitro.bot4j.middle.domain.send.payload.type.SendPayloadType;
 
 @Singleton
 public abstract class AbstractTelegramSendRuleImpl implements TelegramSendRule {
@@ -38,9 +38,9 @@ public abstract class AbstractTelegramSendRuleImpl implements TelegramSendRule {
 		client.execute(message);
 	}
 
-	protected boolean hasPayloadType(final Type type, final SendMessage sendMessage) {
+	protected boolean hasPayloadType(final SendPayloadType sendPayloadtype, final SendMessage sendMessage) {
 		final AbstractSendPayload payload = sendMessage.getPayload();
-		final boolean result = payload != null && type.equals(payload.getType());
+		final boolean result = payload != null && sendPayloadtype.equals(payload.getSendPayloadType());
 		return result;
 	}
 

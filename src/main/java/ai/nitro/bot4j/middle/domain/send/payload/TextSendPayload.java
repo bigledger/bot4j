@@ -11,6 +11,7 @@ package ai.nitro.bot4j.middle.domain.send.payload;
 import com.amazon.speech.ui.Card;
 
 import ai.nitro.bot4j.middle.domain.send.SendMessage;
+import ai.nitro.bot4j.middle.domain.send.payload.type.SendPayloadTypeEnum;
 
 public class TextSendPayload extends AbstractSendPayload {
 
@@ -21,7 +22,7 @@ public class TextSendPayload extends AbstractSendPayload {
 	protected String text;
 
 	public TextSendPayload(final SendMessage sendMessage) {
-		super(Type.TEXT, sendMessage);
+		super(SendPayloadTypeEnum.TEXT, sendMessage);
 	}
 
 	public Card getAlexaCard() {
