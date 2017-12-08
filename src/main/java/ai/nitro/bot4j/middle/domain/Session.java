@@ -22,7 +22,7 @@ import com.google.common.collect.Iterators;
 
 public class Session implements HttpSession {
 
-	private Deque<Runnable> concernStack = new ArrayDeque<Runnable>();
+	protected Deque<Runnable> concernStack = new ArrayDeque<Runnable>();
 
 	protected final long creationTime;
 
