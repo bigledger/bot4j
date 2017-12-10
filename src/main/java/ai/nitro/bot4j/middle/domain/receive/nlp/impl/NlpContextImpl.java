@@ -23,6 +23,8 @@ public class NlpContextImpl implements NlpContext {
 
 	protected final SortedSet<NlpIntent> intents = new TreeSet<NlpIntent>();
 
+	protected Double maxIntentConfidenceThreshold;
+
 	protected final Map<String, List<NlpNamedEntity>> namedEntities = new HashMap<String, List<NlpNamedEntity>>();
 
 	@Override
@@ -54,8 +56,18 @@ public class NlpContextImpl implements NlpContext {
 	}
 
 	@Override
+	public Double getMaxIntentConfidenceThreshold() {
+		return maxIntentConfidenceThreshold;
+	}
+
+	@Override
 	public Map<String, List<NlpNamedEntity>> getNamedEntities() {
 		return namedEntities;
+	}
+
+	@Override
+	public void setMaxIntentConfidenceThreshold(final Double maxIntentConfidenceThreshold) {
+		this.maxIntentConfidenceThreshold = maxIntentConfidenceThreshold;
 	}
 
 	@Override
