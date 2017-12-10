@@ -30,6 +30,7 @@ public class NlpContextImpl implements NlpContext {
 	@Override
 	public void addIntent(final NlpIntent intent) {
 		intents.add(intent);
+		resetMaxIntentConfidenceThreshold();
 	}
 
 	@Override
@@ -45,6 +46,20 @@ public class NlpContextImpl implements NlpContext {
 		}
 	}
 
+	protected double calculateMaxIntentConfidenceThreshold() {
+		final double result;
+
+		if (intents.isEmpty()) {
+			result = 0.0;
+		} else {
+			final double confidenceSum = intents.stream().map(intent -> intent.getConfidence())
+					.mapToDouble(Double::doubleValue).sum();
+			result = confidenceSum * INTENT_CONFIDENCE_THRESHOLD_FACTOR;
+		}
+
+		return result;
+	}
+
 	@Override
 	public SortedSet<NlpIntent> getIntents() {
 		return intents;
@@ -57,6 +72,10 @@ public class NlpContextImpl implements NlpContext {
 
 	@Override
 	public Double getMaxIntentConfidenceThreshold() {
+		if (maxIntentConfidenceThreshold == null) {
+			maxIntentConfidenceThreshold = calculateMaxIntentConfidenceThreshold();
+		}
+
 		return maxIntentConfidenceThreshold;
 	}
 
@@ -66,8 +85,13 @@ public class NlpContextImpl implements NlpContext {
 	}
 
 	@Override
-	public void setMaxIntentConfidenceThreshold(final Double maxIntentConfidenceThreshold) {
-		this.maxIntentConfidenceThreshold = maxIntentConfidenceThreshold;
+	public void removeIntent(final NlpIntent intent) {
+		intents.remove(intent);
+		resetMaxIntentConfidenceThreshold();
+	}
+
+	protected void resetMaxIntentConfidenceThreshold() {
+		maxIntentConfidenceThreshold = null;
 	}
 
 	@Override

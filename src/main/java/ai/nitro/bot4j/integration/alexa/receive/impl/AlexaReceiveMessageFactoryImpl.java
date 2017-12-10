@@ -30,7 +30,6 @@ public class AlexaReceiveMessageFactoryImpl implements AlexaReceiveMessageFactor
 
 	protected NlpContext createNlpContext(final Intent intent) {
 		final NlpContext result = new NlpContextImpl();
-		result.setMaxIntentConfidenceThreshold(NlpContext.DEFAULT_MAX_INTENT_CONFIDENCE_THRESHOLD);
 
 		final NlpIntent nlpIntent = new NlpIntentImpl();
 		nlpIntent.setConfidence(1.0);

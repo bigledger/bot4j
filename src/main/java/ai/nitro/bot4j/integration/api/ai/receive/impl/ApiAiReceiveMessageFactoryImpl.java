@@ -26,7 +26,6 @@ public class ApiAiReceiveMessageFactoryImpl implements ApiAiReceiveMessageFactor
 
 	protected NlpContext createNlpContext(final Result aiResponseResult) {
 		final NlpContext result = new NlpContextImpl();
-		result.setMaxIntentConfidenceThreshold(NlpContext.DEFAULT_MAX_INTENT_CONFIDENCE_THRESHOLD);
 
 		if (aiResponseResult.getMetadata() != null) {
 			final NlpIntent nlpIntent = new NlpIntentImpl();
