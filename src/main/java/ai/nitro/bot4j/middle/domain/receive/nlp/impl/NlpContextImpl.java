@@ -10,6 +10,7 @@ package ai.nitro.bot4j.middle.domain.receive.nlp.impl;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.SortedSet;
@@ -23,14 +24,11 @@ public class NlpContextImpl implements NlpContext {
 
 	protected final SortedSet<NlpIntent> intents = new TreeSet<NlpIntent>();
 
-	protected Double maxIntentConfidenceThreshold;
-
 	protected final Map<String, List<NlpNamedEntity>> namedEntities = new HashMap<String, List<NlpNamedEntity>>();
 
 	@Override
 	public void addIntent(final NlpIntent intent) {
 		intents.add(intent);
-		resetMaxIntentConfidenceThreshold();
 	}
 
 	@Override
@@ -46,18 +44,15 @@ public class NlpContextImpl implements NlpContext {
 		}
 	}
 
-	protected double calculateIntentConfidenceThreshold() {
-		final double result;
-
-		if (intents.isEmpty()) {
-			result = 0.0;
-		} else {
-			final double confidenceSum = intents.stream().map(intent -> intent.getConfidence())
-					.mapToDouble(Double::doubleValue).sum();
-			result = confidenceSum * INTENT_CONFIDENCE_THRESHOLD_FACTOR;
+	@Override
+	public NlpIntent getIntent(final String name) {
+		for (final NlpIntent intent : intents) {
+			if (intent.getName().equalsIgnoreCase(name)) {
+				return intent;
+			}
 		}
 
-		return result;
+		return null;
 	}
 
 	@Override
@@ -71,27 +66,41 @@ public class NlpContextImpl implements NlpContext {
 	}
 
 	@Override
-	public Double getMaxIntentConfidenceThreshold() {
-		if (maxIntentConfidenceThreshold == null) {
-			maxIntentConfidenceThreshold = calculateIntentConfidenceThreshold();
-		}
-
-		return maxIntentConfidenceThreshold;
-	}
-
-	@Override
 	public Map<String, List<NlpNamedEntity>> getNamedEntities() {
 		return namedEntities;
 	}
 
 	@Override
-	public void removeIntent(final NlpIntent intent) {
-		intents.remove(intent);
-		resetMaxIntentConfidenceThreshold();
+	public double getScaledIntentConfidence() {
+		final Iterator<NlpIntent> intentsIterator = intents.iterator();
+		final NlpIntent firstIntent = intentsIterator.hasNext() ? intentsIterator.next() : null;
+		final NlpIntent secondIntent = intentsIterator.hasNext() ? intentsIterator.next() : null;
+
+		final Double firstConfidence = firstIntent != null ? firstIntent.getConfidence() : null;
+		final Double secondConfidence = secondIntent != null ? secondIntent.getConfidence() : null;
+		final double result;
+
+		if (firstConfidence == null) {
+			result = 0;
+		} else if (secondConfidence == null) {
+			result = 0;
+		} else if (firstConfidence == 0.0) {
+			result = 0;
+		} else {
+			result = 1.0 - secondConfidence / firstConfidence;
+		}
+
+		return result;
 	}
 
-	protected void resetMaxIntentConfidenceThreshold() {
-		maxIntentConfidenceThreshold = null;
+	@Override
+	public boolean hasIntent(final String name) {
+		return getIntent(name) != null;
+	}
+
+	@Override
+	public void removeIntent(final NlpIntent intent) {
+		intents.remove(intent);
 	}
 
 	@Override

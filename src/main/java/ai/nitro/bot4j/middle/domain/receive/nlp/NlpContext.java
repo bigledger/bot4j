@@ -14,19 +14,23 @@ import java.util.SortedSet;
 
 public interface NlpContext {
 
-	static final double INTENT_CONFIDENCE_THRESHOLD_FACTOR = 0.5;
+	static final double SCALED_INTENT_CONFIDENCE_THRESHOLD = 0.5;
 
 	void addIntent(NlpIntent intent);
 
 	void addNamedEntity(NlpNamedEntity namedEntity);
 
+	NlpIntent getIntent(String name);
+
 	SortedSet<NlpIntent> getIntents();
 
 	NlpIntent getMaxIntent();
 
-	Double getMaxIntentConfidenceThreshold();
-
 	Map<String, List<NlpNamedEntity>> getNamedEntities();
+
+	double getScaledIntentConfidence();
+
+	boolean hasIntent(String name);
 
 	void removeIntent(NlpIntent intent);
 }
