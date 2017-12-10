@@ -46,7 +46,7 @@ public class NlpContextImpl implements NlpContext {
 		}
 	}
 
-	protected double calculateMaxIntentConfidenceThreshold() {
+	protected double calculateIntentConfidenceThreshold() {
 		final double result;
 
 		if (intents.isEmpty()) {
@@ -73,7 +73,7 @@ public class NlpContextImpl implements NlpContext {
 	@Override
 	public Double getMaxIntentConfidenceThreshold() {
 		if (maxIntentConfidenceThreshold == null) {
-			maxIntentConfidenceThreshold = calculateMaxIntentConfidenceThreshold();
+			maxIntentConfidenceThreshold = calculateIntentConfidenceThreshold();
 		}
 
 		return maxIntentConfidenceThreshold;

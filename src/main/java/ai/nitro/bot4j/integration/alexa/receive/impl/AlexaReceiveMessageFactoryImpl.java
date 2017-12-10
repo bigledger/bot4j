@@ -8,6 +8,8 @@ import javax.inject.Singleton;
 import com.amazon.speech.json.SpeechletRequestEnvelope;
 import com.amazon.speech.slu.Intent;
 import com.amazon.speech.slu.Slot;
+import com.amazon.speech.speechlet.Context;
+import com.amazon.speech.speechlet.Device;
 import com.amazon.speech.speechlet.IntentRequest;
 import com.amazon.speech.speechlet.User;
 import com.amazon.speech.speechlet.interfaces.system.SystemInterface;
@@ -50,14 +52,40 @@ public class AlexaReceiveMessageFactoryImpl implements AlexaReceiveMessageFactor
 		return result;
 	}
 
+	protected Participant createParticipant(final SpeechletRequestEnvelope<IntentRequest> requestEnvelope,
+			final User user) {
+		final Participant sender = new Participant();
+		sender.setPlatform(AlexaPlatformEnum.ALEXA);
+		sender.setId(user.getUserId());
+
+		if (requestEnvelope == null) {
+		} else if (requestEnvelope.getContext() == null) {
+		} else {
+			final Context context = requestEnvelope.getContext();
+			final SystemState state = context.getState(SystemInterface.class, SystemInterface.STATE_TYPE);
+
+			if (state == null) {
+			} else if (state.getDevice() == null) {
+			} else {
+				final Device device = state.getDevice();
+				final String deviceId = device.getDeviceId();
+				sender.setDeviceId(deviceId);
+			}
+		}
+
+		return sender;
+	}
+
 	@Override
 	public ReceiveMessage createReceiveMessage(final IntentRequest intentRequest, final User user,
 			final SpeechletRequestEnvelope<IntentRequest> requestEnvelope, final Map<String, String[]> params) {
-		final Participant sender = createSender(requestEnvelope, user);
+		final Participant sender = createParticipant(requestEnvelope, user);
+		final Participant recipient = createParticipant(requestEnvelope, user);
 
 		final ReceiveMessage result = new ReceiveMessage();
 		result.setMessageId(intentRequest.getRequestId());
 		result.setSender(sender);
+		result.setRecipient(recipient);
 
 		if (params != null) {
 			result.getParams().putAll(params);
@@ -67,25 +95,6 @@ public class AlexaReceiveMessageFactoryImpl implements AlexaReceiveMessageFactor
 		result.addPayload(textReceivePayload);
 
 		return result;
-	}
-
-	protected Participant createSender(final SpeechletRequestEnvelope<IntentRequest> requestEnvelope, final User user) {
-		final Participant sender = new Participant();
-		sender.setPlatform(AlexaPlatformEnum.ALEXA);
-		sender.setId(user.getUserId());
-
-		if (requestEnvelope != null && requestEnvelope.getContext() != null
-				&& requestEnvelope.getContext().getState(SystemInterface.class, SystemInterface.STATE_TYPE) != null) {
-			final SystemState state = requestEnvelope.getContext().getState(SystemInterface.class,
-					SystemInterface.STATE_TYPE);
-
-			if (state.getDevice() != null) {
-				final String deviceId = state.getDevice().getDeviceId();
-				sender.setDeviceId(deviceId);
-			}
-		}
-
-		return sender;
 	}
 
 	protected TextReceivePayload createTextReceivePayload(final IntentRequest intentRequest) {
