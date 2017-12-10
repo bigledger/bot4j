@@ -8,6 +8,7 @@ import javax.inject.Singleton;
 import com.google.gson.JsonElement;
 
 import ai.api.model.AIResponse;
+import ai.api.model.Metadata;
 import ai.api.model.Result;
 import ai.nitro.bot4j.integration.api.ai.domain.ApiAiPlatformEnum;
 import ai.nitro.bot4j.integration.api.ai.receive.ApiAiReceiveMessageFactory;
@@ -24,23 +25,28 @@ import ai.nitro.bot4j.middle.domain.receive.payload.TextReceivePayload;
 @Singleton
 public class ApiAiReceiveMessageFactoryImpl implements ApiAiReceiveMessageFactory {
 
+	protected NlpNamedEntity createNamedEntity(final Entry<String, JsonElement> entry) {
+		final String type = entry.getKey();
+		final JsonElement entity = entry.getValue();
+
+		final NlpNamedEntity result = new NlpNamedEntityImpl();
+		result.setType(type.toLowerCase());
+		result.setEntity(entity.toString());
+		result.setConfidence(1.0);
+		return result;
+	}
+
 	protected NlpContext createNlpContext(final Result aiResponseResult) {
 		final NlpContext result = new NlpContextImpl();
 
 		if (aiResponseResult.getMetadata() != null) {
-			final NlpIntent nlpIntent = new NlpIntentImpl();
-			nlpIntent.setConfidence(1.0);
-			nlpIntent.setName(aiResponseResult.getMetadata().getIntentName().toLowerCase());
+			final NlpIntent nlpIntent = createNlpIntent(aiResponseResult);
 			result.addIntent(nlpIntent);
 		}
 
 		if (aiResponseResult.getParameters() != null) {
 			for (final Entry<String, JsonElement> entry : aiResponseResult.getParameters().entrySet()) {
-				final NlpNamedEntity nlpNamedEntity = new NlpNamedEntityImpl();
-				nlpNamedEntity.setType(entry.getKey().toLowerCase());
-				nlpNamedEntity.setConfidence(1.0);
-				nlpNamedEntity.setEntity(entry.getValue().toString());
-
+				final NlpNamedEntity nlpNamedEntity = createNamedEntity(entry);
 				result.addNamedEntity(nlpNamedEntity);
 			}
 		}
@@ -48,39 +54,57 @@ public class ApiAiReceiveMessageFactoryImpl implements ApiAiReceiveMessageFactor
 		return result;
 	}
 
+	protected NlpIntent createNlpIntent(final Result aiResponseResult) {
+		final Metadata metadata = aiResponseResult.getMetadata();
+		final String intentName = metadata.getIntentName();
+
+		final NlpIntent result = new NlpIntentImpl();
+		result.setName(intentName.toLowerCase());
+		result.setConfidence(1.0);
+		return result;
+	}
+
+	protected Participant createParticipant(final AIResponse aiResponse) {
+		final Participant result = new Participant();
+		result.setPlatform(ApiAiPlatformEnum.APIAI);
+		result.setId(aiResponse.getSessionId());
+		return result;
+	}
+
+	protected TextReceivePayload createPayload(final Result aiResponseResult) {
+		final String text = aiResponseResult.getResolvedQuery();
+		final TextReceivePayload result = new TextReceivePayload();
+		result.setText(text);
+
+		final NlpContext nlpContext = createNlpContext(aiResponseResult);
+		result.setNlpContext(nlpContext);
+		return result;
+	}
+
 	@Override
 	public ReceiveMessage createReceiveMessage(final AIResponse aiResponse, final Map<String, String[]> params) {
 		final ReceiveMessage result = new ReceiveMessage();
 		result.setMessageId(aiResponse.getId());
+
+		final Participant sender = createParticipant(aiResponse);
+		result.setSender(sender);
+
+		final Participant recipient = createParticipant(aiResponse);
+		result.setRecipient(recipient);
+
 		result.setNativePayload(ApiAiPlatformEnum.APIAI, aiResponse);
 
 		if (params != null) {
 			result.getParams().putAll(params);
 		}
 
-		final Participant sender = createSender(aiResponse);
-		result.setSender(sender);
-
 		final Result aiResponseResult = aiResponse.getResult();
 
 		if (aiResponseResult != null) {
-			final TextReceivePayload payload = new TextReceivePayload();
-			payload.setText(aiResponseResult.getResolvedQuery());
-
-			final NlpContext nlpContext = createNlpContext(aiResponseResult);
-			payload.setNlpContext(nlpContext);
-
+			final TextReceivePayload payload = createPayload(aiResponseResult);
 			result.addPayload(payload);
 		}
 
 		return result;
-	}
-
-	protected Participant createSender(final AIResponse aiResponse) {
-		final Participant sender = new Participant();
-		sender.setPlatform(ApiAiPlatformEnum.APIAI);
-		sender.setId(aiResponse.getSessionId());
-
-		return sender;
 	}
 }

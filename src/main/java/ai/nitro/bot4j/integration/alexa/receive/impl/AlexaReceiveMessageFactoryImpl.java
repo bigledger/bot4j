@@ -32,31 +32,45 @@ public class AlexaReceiveMessageFactoryImpl implements AlexaReceiveMessageFactor
 
 	protected NlpContext createNlpContext(final Intent intent) {
 		final NlpContext result = new NlpContextImpl();
-
-		final NlpIntent nlpIntent = new NlpIntentImpl();
-		nlpIntent.setConfidence(1.0);
-		nlpIntent.setName(intent.getName().toLowerCase());
+		final NlpIntent nlpIntent = createNlpIntent(intent);
 		result.addIntent(nlpIntent);
 
-		for (final Entry<String, Slot> entry : intent.getSlots().entrySet()) {
-			final Slot value = entry.getValue();
-
-			final NlpNamedEntity nlpNamedEntity = new NlpNamedEntityImpl();
-			nlpNamedEntity.setType(entry.getKey().toLowerCase());
-			nlpNamedEntity.setConfidence(1.0);
-			nlpNamedEntity.setEntity(value.getValue());
-
-			result.addNamedEntity(nlpNamedEntity);
+		if (intent.getSlots() != null) {
+			for (final Entry<String, Slot> entry : intent.getSlots().entrySet()) {
+				final NlpNamedEntity nlpNamedEntity = createNlpNamedEntity(entry);
+				result.addNamedEntity(nlpNamedEntity);
+			}
 		}
 
 		return result;
 	}
 
+	protected NlpIntent createNlpIntent(final Intent intent) {
+		final String intentName = intent.getName();
+
+		final NlpIntent result = new NlpIntentImpl();
+		result.setName(intentName.toLowerCase());
+		result.setConfidence(1.0);
+		return result;
+	}
+
+	protected NlpNamedEntity createNlpNamedEntity(final Entry<String, Slot> entry) {
+		final Slot value = entry.getValue();
+		final String type = entry.getKey();
+		final String entity = value.getValue();
+
+		final NlpNamedEntity result = new NlpNamedEntityImpl();
+		result.setType(type.toLowerCase());
+		result.setEntity(entity);
+		result.setConfidence(1.0);
+		return result;
+	}
+
 	protected Participant createParticipant(final SpeechletRequestEnvelope<IntentRequest> requestEnvelope,
 			final User user) {
-		final Participant sender = new Participant();
-		sender.setPlatform(AlexaPlatformEnum.ALEXA);
-		sender.setId(user.getUserId());
+		final Participant result = new Participant();
+		result.setPlatform(AlexaPlatformEnum.ALEXA);
+		result.setId(user.getUserId());
 
 		if (requestEnvelope == null) {
 		} else if (requestEnvelope.getContext() == null) {
@@ -69,39 +83,40 @@ public class AlexaReceiveMessageFactoryImpl implements AlexaReceiveMessageFactor
 			} else {
 				final Device device = state.getDevice();
 				final String deviceId = device.getDeviceId();
-				sender.setDeviceId(deviceId);
+				result.setDeviceId(deviceId);
 			}
 		}
 
-		return sender;
+		return result;
 	}
 
 	@Override
 	public ReceiveMessage createReceiveMessage(final IntentRequest intentRequest, final User user,
 			final SpeechletRequestEnvelope<IntentRequest> requestEnvelope, final Map<String, String[]> params) {
-		final Participant sender = createParticipant(requestEnvelope, user);
-		final Participant recipient = createParticipant(requestEnvelope, user);
-
 		final ReceiveMessage result = new ReceiveMessage();
 		result.setMessageId(intentRequest.getRequestId());
+
+		final Participant sender = createParticipant(requestEnvelope, user);
 		result.setSender(sender);
+
+		final Participant recipient = createParticipant(requestEnvelope, user);
 		result.setRecipient(recipient);
 
 		if (params != null) {
 			result.getParams().putAll(params);
 		}
 
-		final TextReceivePayload textReceivePayload = createTextReceivePayload(intentRequest);
-		result.addPayload(textReceivePayload);
-
+		final TextReceivePayload payload = createTextReceivePayload(intentRequest);
+		result.addPayload(payload);
 		return result;
 	}
 
 	protected TextReceivePayload createTextReceivePayload(final IntentRequest intentRequest) {
-		final NlpContext nlpContext = createNlpContext(intentRequest.getIntent());
+		final Intent intent = intentRequest.getIntent();
+		final NlpContext nlpContext = createNlpContext(intent);
+
 		final TextReceivePayload result = new TextReceivePayload();
 		result.setNlpContext(nlpContext);
-
 		return result;
 	}
 }
