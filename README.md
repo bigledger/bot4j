@@ -2,7 +2,7 @@ bot4j
 =====
 
 [![Build](https://img.shields.io/travis/nitroventures/bot4j.svg)](https://travis-ci.org/nitroventures/bot4j)
-[![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 This is a bot framework for Java, which enables the development of lightweight messenger bots (a.k.a. chatbots) with Java. It provides integrations for Facebook Messenger, Slack, Telegram and Alexa and internally unifies message formats by a messaging middleware.
 
@@ -63,7 +63,7 @@ All framework classes are instantiated by dependency injection and therefore can
 License
 -------
 
-Licensed under the BSD 3-Clause License. See LICENSE for details.
+Licensed under the MIT License. See LICENSE for details.
 
 ### And finally...
 

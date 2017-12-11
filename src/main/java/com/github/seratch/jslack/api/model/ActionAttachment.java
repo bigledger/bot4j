@@ -1,9 +1,9 @@
 /*
- * Copyright (C) 2016, nitro.ai
+ * Copyright (C) 2017, nitro ventures GmbH
  * All rights reserved.
  *
  * This software may be modified and distributed under the terms
- * of the BSD 3-clause license. See the LICENSE file for details.
+ * of the MIT license. See the LICENSE file for details.
  */
 
 package com.github.seratch.jslack.api.model;
@@ -39,5 +39,4 @@ public class ActionAttachment extends Attachment {
 	public void setCallbackId(final String callbackId) {
 		this.callbackId = callbackId;
 	}
-
 }

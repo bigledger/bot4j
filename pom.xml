@@ -9,8 +9,8 @@
 	<packaging>jar</packaging>
 	<licenses>
 		<license>
-			<name>The BSD 3-Clause License</name>
-			<url>http://opensource.org/licenses/BSD-3-Clause</url>
+			<name>MIT License</name>
+			<url>https://opensource.org/licenses/MIT</url>
 			<distribution>repo</distribution>
 		</license>
 	</licenses>
@@ -121,11 +121,11 @@
 			</exclusions>
 		</dependency>
 		<dependency>
-    			<groupId>ai.api.libai.web</groupId>
-   			 <artifactId>libai-web-servlet</artifactId>
-    			<version>1.6.12</version>
+			<groupId>ai.api.libai.web</groupId>
+			<artifactId>libai-web-servlet</artifactId>
+			<version>1.6.12</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
