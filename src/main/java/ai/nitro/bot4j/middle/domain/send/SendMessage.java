@@ -9,11 +9,14 @@
 package ai.nitro.bot4j.middle.domain.send;
 
 import ai.nitro.bot4j.middle.domain.AbstractMessage;
+import ai.nitro.bot4j.middle.domain.Session;
 import ai.nitro.bot4j.middle.domain.send.payload.AbstractSendPayload;
 
 public class SendMessage extends AbstractMessage {
 
 	protected AbstractSendPayload payload;
+
+	protected Session session;
 
 	public AbstractSendPayload getPayload() {
 		return payload;
@@ -32,8 +35,16 @@ public class SendMessage extends AbstractMessage {
 		return result;
 	}
 
+	public Session getSession() {
+		return session;
+	}
+
 	public void setPayload(final AbstractSendPayload payload) {
 		this.payload = payload;
+	}
+
+	public void setSession(final Session session) {
+		this.session = session;
 	}
 
 	@Override

@@ -23,11 +23,12 @@ import ai.nitro.bot4j.integration.slack.domain.SlackPlatformEnum;
 import ai.nitro.bot4j.middle.domain.Participant;
 import ai.nitro.bot4j.middle.domain.Session;
 import ai.nitro.bot4j.middle.domain.receive.ReceiveMessage;
+import ai.nitro.bot4j.middle.receive.session.InMemorySessionManager;
 
 public class SessionManagerTest extends TestBase {
 
 	@Inject
-	protected SessionManager sessionManager;
+	protected InMemorySessionManager sessionManager;
 
 	@Test
 	public void testGetSession() throws Exception {

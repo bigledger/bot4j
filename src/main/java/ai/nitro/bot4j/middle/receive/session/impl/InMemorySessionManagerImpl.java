@@ -6,7 +6,7 @@
  * of the MIT license. See the LICENSE file for details.
  */
 
-package ai.nitro.bot4j.middle.receive.impl;
+package ai.nitro.bot4j.middle.receive.session.impl;
 
 import java.util.concurrent.TimeUnit;
 
@@ -19,17 +19,16 @@ import ai.nitro.bot4j.middle.domain.Participant;
 import ai.nitro.bot4j.middle.domain.Platform;
 import ai.nitro.bot4j.middle.domain.Session;
 import ai.nitro.bot4j.middle.domain.receive.ReceiveMessage;
-import ai.nitro.bot4j.middle.domain.send.SendMessage;
-import ai.nitro.bot4j.middle.receive.SessionManager;
 import ai.nitro.bot4j.middle.receive.key.SenderKey;
+import ai.nitro.bot4j.middle.receive.session.InMemorySessionManager;
 
 @Singleton
-public class SessionManagerImpl implements SessionManager {
+public class InMemorySessionManagerImpl implements InMemorySessionManager {
 
 	protected final Cache<SenderKey, Session> sessionCache = CacheBuilder.newBuilder()
 			.expireAfterAccess(60, TimeUnit.MINUTES).build();
 
-	private Session getSession(final Participant sender) {
+	protected Session getSession(final Participant sender) {
 		final Session result;
 
 		if (sender == null) {
@@ -68,19 +67,4 @@ public class SessionManagerImpl implements SessionManager {
 
 		return result;
 	}
-
-	@Override
-	public Session getSession(final SendMessage sendMessage) {
-		final Session result;
-
-		if (sendMessage == null) {
-			result = null;
-		} else {
-			final Participant sender = sendMessage.getRecipient();
-			result = getSession(sender);
-		}
-
-		return result;
-	}
-
 }
