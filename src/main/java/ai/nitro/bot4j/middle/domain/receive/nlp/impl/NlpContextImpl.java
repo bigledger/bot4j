@@ -83,7 +83,7 @@ public class NlpContextImpl implements NlpContext {
 		if (firstConfidence == null) {
 			result = 0;
 		} else if (secondConfidence == null) {
-			result = 0;
+			result = 1.0;
 		} else if (firstConfidence == 0.0) {
 			result = 0;
 		} else {
