@@ -8,15 +8,28 @@
 
 package ai.nitro.bot4j.middle.domain.send;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import ai.nitro.bot4j.middle.domain.AbstractMessage;
 import ai.nitro.bot4j.middle.domain.Session;
 import ai.nitro.bot4j.middle.domain.send.payload.AbstractSendPayload;
 
 public class SendMessage extends AbstractMessage {
 
+	protected final Map<String, String> params = new HashMap<String, String>();
+
 	protected AbstractSendPayload payload;
 
 	protected Session session;
+
+	public String getParam(final String key) {
+		return params.get(key);
+	}
+
+	public Map<String, String> getParams() {
+		return params;
+	}
 
 	public AbstractSendPayload getPayload() {
 		return payload;
@@ -37,6 +50,10 @@ public class SendMessage extends AbstractMessage {
 
 	public Session getSession() {
 		return session;
+	}
+
+	public void putParams(final String key, final String value) {
+		params.put(key, value);
 	}
 
 	public void setPayload(final AbstractSendPayload payload) {
