@@ -8,7 +8,6 @@
 
 package ai.nitro.bot4j.middle.receive.impl;
 
-import java.util.Set;
 import java.util.concurrent.CompletableFuture;
 
 import javax.inject.Inject;
@@ -20,11 +19,11 @@ import org.apache.logging.log4j.Logger;
 import ai.nitro.bot4j.bot.Bot;
 import ai.nitro.bot4j.middle.domain.Participant;
 import ai.nitro.bot4j.middle.domain.Platform;
-import ai.nitro.bot4j.middle.domain.Session;
 import ai.nitro.bot4j.middle.domain.receive.ReceiveMessage;
 import ai.nitro.bot4j.middle.receive.DuplicateMessageFilter;
 import ai.nitro.bot4j.middle.receive.MessageReceiver;
-import ai.nitro.bot4j.middle.receive.session.SessionManager;
+import ai.nitro.bot4j.middle.session.Session;
+import ai.nitro.bot4j.middle.session.SessionManager;
 
 @Singleton
 public class MessageReceiverImpl implements MessageReceiver {
@@ -38,18 +37,12 @@ public class MessageReceiverImpl implements MessageReceiver {
 	protected DuplicateMessageFilter duplicateMessageFilter;
 
 	@Inject
-	protected Set<SessionManager> sessionManagers;
+	protected SessionManager sessionManager;
 
 	protected void doReceive(final ReceiveMessage receiveMessage) {
 		try {
-			for (final SessionManager sessionManager : sessionManagers) {
-				final Session session = sessionManager.getSession(receiveMessage);
-
-				if (session != null) {
-					receiveMessage.setSession(session);
-					break;
-				}
-			}
+			final Session session = sessionManager.getSession(receiveMessage);
+			receiveMessage.setSession(session);
 
 			final boolean isDuplicateMessage = duplicateMessageFilter.isDuplicate(receiveMessage);
 

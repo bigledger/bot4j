@@ -11,6 +11,8 @@ package ai.nitro.bot4j.middle.domain;
 import java.util.HashMap;
 import java.util.Map;
 
+import ai.nitro.bot4j.middle.session.Session;
+
 public abstract class AbstractMessage {
 
 	protected String messageId;
@@ -20,6 +22,8 @@ public abstract class AbstractMessage {
 	protected Participant recipient;
 
 	protected Participant sender;
+
+	protected Session session;
 
 	public String getMessageId() {
 		return messageId;
@@ -37,6 +41,10 @@ public abstract class AbstractMessage {
 		return sender;
 	}
 
+	public Session getSession() {
+		return session;
+	}
+
 	public void setMessageId(final String messageId) {
 		this.messageId = messageId;
 	}
@@ -51,6 +59,10 @@ public abstract class AbstractMessage {
 
 	public void setSender(final Participant sender) {
 		this.sender = sender;
+	}
+
+	public void setSession(final Session session) {
+		this.session = session;
 	}
 
 	@Override

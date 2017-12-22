@@ -6,19 +6,19 @@
  * of the MIT license. See the LICENSE file for details.
  */
 
-package ai.nitro.bot4j.middle.receive.key;
+package ai.nitro.bot4j.middle.receive;
 
 import ai.nitro.bot4j.middle.domain.Platform;
 
-public class SenderKey {
+public class MessageKey {
 
-	protected final String senderId;
+	protected final String messageId;
 
 	protected final Platform platform;
 
-	public SenderKey(final Platform platform, final String senderId) {
+	public MessageKey(final Platform platform, final String messageId) {
 		this.platform = platform;
-		this.senderId = senderId;
+		this.messageId = messageId;
 	}
 
 	@Override
@@ -32,11 +32,11 @@ public class SenderKey {
 		} else if (getClass() != obj.getClass()) {
 			result = false;
 		} else {
-			final SenderKey other = (SenderKey) obj;
+			final MessageKey other = (MessageKey) obj;
 
 			if (!platform.equals(other.platform)) {
 				result = false;
-			} else if (!senderId.equals(other.senderId)) {
+			} else if (!messageId.equals(other.messageId)) {
 				result = false;
 			} else {
 				result = true;
@@ -48,8 +48,7 @@ public class SenderKey {
 
 	@Override
 	public int hashCode() {
-		final int result = senderId.hashCode() + platform.hashCode();
+		final int result = messageId.hashCode() + platform.hashCode();
 		return result;
 	}
-
 }

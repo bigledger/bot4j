@@ -6,7 +6,7 @@
  * of the MIT license. See the LICENSE file for details.
  */
 
-package ai.nitro.bot4j.middle.receive;
+package ai.nitro.bot4j.middle.session.inmemory;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
@@ -21,11 +21,11 @@ import ai.nitro.bot4j.TestBase;
 import ai.nitro.bot4j.integration.facebook.domain.FacebookPlatformEnum;
 import ai.nitro.bot4j.integration.slack.domain.SlackPlatformEnum;
 import ai.nitro.bot4j.middle.domain.Participant;
-import ai.nitro.bot4j.middle.domain.Session;
 import ai.nitro.bot4j.middle.domain.receive.ReceiveMessage;
-import ai.nitro.bot4j.middle.receive.session.InMemorySessionManager;
+import ai.nitro.bot4j.middle.session.Session;
+import ai.nitro.bot4j.middle.session.inmemory.InMemorySessionManager;
 
-public class SessionManagerTest extends TestBase {
+public class InMemorySessionManagerTest extends TestBase {
 
 	@Inject
 	protected InMemorySessionManager sessionManager;

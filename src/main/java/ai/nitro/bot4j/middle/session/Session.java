@@ -6,7 +6,7 @@
  * of the MIT license. See the LICENSE file for details.
  */
 
-package ai.nitro.bot4j.middle.domain;
+package ai.nitro.bot4j.middle.session;
 
 import java.util.ArrayDeque;
 import java.util.Deque;

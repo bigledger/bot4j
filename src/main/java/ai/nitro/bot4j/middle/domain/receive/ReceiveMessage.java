@@ -14,7 +14,6 @@ import java.util.List;
 import java.util.Map;
 
 import ai.nitro.bot4j.middle.domain.AbstractMessage;
-import ai.nitro.bot4j.middle.domain.Session;
 import ai.nitro.bot4j.middle.domain.receive.payload.AbstractReceivePayload;
 
 public class ReceiveMessage extends AbstractMessage {
@@ -24,8 +23,6 @@ public class ReceiveMessage extends AbstractMessage {
 	protected final Map<String, String[]> params = new HashMap<String, String[]>();
 
 	protected final List<AbstractReceivePayload> payloads = new ArrayList<AbstractReceivePayload>();
-
-	protected Session session;
 
 	public void addPayload(final AbstractReceivePayload payload) {
 		payload.setReceiveMessage(this);
@@ -63,17 +60,8 @@ public class ReceiveMessage extends AbstractMessage {
 		return result;
 	}
 
-	public Session getSession() {
-		return session;
-	}
-
-	public void setSession(final Session session) {
-		this.session = session;
-	}
-
 	@Override
 	public String toString() {
 		return super.toString() + ", payloads=[" + payloads + "]";
 	}
-
 }

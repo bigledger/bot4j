@@ -6,7 +6,7 @@
  * of the MIT license. See the LICENSE file for details.
  */
 
-package ai.nitro.bot4j.middle.receive.session.impl;
+package ai.nitro.bot4j.middle.session.inmemory.impl;
 
 import java.util.concurrent.TimeUnit;
 
@@ -17,10 +17,10 @@ import com.google.common.cache.CacheBuilder;
 
 import ai.nitro.bot4j.middle.domain.Participant;
 import ai.nitro.bot4j.middle.domain.Platform;
-import ai.nitro.bot4j.middle.domain.Session;
 import ai.nitro.bot4j.middle.domain.receive.ReceiveMessage;
-import ai.nitro.bot4j.middle.receive.key.SenderKey;
-import ai.nitro.bot4j.middle.receive.session.InMemorySessionManager;
+import ai.nitro.bot4j.middle.session.Session;
+import ai.nitro.bot4j.middle.session.inmemory.InMemorySessionManager;
+import ai.nitro.bot4j.middle.session.inmemory.SenderKey;
 
 @Singleton
 public class InMemorySessionManagerImpl implements InMemorySessionManager {

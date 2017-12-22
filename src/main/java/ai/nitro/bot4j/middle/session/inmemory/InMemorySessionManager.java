@@ -6,7 +6,9 @@
  * of the MIT license. See the LICENSE file for details.
  */
 
-package ai.nitro.bot4j.middle.receive.session;
+package ai.nitro.bot4j.middle.session.inmemory;
+
+import ai.nitro.bot4j.middle.session.SessionManager;
 
 public interface InMemorySessionManager extends SessionManager {
 

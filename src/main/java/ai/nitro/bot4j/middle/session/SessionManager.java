@@ -1,6 +1,5 @@
-package ai.nitro.bot4j.middle.receive.session;
+package ai.nitro.bot4j.middle.session;
 
-import ai.nitro.bot4j.middle.domain.Session;
 import ai.nitro.bot4j.middle.domain.receive.ReceiveMessage;
 
 public interface SessionManager {

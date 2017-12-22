@@ -21,7 +21,7 @@ import ai.nitro.bot4j.middle.domain.Participant;
 import ai.nitro.bot4j.middle.domain.Platform;
 import ai.nitro.bot4j.middle.domain.receive.ReceiveMessage;
 import ai.nitro.bot4j.middle.receive.DuplicateMessageFilter;
-import ai.nitro.bot4j.middle.receive.key.MessageKey;
+import ai.nitro.bot4j.middle.receive.MessageKey;
 
 @Singleton
 public class DuplicateMessageFilterImpl implements DuplicateMessageFilter {
