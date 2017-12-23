@@ -13,22 +13,26 @@ import java.util.Map;
 
 public class Session {
 
-	protected final Map<String, Object> values = new HashMap<String, Object>();
+	protected final Map<String, String> entries = new HashMap<String, String>();
 
 	public void clear() {
-		values.clear();
+		entries.clear();
 	}
 
-	public Object getValue(final String name) {
-		return values.get(name);
+	public Map<String, String> getEntries() {
+		return entries;
 	}
 
-	public void putValue(final String name, final Object value) {
-		values.put(name, value);
+	public String getValue(final String name) {
+		return entries.get(name);
+	}
+
+	public void putValue(final String name, final String value) {
+		entries.put(name, value);
 	}
 
 	@Override
 	public String toString() {
-		return values.toString();
+		return entries.toString();
 	}
 }
