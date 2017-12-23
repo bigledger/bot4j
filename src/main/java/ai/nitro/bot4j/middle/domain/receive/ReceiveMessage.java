@@ -35,6 +35,10 @@ public class ReceiveMessage extends AbstractMessage {
 		}
 	}
 
+	public void clearPayloads() {
+		payloads.clear();
+	}
+
 	public Map<String, String> getCookies() {
 		return cookies;
 	}
