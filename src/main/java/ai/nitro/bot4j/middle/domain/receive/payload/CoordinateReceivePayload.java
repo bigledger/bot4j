@@ -25,5 +25,4 @@ public class CoordinateReceivePayload extends AbstractReceivePayload {
 	public void setLonVal(final double lonVal) {
 		this.lonVal = lonVal;
 	}
-
 }
