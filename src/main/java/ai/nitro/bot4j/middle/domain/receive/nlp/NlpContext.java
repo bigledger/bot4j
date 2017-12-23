@@ -8,29 +8,94 @@
 
 package ai.nitro.bot4j.middle.domain.receive.nlp;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 import java.util.SortedSet;
+import java.util.TreeSet;
 
-public interface NlpContext {
+public class NlpContext {
 
-	static final double SCALED_INTENT_CONFIDENCE_THRESHOLD = 0.5;
+	public static final double SCALED_INTENT_CONFIDENCE_THRESHOLD = 0.5;
 
-	void addIntent(NlpIntent intent);
+	protected final SortedSet<NlpIntent> intents = new TreeSet<NlpIntent>();
 
-	void addNamedEntity(NlpNamedEntity namedEntity);
+	protected final List<NlpNamedEntity> namedEntities = new ArrayList<NlpNamedEntity>();
 
-	NlpIntent getIntent(String name);
+	public void addIntent(final NlpIntent intent) {
+		intents.add(intent);
+	}
 
-	SortedSet<NlpIntent> getIntents();
+	public void addNamedEntity(final NlpNamedEntity namedEntity) {
+		namedEntities.add(namedEntity);
+	}
 
-	NlpIntent getMaxIntent();
+	public NlpIntent getIntent(final String name) {
+		for (final NlpIntent intent : intents) {
+			if (intent.getName().equalsIgnoreCase(name)) {
+				return intent;
+			}
+		}
 
-	Map<String, List<NlpNamedEntity>> getNamedEntities();
+		return null;
+	}
 
-	double getScaledIntentConfidence();
+	public SortedSet<NlpIntent> getIntents() {
+		return intents;
+	}
 
-	boolean hasIntent(String name);
+	public NlpIntent getMaxIntent() {
+		return intents.isEmpty() ? null : intents.first();
+	}
 
-	void removeIntent(NlpIntent intent);
+	public List<NlpNamedEntity> getNamedEntities() {
+		return namedEntities;
+	}
+
+	public List<NlpNamedEntity> getNamedEntities(final String type) {
+		final List<NlpNamedEntity> result = new ArrayList<NlpNamedEntity>();
+
+		for (final NlpNamedEntity nlpNamedEntity : namedEntities) {
+			if (type.equalsIgnoreCase(nlpNamedEntity.getType())) {
+				result.add(nlpNamedEntity);
+			}
+		}
+
+		return result;
+	}
+
+	public double getScaledIntentConfidence() {
+		final Iterator<NlpIntent> intentsIterator = intents.iterator();
+		final NlpIntent firstIntent = intentsIterator.hasNext() ? intentsIterator.next() : null;
+		final NlpIntent secondIntent = intentsIterator.hasNext() ? intentsIterator.next() : null;
+
+		final Double firstConfidence = firstIntent != null ? firstIntent.getConfidence() : null;
+		final Double secondConfidence = secondIntent != null ? secondIntent.getConfidence() : null;
+		final double result;
+
+		if (firstConfidence == null) {
+			result = 0;
+		} else if (secondConfidence == null) {
+			result = 1.0;
+		} else if (firstConfidence == 0.0) {
+			result = 0;
+		} else {
+			result = 1.0 - secondConfidence / firstConfidence;
+		}
+
+		return result;
+	}
+
+	public boolean hasIntent(final String name) {
+		return getIntent(name) != null;
+	}
+
+	public void removeIntent(final NlpIntent intent) {
+		intents.remove(intent);
+	}
+
+	@Override
+	public String toString() {
+		return "intents=[" + intents + "]";
+	}
 }

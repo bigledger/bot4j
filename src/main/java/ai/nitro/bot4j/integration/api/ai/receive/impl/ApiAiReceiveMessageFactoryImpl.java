@@ -15,11 +15,11 @@ import ai.nitro.bot4j.integration.api.ai.receive.ApiAiReceiveMessageFactory;
 import ai.nitro.bot4j.middle.domain.Participant;
 import ai.nitro.bot4j.middle.domain.receive.ReceiveMessage;
 import ai.nitro.bot4j.middle.domain.receive.nlp.NlpContext;
+import ai.nitro.bot4j.middle.domain.receive.nlp.NlpContext;
+import ai.nitro.bot4j.middle.domain.receive.nlp.NlpIntent;
 import ai.nitro.bot4j.middle.domain.receive.nlp.NlpIntent;
 import ai.nitro.bot4j.middle.domain.receive.nlp.NlpNamedEntity;
-import ai.nitro.bot4j.middle.domain.receive.nlp.impl.NlpContextImpl;
-import ai.nitro.bot4j.middle.domain.receive.nlp.impl.NlpIntentImpl;
-import ai.nitro.bot4j.middle.domain.receive.nlp.impl.NlpNamedEntityImpl;
+import ai.nitro.bot4j.middle.domain.receive.nlp.NlpNamedEntity;
 import ai.nitro.bot4j.middle.domain.receive.payload.TextReceivePayload;
 
 @Singleton
@@ -29,7 +29,7 @@ public class ApiAiReceiveMessageFactoryImpl implements ApiAiReceiveMessageFactor
 		final String type = entry.getKey();
 		final JsonElement entity = entry.getValue();
 
-		final NlpNamedEntity result = new NlpNamedEntityImpl();
+		final NlpNamedEntity result = new NlpNamedEntity();
 		result.setType(type.toLowerCase());
 		result.setEntity(entity.toString());
 		result.setConfidence(1.0);
@@ -37,7 +37,7 @@ public class ApiAiReceiveMessageFactoryImpl implements ApiAiReceiveMessageFactor
 	}
 
 	protected NlpContext createNlpContext(final Result aiResponseResult) {
-		final NlpContext result = new NlpContextImpl();
+		final NlpContext result = new NlpContext();
 
 		if (aiResponseResult.getMetadata() != null) {
 			final NlpIntent nlpIntent = createNlpIntent(aiResponseResult);
@@ -58,7 +58,7 @@ public class ApiAiReceiveMessageFactoryImpl implements ApiAiReceiveMessageFactor
 		final Metadata metadata = aiResponseResult.getMetadata();
 		final String intentName = metadata.getIntentName();
 
-		final NlpIntent result = new NlpIntentImpl();
+		final NlpIntent result = new NlpIntent();
 		result.setName(intentName.toLowerCase());
 		result.setConfidence(1.0);
 		return result;

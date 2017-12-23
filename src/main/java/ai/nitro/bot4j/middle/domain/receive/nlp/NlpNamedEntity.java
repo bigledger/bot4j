@@ -8,17 +8,70 @@
 
 package ai.nitro.bot4j.middle.domain.receive.nlp;
 
-public interface NlpNamedEntity {
+public class NlpNamedEntity {
 
-	Double getConfidence();
+	protected Double confidence;
 
-	String getEntity();
+	protected String entity;
 
-	String getType();
+	protected String type;
 
-	void setConfidence(Double confidence);
+	@Override
+	public boolean equals(final Object o) {
+		final boolean result;
 
-	void setEntity(String entity);
+		if (o == this) {
+			result = true;
+		} else if (!(o instanceof NlpNamedEntity)) {
+			result = false;
+		} else {
+			final NlpNamedEntity otherNlpNamedEntity = (NlpNamedEntity) o;
 
-	void setType(String type);
+			if (!otherNlpNamedEntity.getType().equals(type)) {
+				result = false;
+			} else if (!otherNlpNamedEntity.getEntity().equals(entity)) {
+				result = false;
+			} else if (!otherNlpNamedEntity.getConfidence().equals(confidence)) {
+				result = false;
+			} else {
+				result = true;
+			}
+		}
+
+		return result;
+	}
+
+	public Double getConfidence() {
+		return confidence;
+	}
+
+	public String getEntity() {
+		return entity;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	@Override
+	public int hashCode() {
+		return 31 * 17 + type.hashCode();
+	}
+
+	public void setConfidence(final Double confidence) {
+		this.confidence = confidence;
+	}
+
+	public void setEntity(final String entity) {
+		this.entity = entity;
+	}
+
+	public void setType(final String type) {
+		this.type = type;
+	}
+
+	@Override
+	public String toString() {
+		return entity;
+	}
 }

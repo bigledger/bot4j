@@ -20,18 +20,18 @@ import ai.nitro.bot4j.integration.alexa.receive.AlexaReceiveMessageFactory;
 import ai.nitro.bot4j.middle.domain.Participant;
 import ai.nitro.bot4j.middle.domain.receive.ReceiveMessage;
 import ai.nitro.bot4j.middle.domain.receive.nlp.NlpContext;
+import ai.nitro.bot4j.middle.domain.receive.nlp.NlpContext;
+import ai.nitro.bot4j.middle.domain.receive.nlp.NlpIntent;
 import ai.nitro.bot4j.middle.domain.receive.nlp.NlpIntent;
 import ai.nitro.bot4j.middle.domain.receive.nlp.NlpNamedEntity;
-import ai.nitro.bot4j.middle.domain.receive.nlp.impl.NlpContextImpl;
-import ai.nitro.bot4j.middle.domain.receive.nlp.impl.NlpIntentImpl;
-import ai.nitro.bot4j.middle.domain.receive.nlp.impl.NlpNamedEntityImpl;
+import ai.nitro.bot4j.middle.domain.receive.nlp.NlpNamedEntity;
 import ai.nitro.bot4j.middle.domain.receive.payload.TextReceivePayload;
 
 @Singleton
 public class AlexaReceiveMessageFactoryImpl implements AlexaReceiveMessageFactory {
 
 	protected NlpContext createNlpContext(final Intent intent) {
-		final NlpContext result = new NlpContextImpl();
+		final NlpContext result = new NlpContext();
 		final NlpIntent nlpIntent = createNlpIntent(intent);
 		result.addIntent(nlpIntent);
 
@@ -48,7 +48,7 @@ public class AlexaReceiveMessageFactoryImpl implements AlexaReceiveMessageFactor
 	protected NlpIntent createNlpIntent(final Intent intent) {
 		final String intentName = intent.getName();
 
-		final NlpIntent result = new NlpIntentImpl();
+		final NlpIntent result = new NlpIntent();
 		result.setName(intentName.toLowerCase());
 		result.setConfidence(1.0);
 		return result;
@@ -59,7 +59,7 @@ public class AlexaReceiveMessageFactoryImpl implements AlexaReceiveMessageFactor
 		final String type = entry.getKey();
 		final String entity = value.getValue();
 
-		final NlpNamedEntity result = new NlpNamedEntityImpl();
+		final NlpNamedEntity result = new NlpNamedEntity();
 		result.setType(type.toLowerCase());
 		result.setEntity(entity);
 		result.setConfidence(1.0);
