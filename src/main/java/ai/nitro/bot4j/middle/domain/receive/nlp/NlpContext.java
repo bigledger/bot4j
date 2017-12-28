@@ -75,10 +75,10 @@ public class NlpContext {
 
 		if (firstConfidence == null) {
 			result = 0;
-		} else if (secondConfidence == null) {
-			result = 1.0;
 		} else if (firstConfidence == 0.0) {
 			result = 0;
+		} else if (secondConfidence == null) {
+			result = 1.0;
 		} else {
 			result = 1.0 - secondConfidence / firstConfidence;
 		}
