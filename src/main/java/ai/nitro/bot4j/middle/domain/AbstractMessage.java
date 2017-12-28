@@ -23,7 +23,7 @@ public abstract class AbstractMessage {
 
 	protected Participant sender;
 
-	protected Session session;
+	protected transient Session session;
 
 	public String getMessageId() {
 		return messageId;
