@@ -20,10 +20,7 @@ import ai.nitro.bot4j.integration.alexa.receive.AlexaReceiveMessageFactory;
 import ai.nitro.bot4j.middle.domain.Participant;
 import ai.nitro.bot4j.middle.domain.receive.ReceiveMessage;
 import ai.nitro.bot4j.middle.domain.receive.nlp.NlpContext;
-import ai.nitro.bot4j.middle.domain.receive.nlp.NlpContext;
 import ai.nitro.bot4j.middle.domain.receive.nlp.NlpIntent;
-import ai.nitro.bot4j.middle.domain.receive.nlp.NlpIntent;
-import ai.nitro.bot4j.middle.domain.receive.nlp.NlpNamedEntity;
 import ai.nitro.bot4j.middle.domain.receive.nlp.NlpNamedEntity;
 import ai.nitro.bot4j.middle.domain.receive.payload.TextReceivePayload;
 

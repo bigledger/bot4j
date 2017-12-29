@@ -10,8 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.IOUtils;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import com.google.gson.Gson;
 
@@ -23,8 +21,6 @@ import ai.nitro.bot4j.integration.api.ai.receive.webhook.ApiAiWebhook;
 
 @Singleton
 public class ApiAiWebhookImpl implements ApiAiWebhook {
-
-	private final static Logger LOG = LogManager.getLogger(ApiAiWebhookImpl.class);
 
 	@Inject
 	protected ApiAiReceiveHandler apiAiReceiveHandler;
