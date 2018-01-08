@@ -31,4 +31,8 @@ public class TypingSendPayload extends AbstractSendPayload {
 		this.typing = typing;
 	}
 
+	@Override
+	public String toString() {
+		return "type=[" + sendPayloadType + "], typing=[" + typing + "]";
+	}
 }

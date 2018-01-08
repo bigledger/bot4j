@@ -8,15 +8,11 @@
 
 package ai.nitro.bot4j.middle.domain;
 
-import java.util.Locale;
-
 public class Participant {
 
 	protected String deviceId;
 
 	protected String id;
-
-	protected Locale locale;
 
 	protected Platform platform;
 
@@ -26,10 +22,6 @@ public class Participant {
 
 	public String getId() {
 		return id;
-	}
-
-	public Locale getLocale() {
-		return locale;
 	}
 
 	public Platform getPlatform() {
@@ -42,10 +34,6 @@ public class Participant {
 
 	public void setId(final String id) {
 		this.id = id;
-	}
-
-	public void setLocale(final Locale locale) {
-		this.locale = locale;
 	}
 
 	public void setPlatform(final Platform platform) {

@@ -33,4 +33,9 @@ public class PostbackSendButton extends AbstractSendButton {
 	public void setPayload(final String... payload) {
 		this.payload = payload;
 	}
+
+	@Override
+	public String toString() {
+		return "type=[" + type + "], title=[" + title + "], name=[" + name + "], payload=[" + payload + "]";
+	}
 }

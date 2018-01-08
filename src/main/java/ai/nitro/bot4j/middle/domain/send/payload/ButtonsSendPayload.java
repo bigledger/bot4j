@@ -40,4 +40,9 @@ public class ButtonsSendPayload extends AbstractSendPayload {
 	public void setTitle(final String title) {
 		this.title = title;
 	}
+
+	@Override
+	public String toString() {
+		return "type=[" + sendPayloadType + "], title=[" + title + "], buttons=[" + buttons + "]";
+	}
 }

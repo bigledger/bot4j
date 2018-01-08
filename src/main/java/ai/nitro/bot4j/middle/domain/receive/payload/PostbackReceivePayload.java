@@ -34,4 +34,8 @@ public class PostbackReceivePayload extends AbstractReceivePayload {
 		this.payload = payload;
 	}
 
+	@Override
+	public String toString() {
+		return "type=[" + type + "], name=[" + name + "], payload=[" + payload + "]";
+	}
 }

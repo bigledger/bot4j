@@ -24,4 +24,8 @@ public class ReadNotificationReceivePayload extends AbstractReceivePayload {
 		this.watermark = watermark;
 	}
 
+	@Override
+	public String toString() {
+		return "type=[" + type + "], watermark=[" + watermark + "]";
+	}
 }

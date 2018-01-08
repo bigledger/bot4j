@@ -41,4 +41,8 @@ public class TextSendPayload extends AbstractSendPayload {
 		this.text = text;
 	}
 
+	@Override
+	public String toString() {
+		return "type=[" + sendPayloadType + "], text=[" + text + "]";
+	}
 }

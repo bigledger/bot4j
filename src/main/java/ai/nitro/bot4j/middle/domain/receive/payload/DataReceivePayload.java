@@ -33,4 +33,9 @@ public class DataReceivePayload extends AbstractReceivePayload {
 	public void setData(final byte[] data) {
 		this.data = data;
 	}
+
+	@Override
+	public String toString() {
+		return "type=[" + type + "], attachmentType=[" + attachmentType + "]";
+	}
 }

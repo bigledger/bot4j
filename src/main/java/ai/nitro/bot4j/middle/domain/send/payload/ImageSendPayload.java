@@ -37,4 +37,8 @@ public class ImageSendPayload extends AbstractSendPayload {
 		this.title = title;
 	}
 
+	@Override
+	public String toString() {
+		return "type=[" + sendPayloadType + "], title=[" + title + "], imageUrl=[" + imageUrl + "]";
+	}
 }

@@ -21,4 +21,9 @@ public class FormParam {
 	public void setValue(final String value) {
 		this.value = value;
 	}
+
+	@Override
+	public String toString() {
+		return "key=[" + key + "], value=[" + value + "]";
+	}
 }

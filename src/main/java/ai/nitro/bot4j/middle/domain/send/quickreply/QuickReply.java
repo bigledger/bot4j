@@ -54,4 +54,8 @@ public class QuickReply {
 		this.title = title;
 	}
 
+	@Override
+	public String toString() {
+		return "title=[" + title + "], payload=[" + payload + "], contentType=[" + contentType + "]";
+	}
 }

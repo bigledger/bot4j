@@ -64,4 +64,9 @@ public class Bubble {
 	public void setUrl(final String url) {
 		this.url = url;
 	}
+
+	@Override
+	public String toString() {
+		return "title=[" + title + "], imageUrl=[" + imageUrl + "], url=[" + url + "], text=[" + text + "]";
+	}
 }

@@ -30,4 +30,9 @@ public class BubbleSendPayload extends AbstractSendPayload {
 	public List<Bubble> getBubbles() {
 		return bubbles;
 	}
+
+	@Override
+	public String toString() {
+		return "type=[" + sendPayloadType + "], bubbles=[" + bubbles + "]";
+	}
 }

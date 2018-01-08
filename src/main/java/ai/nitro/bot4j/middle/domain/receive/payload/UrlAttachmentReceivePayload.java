@@ -43,4 +43,9 @@ public class UrlAttachmentReceivePayload extends AbstractReceivePayload {
 	public void setUrl(final String url) {
 		this.url = url;
 	}
+
+	@Override
+	public String toString() {
+		return "type=[" + type + "], title=[" + title + "], url=[" + url + "], attachmentType=[" + attachmentType + "]";
+	}
 }

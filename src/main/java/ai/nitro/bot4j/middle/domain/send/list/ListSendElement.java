@@ -61,4 +61,10 @@ public class ListSendElement {
 	public void setUrl(final String url) {
 		this.url = url;
 	}
+
+	@Override
+	public String toString() {
+		return "title=[" + title + "], subTitle=[" + subTitle + "], imageUrl=[" + imageUrl + "], url=[" + url
+				+ "], button=[" + button + "]";
+	}
 }

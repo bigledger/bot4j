@@ -96,6 +96,6 @@ public class NlpContext {
 
 	@Override
 	public String toString() {
-		return "intents=[" + intents + "]";
+		return "intents=[" + intents + "], namedEntities=[" + namedEntities + "]";
 	}
 }

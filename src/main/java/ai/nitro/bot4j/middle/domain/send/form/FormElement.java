@@ -42,4 +42,8 @@ public class FormElement {
 		this.value = value;
 	}
 
+	@Override
+	public String toString() {
+		return "name=[" + name + "], type=[" + type + "], label=[" + label + "], value=[" + value + "]";
+	}
 }

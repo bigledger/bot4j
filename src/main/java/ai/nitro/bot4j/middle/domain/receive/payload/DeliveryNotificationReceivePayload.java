@@ -37,4 +37,8 @@ public class DeliveryNotificationReceivePayload extends AbstractReceivePayload {
 		this.watermark = watermark;
 	}
 
+	@Override
+	public String toString() {
+		return "type=[" + type + "], watermark=[" + watermark + "], messageIds=[" + messageIds + "]";
+	}
 }

@@ -37,4 +37,8 @@ public class VideoSendPayload extends AbstractSendPayload {
 		this.videoUrl = videoUrl;
 	}
 
+	@Override
+	public String toString() {
+		return "type=[" + sendPayloadType + "], title=[" + title + "], videoUrl=[" + videoUrl + "]";
+	}
 }

@@ -51,4 +51,9 @@ public class FormReceivePayload extends AbstractReceivePayload {
 	public void setName(final String name) {
 		this.name = name;
 	}
+
+	@Override
+	public String toString() {
+		return "type=[" + type + "], name=[" + name + "], form=[" + form + "]";
+	}
 }

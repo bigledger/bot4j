@@ -23,4 +23,9 @@ public class QuickReplyReceivePayload extends AbstractReceivePayload {
 	public void setPayload(final String payload) {
 		this.payload = payload;
 	}
+
+	@Override
+	public String toString() {
+		return "type=[" + type + "], payload=[" + payload + "]";
+	}
 }

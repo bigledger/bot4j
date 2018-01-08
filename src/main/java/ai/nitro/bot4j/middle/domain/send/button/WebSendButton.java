@@ -23,4 +23,9 @@ public class WebSendButton extends AbstractSendButton {
 	public void setUrl(final String url) {
 		this.url = url;
 	}
+
+	@Override
+	public String toString() {
+		return "type=[" + type + "], title=[" + title + "], url=[" + url + "]";
+	}
 }

@@ -66,4 +66,9 @@ public class ListSendPayload extends AbstractSendPayload {
 		this.title = title;
 	}
 
+	@Override
+	public String toString() {
+		return "type=[" + sendPayloadType + "], title=[" + title + "], button=[" + button + "], listElements=["
+				+ listElements + "]";
+	}
 }
