@@ -72,8 +72,8 @@ public class FacebookSendButtonFactoryImpl implements FacebookSendButtonFactory 
 		final PostbackPayload postbackPayload = new PostbackPayload();
 		postbackPayload.name = name;
 		postbackPayload.payload = payload;
-		final String serializedPayload = postbackPayloadService.serialize(postbackPayload);
 
+		final String serializedPayload = postbackPayloadService.serialize(postbackPayload);
 		final PostbackButton result = new PostbackButton(title, serializedPayload);
 		return result;
 	}
@@ -85,5 +85,4 @@ public class FacebookSendButtonFactoryImpl implements FacebookSendButtonFactory 
 
 		return result;
 	}
-
 }
